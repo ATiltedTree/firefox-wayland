@@ -1,10 +1,11 @@
-From 3e9697dfe5e422d58913a140797b259cb1d276ae Mon Sep 17 00:00:00 2001
+From aa8316a01c88cc40101f76d5ace8e8f3e3f6a804 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:43:32 +0100
 Subject: [PATCH 16/19] stub out X11 specific stuff
 
 ---
- gfx/thebes/gfxPlatformGtk.cpp   |  9 ++---
+ gfx/thebes/gfxPlatformGtk.cpp   |  4 +-
+ gfx/thebes/gfxPlatformGtk.h     |  2 +-
  widget/gtk/TaskbarProgress.cpp  |  2 -
  widget/gtk/mozgtk/mozgtk.c      |  4 +-
  widget/gtk/nsClipboard.cpp      | 12 ++++--
@@ -13,10 +14,10 @@ Subject: [PATCH 16/19] stub out X11 specific stuff
  widget/gtk/nsPrintDialogGTK.cpp |  9 +++--
  widget/gtk/nsWindow.cpp         | 71 +++++++++++++++++++++------------
  widget/gtk/nsWindow.h           |  9 ++++-
- 9 files changed, 112 insertions(+), 49 deletions(-)
+ 10 files changed, 112 insertions(+), 46 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
-index 197d33b85faa7..18f3314a20b3a 100644
+index 197d33b85faa7..93ef315715197 100644
 --- a/gfx/thebes/gfxPlatformGtk.cpp
 +++ b/gfx/thebes/gfxPlatformGtk.cpp
 @@ -31,7 +31,6 @@
@@ -45,27 +46,19 @@ index 197d33b85faa7..18f3314a20b3a 100644
    if (XRE_IsParentProcess()) {
      InitX11EGLConfig();
      if (IsWaylandDisplay() || gfxConfig::IsEnabled(Feature::X11_EGL)) {
-@@ -135,9 +137,9 @@ gfxPlatformGtk::~gfxPlatformGtk() {
+diff --git a/gfx/thebes/gfxPlatformGtk.h b/gfx/thebes/gfxPlatformGtk.h
+index 3a03f40dfcfea..5a8d5f1189fac 100644
+--- a/gfx/thebes/gfxPlatformGtk.h
++++ b/gfx/thebes/gfxPlatformGtk.h
+@@ -78,7 +78,7 @@ class gfxPlatformGtk final : public gfxPlatform {
+  private:
+   nsTArray<uint8_t> GetPlatformCMSOutputProfileData() override;
  
- void gfxPlatformGtk::InitX11EGLConfig() {
-   FeatureState& feature = gfxConfig::GetFeature(Feature::X11_EGL);
--#ifdef MOZ_X11
-   feature.EnableByDefault();
+-  bool mIsX11Display;
++  bool mIsX11Display = false;
+ };
  
-+#ifdef MOZ_X11
-   if (StaticPrefs::gfx_x11_egl_force_enabled_AtStartup()) {
-     feature.UserForceEnable("Force enabled by pref");
-   } else if (IsX11EGLEnvvarEnabled()) {
-@@ -172,9 +174,6 @@ void gfxPlatformGtk::InitX11EGLConfig() {
-     // Enabling glthread crashes on X11/EGL, see bug 1670545
-     PR_SetEnv("mesa_glthread=false");
-   }
--#else
--  feature.DisableByDefault(FeatureStatus::Unavailable, "X11 support missing",
--                           "FEATURE_FAILURE_NO_X11"_ns);
- #endif
- }
- 
+ #endif /* GFX_PLATFORM_GTK_H */
 diff --git a/widget/gtk/TaskbarProgress.cpp b/widget/gtk/TaskbarProgress.cpp
 index 2aad109eab1a5..396f39b5e7e54 100644
 --- a/widget/gtk/TaskbarProgress.cpp
