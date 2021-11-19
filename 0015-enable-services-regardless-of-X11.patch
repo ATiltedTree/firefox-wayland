@@ -1,7 +1,7 @@
-From 84f5d380c9547b97d591d2fa6b5c19b65050d413 Mon Sep 17 00:00:00 2001
+From de0e0a50850cd2791bc933c2e6f7f969e7bc9736 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:52:21 +0100
-Subject: [PATCH 14/18] enable services regardless of X11
+Subject: [PATCH 15/18] enable services regardless of X11
 
 ---
  widget/gtk/components.conf | 86 ++++++++++++++++++--------------------

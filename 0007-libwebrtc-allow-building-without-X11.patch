@@ -1,0 +1,170 @@
+From b3975220100b5a7c3e5b7cb7852062976666523e Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Thu, 18 Nov 2021 15:42:49 +0100
+Subject: [PATCH 07/18] libwebrtc: allow building without X11
+
+---
+ .../desktop_capture_generic_gn/moz.build      | 34 ++++++++-----------
+ .../desktop_capture_gn/moz.build              | 10 ------
+ .../desktop_capture/desktop_capturer.cc       |  1 -
+ third_party/libwebrtc/webrtc_gn/moz.build     | 23 ++++++++-----
+ 4 files changed, 28 insertions(+), 40 deletions(-)
+
+diff --git a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
+index 8e307063f39e6..14a32c52fb478 100644
+--- a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
++++ b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
+@@ -91,10 +91,8 @@ if CONFIG["OS_TARGET"] == "Linux":
+     DEFINES["USE_NSS_CERTS"] = "1"
+     DEFINES["USE_OZONE"] = "1"
+     DEFINES["USE_UDEV"] = True
+-    DEFINES["USE_X11"] = "1"
+     DEFINES["WEBRTC_LINUX"] = True
+     DEFINES["WEBRTC_POSIX"] = True
+-    DEFINES["WEBRTC_USE_X11"] = True
+     DEFINES["_FILE_OFFSET_BITS"] = "64"
+     DEFINES["_GNU_SOURCE"] = True
+     DEFINES["_LARGEFILE64_SOURCE"] = True
+@@ -105,14 +103,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+     OS_LIBS += [
+         "dl",
+         "rt",
+-        "X11",
+-        "Xcomposite",
+-        "Xdamage",
+-        "Xext",
+-        "Xfixes",
+-        "Xrandr",
+-        "Xrender",
+-        "Xtst"
+     ]
+ 
+     SOURCES += [
+@@ -120,23 +110,27 @@ if CONFIG["OS_TARGET"] == "Linux":
+     ]
+ 
+     UNIFIED_SOURCES += [
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/mouse_cursor_monitor_x11.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/linux/screen_capturer_pipewire.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/screen_capturer_x11.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/shared_x_display.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/linux/window_capturer_pipewire.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/window_capturer_x11.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/window_finder_x11.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/window_list_utils.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/x_atom_cache.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/x_error_trap.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/x_server_pixel_buffer.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/x_window_property.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/screen_capturer_linux.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/window_capturer_linux.cc"
+     ]
+ 
++    if CONFIG["MOZ_X11"]:
++        UNIFIED_SOURCES += [
++            "/third_party/libwebrtc/modules/desktop_capture/linux/mouse_cursor_monitor_x11.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/screen_capturer_x11.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/shared_x_display.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/window_capturer_x11.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/window_finder_x11.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/window_list_utils.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/x_atom_cache.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/x_error_trap.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/x_server_pixel_buffer.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/x_window_property.cc",
++        ]
++
+ if CONFIG["OS_TARGET"] == "WINNT":
+ 
+     DEFINES["CERT_CHAIN_PARA_HAS_EXTRA_FIELDS"] = True
+diff --git a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
+index 9b1c42eecc1c0..a224245c30256 100644
+--- a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
++++ b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
+@@ -54,10 +54,8 @@ if CONFIG["OS_TARGET"] == "Linux":
+     DEFINES["USE_NSS_CERTS"] = "1"
+     DEFINES["USE_OZONE"] = "1"
+     DEFINES["USE_UDEV"] = True
+-    DEFINES["USE_X11"] = "1"
+     DEFINES["WEBRTC_LINUX"] = True
+     DEFINES["WEBRTC_POSIX"] = True
+-    DEFINES["WEBRTC_USE_X11"] = True
+     DEFINES["_FILE_OFFSET_BITS"] = "64"
+     DEFINES["_GNU_SOURCE"] = True
+     DEFINES["_LARGEFILE64_SOURCE"] = True
+@@ -68,14 +66,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+     OS_LIBS += [
+         "dl",
+         "rt",
+-        "X11",
+-        "Xcomposite",
+-        "Xdamage",
+-        "Xext",
+-        "Xfixes",
+-        "Xrandr",
+-        "Xrender",
+-        "Xtst"
+     ]
+ 
+ if CONFIG["OS_TARGET"] == "WINNT":
+diff --git a/third_party/libwebrtc/modules/desktop_capture/desktop_capturer.cc b/third_party/libwebrtc/modules/desktop_capture/desktop_capturer.cc
+index ec3d097676a51..14b8ba2c9dd92 100644
+--- a/third_party/libwebrtc/modules/desktop_capture/desktop_capturer.cc
++++ b/third_party/libwebrtc/modules/desktop_capture/desktop_capturer.cc
+@@ -22,7 +22,6 @@
+ 
+ #if defined(WEBRTC_USE_PIPEWIRE) || defined(WEBRTC_USE_X11)
+ #include <gtk/gtk.h>
+-#include <gtk/gtkx.h>
+ #endif
+ 
+ namespace webrtc {
+diff --git a/third_party/libwebrtc/webrtc_gn/moz.build b/third_party/libwebrtc/webrtc_gn/moz.build
+index c5d06aa1d6871..b79e73b63f848 100644
+--- a/third_party/libwebrtc/webrtc_gn/moz.build
++++ b/third_party/libwebrtc/webrtc_gn/moz.build
+@@ -72,7 +72,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+     DEFINES["USE_NSS_CERTS"] = "1"
+     DEFINES["USE_OZONE"] = "1"
+     DEFINES["USE_UDEV"] = True
+-    DEFINES["USE_X11"] = "1"
+     DEFINES["WEBRTC_LINUX"] = True
+     DEFINES["WEBRTC_POSIX"] = True
+     DEFINES["_FILE_OFFSET_BITS"] = "64"
+@@ -82,18 +81,24 @@ if CONFIG["OS_TARGET"] == "Linux":
+     DEFINES["__STDC_CONSTANT_MACROS"] = True
+     DEFINES["__STDC_FORMAT_MACROS"] = True
+ 
++    if CONFIG["MOZ_X11"]:
++        DEFINES["USE_X11"] = "1"
++        DEFINES["WEBRTC_USE_X11"] = True
++        OS_LIBS += [
++            "X11",
++            "Xcomposite",
++            "Xdamage",
++            "Xext",
++            "Xfixes",
++            "Xrandr",
++            "Xrender",
++            "Xtst"
++        ]
++
+     OS_LIBS += [
+         "dl",
+         "m",
+         "rt",
+-        "X11",
+-        "Xcomposite",
+-        "Xdamage",
+-        "Xext",
+-        "Xfixes",
+-        "Xrandr",
+-        "Xrender",
+-        "Xtst"
+     ]
+ 
+ if CONFIG["OS_TARGET"] == "WINNT":
+-- 
+2.34.0
+

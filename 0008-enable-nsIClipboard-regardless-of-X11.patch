@@ -1,7 +1,7 @@
-From de2ca1a4cf0f91b18fe37fd8e1f71a33c5fe6332 Mon Sep 17 00:00:00 2001
+From 448d577f4e10b04b8011ef8a5cbea5f57a9effe0 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:43:38 +0100
-Subject: [PATCH 07/18] enable nsIClipboard regardless of X11
+Subject: [PATCH 08/18] enable nsIClipboard regardless of X11
 
 ---
  widget/gtk/nsWidgetFactory.cpp | 6 +-----
