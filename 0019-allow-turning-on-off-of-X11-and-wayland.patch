@@ -1,4 +1,4 @@
-From 15fa239d5c68f57bd9b2e4c5fe9791e299da2ab2 Mon Sep 17 00:00:00 2001
+From 2199ac02bdacb54f059b6ba3c55516c2430d19f6 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
 Subject: [PATCH 19/19] allow turning on/off of X11 and wayland

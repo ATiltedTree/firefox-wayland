@@ -1,12 +1,12 @@
-From c8578bb94f889aef5cb683a9742cf0b53538db77 Mon Sep 17 00:00:00 2001
+From 3c66432dd68d035240efbffa25075bd45e7517d3 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 15:06:58 +0100
 Subject: [PATCH 18/19] make sure xul links with mozgtk
 
 ---
  widget/gtk/mozgtk/mozgtk.c | 2 ++
- widget/gtk/nsWindow.cpp    | 4 ++++
- 2 files changed, 6 insertions(+)
+ widget/gtk/nsWindow.cpp    | 6 ++++++
+ 2 files changed, 8 insertions(+)
 
 diff --git a/widget/gtk/mozgtk/mozgtk.c b/widget/gtk/mozgtk/mozgtk.c
 index d7dbbc6fd9e3a..75c6f71832f97 100644
@@ -22,20 +22,22 @@ index d7dbbc6fd9e3a..75c6f71832f97 100644
  #  include <X11/Xlib.h>
  // Bug 1271100
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
-index e6aa6215c4d58..7bcf776f157de 100644
+index e6aa6215c4d58..b8e630f25e2d7 100644
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
-@@ -120,6 +120,9 @@ using namespace mozilla::gfx;
+@@ -120,6 +120,11 @@ using namespace mozilla::gfx;
  using namespace mozilla::layers;
  using namespace mozilla::widget;
  
++extern "C" {
 +// Make sure mozgtk gets linked
 +MOZ_EXPORT void PleaseLinkWithMe();
++}
 +
  // Don't put more than this many rects in the dirty region, just fluff
  // out to the bounding-box if there are more
  #define MAX_RECTS_IN_REGION 100
-@@ -499,6 +502,7 @@ nsWindow::nsWindow()
+@@ -499,6 +504,7 @@ nsWindow::nsWindow()
        mRelativePointer(nullptr)
  #endif
  {
