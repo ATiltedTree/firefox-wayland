@@ -1,0 +1,26 @@
+From 97475c7ffc3028f10b15bedad18a773180b5e6f4 Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Thu, 18 Nov 2021 15:39:47 +0100
+Subject: [PATCH 03/18] angle: Build without X11 support if MOZ_X11 is disabled
+
+---
+ gfx/angle/moz.build.common | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/gfx/angle/moz.build.common b/gfx/angle/moz.build.common
+index 8769a2fe96cbf..6976853b35538 100644
+--- a/gfx/angle/moz.build.common
++++ b/gfx/angle/moz.build.common
+@@ -12,6 +12,9 @@ CXXFLAGS += CONFIG['MOZ_X11_CFLAGS']
+ if CONFIG['INTEL_ARCHITECTURE']:
+     CXXFLAGS += CONFIG['SSE2_FLAGS']
+ 
++if not CONFIG['MOZ_X11']:
++    DEFINES['EGL_NO_X11'] = True
++
+ if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'windows':
+     DEFINES['ANGLE_IS_WIN'] = True
+ 
+-- 
+2.34.0
+

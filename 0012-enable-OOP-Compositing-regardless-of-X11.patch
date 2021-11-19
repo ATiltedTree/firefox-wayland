@@ -1,0 +1,98 @@
+From 1e1fd21a3da5979a5a9c5a47bfcfb642ee63c5b8 Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Thu, 18 Nov 2021 15:47:23 +0100
+Subject: [PATCH 12/18] enable OOP Compositing regardless of X11
+
+---
+ widget/CompositorWidget.h |  2 +-
+ widget/gtk/moz.build      | 18 ++++++++----------
+ widget/moz.build          |  2 +-
+ 3 files changed, 10 insertions(+), 12 deletions(-)
+
+diff --git a/widget/CompositorWidget.h b/widget/CompositorWidget.h
+index 20eb3634f38fc..e41264a6e6be9 100644
+--- a/widget/CompositorWidget.h
++++ b/widget/CompositorWidget.h
+@@ -62,7 +62,7 @@ class CompositorWidgetDelegate {
+ };
+ 
+ // Platforms that support out-of-process widgets.
+-#if defined(XP_WIN) || defined(MOZ_X11)
++#if defined(XP_WIN) || defined(MOZ_WIDGET_GTK)
+ // CompositorWidgetParent should implement CompositorWidget and
+ // PCompositorWidgetParent.
+ class CompositorWidgetParent;
+diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
+index 9412db2fa4919..fdea8c6ce3c13 100644
+--- a/widget/gtk/moz.build
++++ b/widget/gtk/moz.build
+@@ -33,15 +33,22 @@ EXPORTS += [
+ EXPORTS.mozilla += ["WidgetUtilsGtk.h"]
+ 
+ EXPORTS.mozilla.widget += [
++    "CompositorWidgetChild.h",
++    "CompositorWidgetParent.h",
++    "GtkCompositorWidget.h",
++    "InProcessGtkCompositorWidget.h",
+     "WindowSurface.h",
+     "WindowSurfaceProvider.h",
+ ]
+ 
+ UNIFIED_SOURCES += [
++    "CompositorWidgetChild.cpp",
++    "CompositorWidgetParent.cpp",
+     "GfxInfo.cpp",
+     "gtk3drawing.cpp",
+     "GtkCompositorWidget.cpp",
+     "IMContextWrapper.cpp",
++    "InProcessGtkCompositorWidget.cpp",
+     "keysym2ucs.c",
+     "MozContainer.cpp",
+     "MPRISServiceHandler.cpp",
+@@ -59,6 +66,7 @@ UNIFIED_SOURCES += [
+     "nsNativeBasicThemeGTK.cpp",
+     "nsSound.cpp",
+     "nsToolkit.cpp",
++    "nsUserIdleServiceGTK.cpp",
+     "nsWidgetFactory.cpp",
+     "ScreenHelperGTK.cpp",
+     "TaskbarProgress.cpp",
+@@ -102,22 +110,12 @@ if CONFIG["MOZ_WAYLAND"]:
+ 
+ if CONFIG["MOZ_X11"]:
+     UNIFIED_SOURCES += [
+-        "CompositorWidgetChild.cpp",
+-        "CompositorWidgetParent.cpp",
+-        "InProcessGtkCompositorWidget.cpp",
+         "nsClipboardX11.cpp",
+         "nsShmImage.cpp",
+-        "nsUserIdleServiceGTK.cpp",
+         "WindowSurfaceX11.cpp",
+         "WindowSurfaceX11Image.cpp",
+         "WindowSurfaceX11SHM.cpp",
+     ]
+-    EXPORTS.mozilla.widget += [
+-        "CompositorWidgetChild.h",
+-        "CompositorWidgetParent.h",
+-        "GtkCompositorWidget.h",
+-        "InProcessGtkCompositorWidget.h",
+-    ]
+ 
+ if CONFIG["NS_PRINTING"]:
+     UNIFIED_SOURCES += [
+diff --git a/widget/moz.build b/widget/moz.build
+index 9bdd1c3b6fcfc..68e8534c395d8 100644
+--- a/widget/moz.build
++++ b/widget/moz.build
+@@ -302,7 +302,7 @@ if toolkit == "windows":
+         "windows/PCompositorWidget.ipdl",
+         "windows/PlatformWidgetTypes.ipdlh",
+     ]
+-elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk" and CONFIG["MOZ_X11"]:
++elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+     IPDL_SOURCES = [
+         "gtk/PCompositorWidget.ipdl",
+         "gtk/PlatformWidgetTypes.ipdlh",
+-- 
+2.34.0
+

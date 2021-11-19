@@ -1,0 +1,25 @@
+From 771f9944db49e297863360229ba2dd0530dc2bcf Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Thu, 18 Nov 2021 15:53:43 +0100
+Subject: [PATCH 15/18] always use EGL when building for wayland
+
+---
+ gfx/gl/moz.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gfx/gl/moz.build b/gfx/gl/moz.build
+index 7ac6b0753a9ed..a817a6fb0856c 100644
+--- a/gfx/gl/moz.build
++++ b/gfx/gl/moz.build
+@@ -13,7 +13,7 @@ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "cocoa":
+ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "uikit":
+     gl_provider = "EAGL"
+ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+-    if CONFIG["MOZ_EGL_XRENDER_COMPOSITE"]:
++    if CONFIG["MOZ_EGL_XRENDER_COMPOSITE"] or CONFIG["MOZ_WAYLAND"]:
+         gl_provider = "EGL"
+     else:
+         gl_provider = "GLX"
+-- 
+2.34.0
+
