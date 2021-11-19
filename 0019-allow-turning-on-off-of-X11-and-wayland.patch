@@ -1,7 +1,7 @@
-From e42129aaa7b16878d98c9fcfb32c8319deb31b2d Mon Sep 17 00:00:00 2001
+From 6906a5c9b29afa6771dbb4ba90c899bbf598230d Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
-Subject: [PATCH 18/18] allow turning on/off of X11 and wayland
+Subject: [PATCH 19/19] allow turning on/off of X11 and wayland
 
 ---
  toolkit/moz.configure | 46 ++++++++++++++++++++++++++-----------------

@@ -1,7 +1,7 @@
 From 1e1fd21a3da5979a5a9c5a47bfcfb642ee63c5b8 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:47:23 +0100
-Subject: [PATCH 12/18] enable OOP Compositing regardless of X11
+Subject: [PATCH 12/19] enable OOP Compositing regardless of X11
 
 ---
  widget/CompositorWidget.h |  2 +-

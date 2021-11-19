@@ -1,0 +1,40 @@
+From 5559c9432067526e53b84f0af779788517c881ce Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Fri, 19 Nov 2021 14:52:32 +0100
+Subject: [PATCH 18/19] make sure mozgtk doesn't get dropped by the linker
+
+---
+ toolkit/library/moz.build | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/toolkit/library/moz.build b/toolkit/library/moz.build
+index 2c3f86948ed16..1a978d6958c64 100644
+--- a/toolkit/library/moz.build
++++ b/toolkit/library/moz.build
+@@ -166,6 +166,15 @@ USE_LIBS += [
+ ]
+ 
+ if CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
++    if CONFIG["GCC_USE_GNU_LD"]:
++        no_as_needed = ["-Wl,--no-as-needed"]
++        as_needed = ["-Wl,--as-needed"]
++    else:
++        no_as_needed = []
++        as_needed = []
++
++    # Make sure mozgtk doesn't get dropped
++    USE_LIBS += no_as_needed
+     # The mozgtk library is a workaround that makes Gtk+ use libwayland-client
+     # instead of mozwayland. The reason it works is that by being a dependency
+     # of libxul, mozgtk appears in dependentlibs.list, preceding mozwayland
+@@ -181,6 +190,7 @@ if CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+     USE_LIBS += [
+         "mozgtk",
+     ]
++    USE_LIBS += as_needed
+     OS_LIBS += CONFIG["MOZ_GTK3_LIBS"]
+ 
+ if CONFIG["MOZ_WAYLAND"]:
+-- 
+2.34.0
+
