@@ -1,4 +1,4 @@
-From aa8316a01c88cc40101f76d5ace8e8f3e3f6a804 Mon Sep 17 00:00:00 2001
+From 12b4cf514d72ae7b37257a24bd31295bd985fd9a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:43:32 +0100
 Subject: [PATCH 16/19] stub out X11 specific stuff

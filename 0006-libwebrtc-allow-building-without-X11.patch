@@ -1,4 +1,4 @@
-From 35c13879cbaec906bd67180b0d9018d4192932c2 Mon Sep 17 00:00:00 2001
+From 8993e9a1fbcbb9d24ff1717b90563804e859ee42 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:42:49 +0100
 Subject: [PATCH 06/19] libwebrtc: allow building without X11
@@ -7,8 +7,9 @@ Subject: [PATCH 06/19] libwebrtc: allow building without X11
  .../desktop_capture_generic_gn/moz.build      | 37 ++++++++-----------
  .../desktop_capture_gn/moz.build              | 11 ------
  .../desktop_capture/desktop_capturer.cc       |  1 -
+ .../linux/desktop_device_info_x11.cc          |  2 +
  .../libwebrtc/webrtc/webrtc_gn/moz.build      | 25 +++++++------
- 4 files changed, 29 insertions(+), 45 deletions(-)
+ 5 files changed, 31 insertions(+), 45 deletions(-)
 
 diff --git a/third_party/libwebrtc/webrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build b/third_party/libwebrtc/webrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
 index 16b0f5d09ef83..4386d75cf78c8 100644
@@ -109,6 +110,22 @@ index 5e4dcb058d166..87ea0a95b61b8 100644
  #include <gtk/gtk.h>
 -#include <gtk/gtkx.h>
  #endif
+ 
+ namespace webrtc {
+diff --git a/third_party/libwebrtc/webrtc/modules/desktop_capture/linux/desktop_device_info_x11.cc b/third_party/libwebrtc/webrtc/modules/desktop_capture/linux/desktop_device_info_x11.cc
+index 04e5caf21d8a2..43bf0cc4555a6 100644
+--- a/third_party/libwebrtc/webrtc/modules/desktop_capture/linux/desktop_device_info_x11.cc
++++ b/third_party/libwebrtc/webrtc/modules/desktop_capture/linux/desktop_device_info_x11.cc
+@@ -6,9 +6,11 @@
+ #include <inttypes.h>
+ #include <unistd.h>
+ #include <stdio.h>
++#ifdef USE_X11
+ #include "modules/desktop_capture/linux/shared_x_util.h"
+ #include "modules/desktop_capture/linux/x_error_trap.h"
+ #include "modules/desktop_capture/linux/x_server_pixel_buffer.h"
++#endif
+ #include "rtc_base/logging.h"
  
  namespace webrtc {
 diff --git a/third_party/libwebrtc/webrtc/webrtc_gn/moz.build b/third_party/libwebrtc/webrtc/webrtc_gn/moz.build
