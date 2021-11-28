@@ -1,7 +1,7 @@
 From 73d5114d81810e4304f04bf127013f2147d19170 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:38:49 +0100
-Subject: [PATCH 02/19] remove unused x11 includes
+Subject: [PATCH 02/20] remove unused x11 includes
 
 ---
  gfx/layers/client/TextureClient.cpp                | 2 --
@@ -94,5 +94,5 @@ index fcd423626159c..9b458a4a858c7 100644
  #include "nsImageToPixbuf.h"
  #include "nsPresContext.h"
 -- 
-2.34.0
+2.34.1
 

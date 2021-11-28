@@ -1,7 +1,7 @@
 From 12b4cf514d72ae7b37257a24bd31295bd985fd9a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:43:32 +0100
-Subject: [PATCH 16/19] stub out X11 specific stuff
+Subject: [PATCH 16/20] stub out X11 specific stuff
 
 ---
  gfx/thebes/gfxPlatformGtk.cpp   |  4 +-
@@ -790,5 +790,5 @@ index 4b524a0795b91..805eee84b3943 100644
    bool ConfigureX11GLVisual(bool aUseAlpha);
  #endif
 -- 
-2.34.0
+2.34.1
 

@@ -1,7 +1,7 @@
 From 8993e9a1fbcbb9d24ff1717b90563804e859ee42 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:42:49 +0100
-Subject: [PATCH 06/19] libwebrtc: allow building without X11
+Subject: [PATCH 06/20] libwebrtc: allow building without X11
 
 ---
  .../desktop_capture_generic_gn/moz.build      | 37 ++++++++-----------
@@ -172,5 +172,5 @@ index 7ce0675b163b2..05a49448b1f6b 100644
  
  if CONFIG["OS_TARGET"] == "NetBSD":
 -- 
-2.34.0
+2.34.1
 

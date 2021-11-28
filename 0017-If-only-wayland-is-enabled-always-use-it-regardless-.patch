@@ -1,7 +1,7 @@
 From b29d701b2f4682c0adce568f4d4af041a0aaaab2 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 12:31:16 +0100
-Subject: [PATCH 17/19] If only wayland is enabled, always use it regardless of
+Subject: [PATCH 17/20] If only wayland is enabled, always use it regardless of
  MOZ_ENABLE_WAYLAND
 
 ---
@@ -31,5 +31,5 @@ index 332f340179d34..299bb8385280a 100644
  #endif
  
 -- 
-2.34.0
+2.34.1
 

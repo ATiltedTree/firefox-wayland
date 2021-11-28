@@ -1,7 +1,7 @@
 From ff94061c164bd1377fdd13b1faf40ee58d4d46af Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:47:23 +0100
-Subject: [PATCH 12/19] enable OOP Compositing regardless of X11
+Subject: [PATCH 12/20] enable OOP Compositing regardless of X11
 
 ---
  widget/CompositorWidget.h |  2 +-
@@ -94,5 +94,5 @@ index 9bdd1c3b6fcfc..68e8534c395d8 100644
          "gtk/PCompositorWidget.ipdl",
          "gtk/PlatformWidgetTypes.ipdlh",
 -- 
-2.34.0
+2.34.1
 

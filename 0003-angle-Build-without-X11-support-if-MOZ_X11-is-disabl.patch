@@ -1,7 +1,7 @@
 From a491a56ca6609b49919a2f268d0d9771ed21d577 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:39:47 +0100
-Subject: [PATCH 03/19] angle: Build without X11 support if MOZ_X11 is disabled
+Subject: [PATCH 03/20] angle: Build without X11 support if MOZ_X11 is disabled
 
 ---
  gfx/angle/moz.build.common | 3 +++
@@ -22,5 +22,5 @@ index 8769a2fe96cbf..6976853b35538 100644
      DEFINES['ANGLE_IS_WIN'] = True
  
 -- 
-2.34.0
+2.34.1
 

@@ -1,7 +1,7 @@
 From 088132ab476c88523c69a7fe45353de7882f4161 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 15:06:58 +0100
-Subject: [PATCH 18/19] make sure xul links with mozgtk
+Subject: [PATCH 18/20] make sure xul links with mozgtk
 
 ---
  widget/gtk/mozgtk/mozgtk.c | 2 ++
@@ -46,5 +46,5 @@ index e6aa6215c4d58..b8e630f25e2d7 100644
    mSizeConstraints.mMaxSize = GetSafeWindowSize(mSizeConstraints.mMaxSize);
  
 -- 
-2.34.0
+2.34.1
 

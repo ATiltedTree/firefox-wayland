@@ -1,7 +1,7 @@
 From d496ff36086efd19bd828bcbd5460251582a5fcc Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
-Subject: [PATCH 19/19] allow turning on/off of X11 and wayland
+Subject: [PATCH 19/20] allow turning on/off of X11 and wayland
 
 ---
  toolkit/moz.configure | 46 ++++++++++++++++++++++++++-----------------
@@ -100,5 +100,5 @@ index f63780b892967..c94342dced3b3 100644
  
  # ASan Reporter Addon
 -- 
-2.34.0
+2.34.1
 

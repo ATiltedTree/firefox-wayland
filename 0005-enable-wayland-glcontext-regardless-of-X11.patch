@@ -1,7 +1,7 @@
 From b469371adf07256b51086b802552692159125f26 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:41:56 +0100
-Subject: [PATCH 05/19] enable wayland glcontext regardless of X11
+Subject: [PATCH 05/20] enable wayland glcontext regardless of X11
 
 ---
  gfx/gl/GLContextProvider.h          | 13 +++++++------
@@ -97,5 +97,5 @@ index 3f1f926cd9318..b3641be3ee4e5 100644
  
  }  // namespace mozilla::gl
 -- 
-2.34.0
+2.34.1
 

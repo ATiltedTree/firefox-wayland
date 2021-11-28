@@ -1,7 +1,7 @@
 From ade620064b193f4990259da1c4c1cdffd985c54a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:53:43 +0100
-Subject: [PATCH 15/19] always use EGL when building for wayland
+Subject: [PATCH 15/20] always use EGL when building for wayland
 
 ---
  gfx/gl/moz.build | 2 +-
@@ -21,5 +21,5 @@ index 7ac6b0753a9ed..a817a6fb0856c 100644
      else:
          gl_provider = "GLX"
 -- 
-2.34.0
+2.34.1
 
