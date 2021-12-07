@@ -1,4 +1,4 @@
-From 2b9872d980b52b6c4aaf535e65c157ffa5580308 Mon Sep 17 00:00:00 2001
+From 192aa3d882a6ba9d9f6088dc563a7213e0637d85 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:46:17 +0100
 Subject: [PATCH 10/20] enable glxtest on X11 and wayland
@@ -8,10 +8,10 @@ Subject: [PATCH 10/20] enable glxtest on X11 and wayland
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
-index 37687c5642f00..2f3563146f70b 100644
+index 089b38759104a..89fd7b0289d10 100644
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
-@@ -154,7 +154,7 @@ SOURCES += [
+@@ -156,7 +156,7 @@ SOURCES += [
      "ProfileReset.cpp",
  ]
  
@@ -20,7 +20,7 @@ index 37687c5642f00..2f3563146f70b 100644
      UNIFIED_SOURCES += [
          "glxtest.cpp",
      ]
-@@ -185,7 +185,7 @@ include("/ipc/chromium/chromium-config.mozbuild")
+@@ -187,7 +187,7 @@ include("/ipc/chromium/chromium-config.mozbuild")
  
  FINAL_LIBRARY = "xul"
  

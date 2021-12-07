@@ -1,7 +1,7 @@
-From b29d701b2f4682c0adce568f4d4af041a0aaaab2 Mon Sep 17 00:00:00 2001
+From 57eed4533eed120c65e7e601dbe11f2564c00a08 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 12:31:16 +0100
-Subject: [PATCH 17/20] If only wayland is enabled, always use it regardless of
+Subject: [PATCH 16/20] If only wayland is enabled, always use it regardless of
  MOZ_ENABLE_WAYLAND
 
 ---
@@ -9,10 +9,10 @@ Subject: [PATCH 17/20] If only wayland is enabled, always use it regardless of
  1 file changed, 4 insertions(+)
 
 diff --git a/toolkit/xre/nsAppRunner.cpp b/toolkit/xre/nsAppRunner.cpp
-index 332f340179d34..299bb8385280a 100644
+index 60ea6966cccf2..f3a472b127a8b 100644
 --- a/toolkit/xre/nsAppRunner.cpp
 +++ b/toolkit/xre/nsAppRunner.cpp
-@@ -4099,6 +4099,7 @@ static void PR_CALLBACK ReadAheadDlls_ThreadStart(void* arg) {
+@@ -4113,6 +4113,7 @@ static void PR_CALLBACK ReadAheadDlls_ThreadStart(void* arg) {
  
  #if defined(MOZ_WAYLAND)
  bool IsWaylandEnabled() {
@@ -20,7 +20,7 @@ index 332f340179d34..299bb8385280a 100644
    const char* waylandDisplay = PR_GetEnv("WAYLAND_DISPLAY");
    if (!waylandDisplay) {
      return false;
-@@ -4121,6 +4122,9 @@ bool IsWaylandEnabled() {
+@@ -4135,6 +4136,9 @@ bool IsWaylandEnabled() {
      NS_WARNING("Running Wayland backen on Gtk3 < 3.22. Expect issues/glitches");
    }
    return enableWayland;

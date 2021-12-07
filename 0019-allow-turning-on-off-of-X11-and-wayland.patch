@@ -1,14 +1,27 @@
-From d496ff36086efd19bd828bcbd5460251582a5fcc Mon Sep 17 00:00:00 2001
+From fba8fa66c2d2956952e4bbd942004c42eb1e3293 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
 Subject: [PATCH 19/20] allow turning on/off of X11 and wayland
 
 ---
- toolkit/moz.configure | 46 ++++++++++++++++++++++++++-----------------
- 1 file changed, 28 insertions(+), 18 deletions(-)
+ python/mozboot/mozboot/gentoo.py |  1 -
+ toolkit/moz.configure            | 48 +++++++++++++++++++-------------
+ 2 files changed, 29 insertions(+), 20 deletions(-)
 
+diff --git a/python/mozboot/mozboot/gentoo.py b/python/mozboot/mozboot/gentoo.py
+index 545eaaacbc134..acb2a26d910be 100644
+--- a/python/mozboot/mozboot/gentoo.py
++++ b/python/mozboot/mozboot/gentoo.py
+@@ -33,7 +33,6 @@ class GentooBootstrapper(LinuxBootstrapper, BaseBootstrapper):
+                 "dev-libs/dbus-glib",
+                 "media-sound/pulseaudio",
+                 "x11-libs/gtk+:3",
+-                "x11-libs/libXt",
+             ]
+         )
+ 
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index f63780b892967..c94342dced3b3 100644
+index a78a32bdc0c94..f6789681f9f79 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
 @@ -265,7 +265,7 @@ def toolkit_choices(target):
@@ -90,12 +103,14 @@ index f63780b892967..c94342dced3b3 100644
  def x11_libs(webrtc):
      libs = [
          "x11",
-@@ -1197,7 +1207,7 @@ def x11_libs(webrtc):
-     return " ".join(libs)
+@@ -1197,8 +1207,8 @@ def x11_libs(webrtc):
+     return libs
  
  
 -pkg_check_modules("MOZ_X11", x11_libs, when=toolkit_gtk)
+-pkg_check_modules("MOZ_X11_SM", ["ice", "sm"], cflags_only=True, when=toolkit_gtk)
 +pkg_check_modules("MOZ_X11", x11_libs, when=with_x)
++pkg_check_modules("MOZ_X11_SM", ["ice", "sm"], cflags_only=True, when=with_x)
  
  
  # ASan Reporter Addon

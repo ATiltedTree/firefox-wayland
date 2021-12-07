@@ -1,4 +1,4 @@
-From f6fe95bc4c7abc6201aaa4decd784f870bde4f39 Mon Sep 17 00:00:00 2001
+From f156516e612d5097c3805865101d5e8aee554bd1 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sun, 28 Nov 2021 11:59:21 +0100
 Subject: [PATCH 20/20] use xdg

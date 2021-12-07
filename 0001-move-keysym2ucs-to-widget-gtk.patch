@@ -1,4 +1,4 @@
-From 0c41105ae0fb282c22e1313827c5543ed5f9789e Mon Sep 17 00:00:00 2001
+From 6ecb9d27d2a75894c6bfcc0dc983114a3dce4907 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:33:13 +0100
 Subject: [PATCH 01/20] move keysym2ucs to widget/gtk
@@ -35,10 +35,10 @@ index 291e3a78c8c2d..9412db2fa4919 100644
      "MPRISServiceHandler.cpp",
      "NativeKeyBindings.cpp",
 diff --git a/widget/moz.build b/widget/moz.build
-index f5f28d2214788..9bdd1c3b6fcfc 100644
+index 4724d667d8ac3..17de96e2d68f2 100644
 --- a/widget/moz.build
 +++ b/widget/moz.build
-@@ -258,9 +258,6 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
+@@ -262,9 +262,6 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
  
  EXPORTS.ipc = ["nsGUIEventIPC.h"]
  

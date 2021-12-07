@@ -1,4 +1,4 @@
-From ff94061c164bd1377fdd13b1faf40ee58d4d46af Mon Sep 17 00:00:00 2001
+From 1fba0e5c24f27b3e1bdacc210a7484027f9bbf5e Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:47:23 +0100
 Subject: [PATCH 12/20] enable OOP Compositing regardless of X11
@@ -81,10 +81,10 @@ index 9412db2fa4919..fdea8c6ce3c13 100644
  if CONFIG["NS_PRINTING"]:
      UNIFIED_SOURCES += [
 diff --git a/widget/moz.build b/widget/moz.build
-index 9bdd1c3b6fcfc..68e8534c395d8 100644
+index 17de96e2d68f2..a73e447cd0136 100644
 --- a/widget/moz.build
 +++ b/widget/moz.build
-@@ -302,7 +302,7 @@ if toolkit == "windows":
+@@ -306,7 +306,7 @@ if toolkit == "windows":
          "windows/PCompositorWidget.ipdl",
          "windows/PlatformWidgetTypes.ipdlh",
      ]

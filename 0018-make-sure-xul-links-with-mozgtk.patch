@@ -1,28 +1,36 @@
-From 088132ab476c88523c69a7fe45353de7882f4161 Mon Sep 17 00:00:00 2001
+From 22ab153d15a4917944b2f737a86b7210ac76b76e Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 15:06:58 +0100
 Subject: [PATCH 18/20] make sure xul links with mozgtk
 
 ---
- widget/gtk/mozgtk/mozgtk.c | 2 ++
+ widget/gtk/mozgtk/mozgtk.c | 6 +++++-
  widget/gtk/nsWindow.cpp    | 6 ++++++
- 2 files changed, 8 insertions(+)
+ 2 files changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/widget/gtk/mozgtk/mozgtk.c b/widget/gtk/mozgtk/mozgtk.c
-index d7dbbc6fd9e3a..75c6f71832f97 100644
+index 677f9b356160a..75c6f71832f97 100644
 --- a/widget/gtk/mozgtk/mozgtk.c
 +++ b/widget/gtk/mozgtk/mozgtk.c
-@@ -6,6 +6,8 @@
+@@ -6,7 +6,10 @@
  
  #include "mozilla/Types.h"
  
+-#include <X11/Xlib.h>
 +MOZ_EXPORT void PleaseLinkWithMe() {}
 +
- #ifdef MOZ_X11
- #  include <X11/Xlib.h>
++#ifdef MOZ_X11
++#  include <X11/Xlib.h>
  // Bug 1271100
+ // We need to trick system Cairo into not using the XShm extension due to
+ // a race condition in it that results in frequent BadAccess errors. Cairo
+@@ -19,3 +22,4 @@
+ // ever can remove this workaround for system Cairo, we'll need something
+ // to replace it for that purpose.
+ MOZ_EXPORT Bool XShmQueryExtension(Display* aDisplay) { return False; }
++#endif
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
-index e6aa6215c4d58..b8e630f25e2d7 100644
+index 1af1e37c73a36..53ccaa220ea8f 100644
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
 @@ -120,6 +120,11 @@ using namespace mozilla::gfx;
@@ -37,7 +45,7 @@ index e6aa6215c4d58..b8e630f25e2d7 100644
  // Don't put more than this many rects in the dirty region, just fluff
  // out to the bounding-box if there are more
  #define MAX_RECTS_IN_REGION 100
-@@ -499,6 +504,7 @@ nsWindow::nsWindow()
+@@ -500,6 +505,7 @@ nsWindow::nsWindow()
        mRelativePointer(nullptr)
  #endif
  {
