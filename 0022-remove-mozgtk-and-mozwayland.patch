@@ -1,7 +1,7 @@
-From 6256a9e55ba333cb928a30c630e2f1ad01ca0f71 Mon Sep 17 00:00:00 2001
+From b4ed24f04adf5ca33a46b6348632e24ebbd2e1d8 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 13 Dec 2021 22:42:39 +0100
-Subject: [PATCH 21/22] remove mozgtk and mozwayland
+Subject: [PATCH 22/23] remove mozgtk and mozwayland
 
 ---
  browser/installer/package-manifest.in |   6 -
@@ -12,12 +12,12 @@ Subject: [PATCH 21/22] remove mozgtk and mozwayland
  widget/gtk/mozgtk/moz.build           |  36 -----
  widget/gtk/mozgtk/mozgtk.c            |  25 ----
  widget/gtk/mozwayland/moz.build       |  16 --
- widget/gtk/mozwayland/mozwayland.c    | 201 --------------------------
+ widget/gtk/mozwayland/mozwayland.c    | 208 --------------------------
  widget/gtk/mozwayland/mozwayland.h    | 134 -----------------
  widget/gtk/nsClipboardWayland.cpp     |   4 +-
  widget/gtk/nsWaylandDisplay.h         |   4 +-
  widget/gtk/nsWindow.cpp               |  10 --
- 13 files changed, 13 insertions(+), 459 deletions(-)
+ 13 files changed, 13 insertions(+), 466 deletions(-)
  delete mode 100644 widget/gtk/mozgtk/moz.build
  delete mode 100644 widget/gtk/mozgtk/mozgtk.c
  delete mode 100644 widget/gtk/mozwayland/moz.build
@@ -75,7 +75,7 @@ index 2c3f86948ed16..68e6b57076c50 100644
  if CONFIG["MOZ_JPROF"]:
      USE_LIBS += [
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index f6789681f9f79..1ceafa22eed55 100644
+index 7d0f041775799..ad56d51d0674e 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
 @@ -328,7 +328,7 @@ def with_wayland(value, toolkit_gtk, artifacts):
@@ -243,10 +243,10 @@ index 94eca8a785238..0000000000000
 -CFLAGS += CONFIG["TK_CFLAGS"]
 diff --git a/widget/gtk/mozwayland/mozwayland.c b/widget/gtk/mozwayland/mozwayland.c
 deleted file mode 100644
-index 8dcf5c9c18fd6..0000000000000
+index 3e71e44b66df6..0000000000000
 --- a/widget/gtk/mozwayland/mozwayland.c
 +++ /dev/null
-@@ -1,201 +0,0 @@
+@@ -1,208 +0,0 @@
 -/* -*- Mode: C; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 -/* vim:expandtab:shiftwidth=4:tabstop=4:
 - */
@@ -287,6 +287,13 @@ index 8dcf5c9c18fd6..0000000000000
 -MOZ_EXPORT void wl_event_queue_destroy(struct wl_event_queue* queue) {}
 -
 -MOZ_EXPORT void wl_proxy_marshal(struct wl_proxy* p, uint32_t opcode, ...) {}
+-
+-MOZ_EXPORT struct wl_proxy* wl_proxy_marshal_flags(
+-    struct wl_proxy* proxy, uint32_t opcode,
+-    const struct wl_interface* interface, uint32_t version, uint32_t flags,
+-    ...) {
+-  return NULL;
+-}
 -
 -MOZ_EXPORT void wl_proxy_marshal_array(struct wl_proxy* p, uint32_t opcode,
 -                                       union wl_argument* args) {}

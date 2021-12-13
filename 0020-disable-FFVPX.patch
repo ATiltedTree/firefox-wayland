@@ -1,14 +1,14 @@
-From 6e5ea4b7f4af508b9b01addc67100b6cbfec17c1 Mon Sep 17 00:00:00 2001
+From ce539d9ebfdfbdc2f060eea424f29bf00c657d7d Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 13 Dec 2021 22:43:55 +0100
-Subject: [PATCH 22/22] disable FFVPX
+Subject: [PATCH 20/23] disable FFVPX
 
 ---
  toolkit/moz.configure | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 1ceafa22eed55..ad56d51d0674e 100644
+index f6789681f9f79..7d0f041775799 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
 @@ -1896,7 +1896,7 @@ with only_when(compile_environment):
