@@ -1,23 +1,24 @@
-From b4ed24f04adf5ca33a46b6348632e24ebbd2e1d8 Mon Sep 17 00:00:00 2001
+From 6abf5596fbee1549a467976f96c484a0557e6e64 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 13 Dec 2021 22:42:39 +0100
 Subject: [PATCH 22/23] remove mozgtk and mozwayland
 
 ---
- browser/installer/package-manifest.in |   6 -
- toolkit/library/moz.build             |  19 +--
- toolkit/moz.configure                 |   2 +-
- toolkit/xre/glxtest.cpp               |   3 +-
- widget/gtk/moz.build                  |  12 +-
- widget/gtk/mozgtk/moz.build           |  36 -----
- widget/gtk/mozgtk/mozgtk.c            |  25 ----
- widget/gtk/mozwayland/moz.build       |  16 --
- widget/gtk/mozwayland/mozwayland.c    | 208 --------------------------
- widget/gtk/mozwayland/mozwayland.h    | 134 -----------------
- widget/gtk/nsClipboardWayland.cpp     |   4 +-
- widget/gtk/nsWaylandDisplay.h         |   4 +-
- widget/gtk/nsWindow.cpp               |  10 --
- 13 files changed, 13 insertions(+), 466 deletions(-)
+ browser/installer/package-manifest.in         |   6 -
+ toolkit/library/moz.build                     |  19 +-
+ toolkit/moz.configure                         |   2 +-
+ toolkit/xre/glxtest.cpp                       |   3 +-
+ widget/gtk/moz.build                          |  12 +-
+ widget/gtk/mozgtk/moz.build                   |  36 --
+ widget/gtk/mozgtk/mozgtk.c                    |  25 --
+ widget/gtk/mozwayland/moz.build               |  16 -
+ widget/gtk/mozwayland/mozwayland.c            | 208 ----------
+ widget/gtk/mozwayland/mozwayland.h            | 134 ------
+ widget/gtk/nsClipboardWayland.cpp             |   4 +-
+ widget/gtk/nsWaylandDisplay.h                 |   4 +-
+ widget/gtk/nsWindow.cpp                       |  10 -
+ .../gtk-primary-selection-client-protocol.h   | 391 +++++++++---------
+ 14 files changed, 214 insertions(+), 656 deletions(-)
  delete mode 100644 widget/gtk/mozgtk/moz.build
  delete mode 100644 widget/gtk/mozgtk/mozgtk.c
  delete mode 100644 widget/gtk/mozwayland/moz.build
@@ -675,6 +676,617 @@ index 53ccaa220ea8f..a544002982e88 100644
    }
  #endif
  #ifdef MOZ_WAYLAND
+diff --git a/widget/gtk/wayland/gtk-primary-selection-client-protocol.h b/widget/gtk/wayland/gtk-primary-selection-client-protocol.h
+index 21cf84a6e96cd..833d6efba5300 100644
+--- a/widget/gtk/wayland/gtk-primary-selection-client-protocol.h
++++ b/widget/gtk/wayland/gtk-primary-selection-client-protocol.h
+@@ -5,10 +5,9 @@
+ 
+ #include <stdint.h>
+ #include <stddef.h>
+-#include "mozilla/widget/mozwayland.h"
+ #include "wayland-client.h"
+ 
+-#ifdef  __cplusplus
++#ifdef __cplusplus
+ extern "C" {
+ #endif
+ 
+@@ -61,10 +60,13 @@ extern "C" {
+  * writes, merely cancelling the ongoing transfer if any happened.
+  *
+  * @section page_ifaces_gtk_primary_selection Interfaces
+- * - @subpage page_iface_gtk_primary_selection_device_manager - X primary selection emulation
++ * - @subpage page_iface_gtk_primary_selection_device_manager - X primary
++ * selection emulation
+  * - @subpage page_iface_gtk_primary_selection_device -
+- * - @subpage page_iface_gtk_primary_selection_offer - offer to transfer primary selection contents
+- * - @subpage page_iface_gtk_primary_selection_source - offer to replace the contents of the primary selection
++ * - @subpage page_iface_gtk_primary_selection_offer - offer to transfer primary
++ * selection contents
++ * - @subpage page_iface_gtk_primary_selection_source - offer to replace the
++ * contents of the primary selection
+  * @section page_copyright_gtk_primary_selection Copyright
+  * <pre>
+  *
+@@ -97,7 +99,8 @@ struct gtk_primary_selection_source;
+ struct wl_seat;
+ 
+ /**
+- * @page page_iface_gtk_primary_selection_device_manager gtk_primary_selection_device_manager
++ * @page page_iface_gtk_primary_selection_device_manager
++ * gtk_primary_selection_device_manager
+  * @section page_iface_gtk_primary_selection_device_manager_desc Description
+  *
+  * The primary selection device manager is a singleton global object that
+@@ -108,7 +111,8 @@ struct wl_seat;
+  * See @ref iface_gtk_primary_selection_device_manager.
+  */
+ /**
+- * @defgroup iface_gtk_primary_selection_device_manager The gtk_primary_selection_device_manager interface
++ * @defgroup iface_gtk_primary_selection_device_manager The
++ * gtk_primary_selection_device_manager interface
+  *
+  * The primary selection device manager is a singleton global object that
+  * provides access to the primary selection. It allows to create
+@@ -122,7 +126,8 @@ extern const struct wl_interface gtk_primary_selection_device_manager_interface;
+  * See @ref iface_gtk_primary_selection_device.
+  */
+ /**
+- * @defgroup iface_gtk_primary_selection_device The gtk_primary_selection_device interface
++ * @defgroup iface_gtk_primary_selection_device The gtk_primary_selection_device
++ * interface
+  */
+ extern const struct wl_interface gtk_primary_selection_device_interface;
+ /**
+@@ -139,7 +144,8 @@ extern const struct wl_interface gtk_primary_selection_device_interface;
+  * See @ref iface_gtk_primary_selection_offer.
+  */
+ /**
+- * @defgroup iface_gtk_primary_selection_offer The gtk_primary_selection_offer interface
++ * @defgroup iface_gtk_primary_selection_offer The gtk_primary_selection_offer
++ * interface
+  *
+  * A wp_primary_selection_offer represents an offer to transfer the contents
+  * of the primary selection clipboard to the client. Similar to
+@@ -160,7 +166,8 @@ extern const struct wl_interface gtk_primary_selection_offer_interface;
+  * See @ref iface_gtk_primary_selection_source.
+  */
+ /**
+- * @defgroup iface_gtk_primary_selection_source The gtk_primary_selection_source interface
++ * @defgroup iface_gtk_primary_selection_source The gtk_primary_selection_source
++ * interface
+  *
+  * The source side of a wp_primary_selection_offer, it provides a way to
+  * describe the offered data and respond to requests to transfer the
+@@ -172,7 +179,6 @@ extern const struct wl_interface gtk_primary_selection_source_interface;
+ #define GTK_PRIMARY_SELECTION_DEVICE_MANAGER_GET_DEVICE 1
+ #define GTK_PRIMARY_SELECTION_DEVICE_MANAGER_DESTROY 2
+ 
+-
+ /**
+  * @ingroup iface_gtk_primary_selection_device_manager
+  */
+@@ -187,23 +193,27 @@ extern const struct wl_interface gtk_primary_selection_source_interface;
+ #define GTK_PRIMARY_SELECTION_DEVICE_MANAGER_DESTROY_SINCE_VERSION 1
+ 
+ /** @ingroup iface_gtk_primary_selection_device_manager */
+-static inline void
+-gtk_primary_selection_device_manager_set_user_data(struct gtk_primary_selection_device_manager *gtk_primary_selection_device_manager, void *user_data)
+-{
+-	wl_proxy_set_user_data((struct wl_proxy *) gtk_primary_selection_device_manager, user_data);
++static inline void gtk_primary_selection_device_manager_set_user_data(
++    struct gtk_primary_selection_device_manager*
++        gtk_primary_selection_device_manager,
++    void* user_data) {
++  wl_proxy_set_user_data((struct wl_proxy*)gtk_primary_selection_device_manager,
++                         user_data);
+ }
+ 
+ /** @ingroup iface_gtk_primary_selection_device_manager */
+-static inline void *
+-gtk_primary_selection_device_manager_get_user_data(struct gtk_primary_selection_device_manager *gtk_primary_selection_device_manager)
+-{
+-	return wl_proxy_get_user_data((struct wl_proxy *) gtk_primary_selection_device_manager);
++static inline void* gtk_primary_selection_device_manager_get_user_data(
++    struct gtk_primary_selection_device_manager*
++        gtk_primary_selection_device_manager) {
++  return wl_proxy_get_user_data(
++      (struct wl_proxy*)gtk_primary_selection_device_manager);
+ }
+ 
+-static inline uint32_t
+-gtk_primary_selection_device_manager_get_version(struct gtk_primary_selection_device_manager *gtk_primary_selection_device_manager)
+-{
+-	return wl_proxy_get_version((struct wl_proxy *) gtk_primary_selection_device_manager);
++static inline uint32_t gtk_primary_selection_device_manager_get_version(
++    struct gtk_primary_selection_device_manager*
++        gtk_primary_selection_device_manager) {
++  return wl_proxy_get_version(
++      (struct wl_proxy*)gtk_primary_selection_device_manager);
+ }
+ 
+ /**
+@@ -211,15 +221,18 @@ gtk_primary_selection_device_manager_get_version(struct gtk_primary_selection_de
+  *
+  * Create a new primary selection source.
+  */
+-static inline struct gtk_primary_selection_source *
+-gtk_primary_selection_device_manager_create_source(struct gtk_primary_selection_device_manager *gtk_primary_selection_device_manager)
+-{
+-	struct wl_proxy *id;
++static inline struct gtk_primary_selection_source*
++gtk_primary_selection_device_manager_create_source(
++    struct gtk_primary_selection_device_manager*
++        gtk_primary_selection_device_manager) {
++  struct wl_proxy* id;
+ 
+-	id = wl_proxy_marshal_constructor((struct wl_proxy *) gtk_primary_selection_device_manager,
+-			 GTK_PRIMARY_SELECTION_DEVICE_MANAGER_CREATE_SOURCE, &gtk_primary_selection_source_interface, NULL);
++  id = wl_proxy_marshal_constructor(
++      (struct wl_proxy*)gtk_primary_selection_device_manager,
++      GTK_PRIMARY_SELECTION_DEVICE_MANAGER_CREATE_SOURCE,
++      &gtk_primary_selection_source_interface, NULL);
+ 
+-	return (struct gtk_primary_selection_source *) id;
++  return (struct gtk_primary_selection_source*)id;
+ }
+ 
+ /**
+@@ -227,15 +240,19 @@ gtk_primary_selection_device_manager_create_source(struct gtk_primary_selection_
+  *
+  * Create a new data device for a given seat.
+  */
+-static inline struct gtk_primary_selection_device *
+-gtk_primary_selection_device_manager_get_device(struct gtk_primary_selection_device_manager *gtk_primary_selection_device_manager, struct wl_seat *seat)
+-{
+-	struct wl_proxy *id;
++static inline struct gtk_primary_selection_device*
++gtk_primary_selection_device_manager_get_device(
++    struct gtk_primary_selection_device_manager*
++        gtk_primary_selection_device_manager,
++    struct wl_seat* seat) {
++  struct wl_proxy* id;
+ 
+-	id = wl_proxy_marshal_constructor((struct wl_proxy *) gtk_primary_selection_device_manager,
+-			 GTK_PRIMARY_SELECTION_DEVICE_MANAGER_GET_DEVICE, &gtk_primary_selection_device_interface, NULL, seat);
++  id = wl_proxy_marshal_constructor(
++      (struct wl_proxy*)gtk_primary_selection_device_manager,
++      GTK_PRIMARY_SELECTION_DEVICE_MANAGER_GET_DEVICE,
++      &gtk_primary_selection_device_interface, NULL, seat);
+ 
+-	return (struct gtk_primary_selection_device *) id;
++  return (struct gtk_primary_selection_device*)id;
+ }
+ 
+ /**
+@@ -243,13 +260,13 @@ gtk_primary_selection_device_manager_get_device(struct gtk_primary_selection_dev
+  *
+  * Destroy the primary selection device manager.
+  */
+-static inline void
+-gtk_primary_selection_device_manager_destroy(struct gtk_primary_selection_device_manager *gtk_primary_selection_device_manager)
+-{
+-	wl_proxy_marshal((struct wl_proxy *) gtk_primary_selection_device_manager,
+-			 GTK_PRIMARY_SELECTION_DEVICE_MANAGER_DESTROY);
++static inline void gtk_primary_selection_device_manager_destroy(
++    struct gtk_primary_selection_device_manager*
++        gtk_primary_selection_device_manager) {
++  wl_proxy_marshal((struct wl_proxy*)gtk_primary_selection_device_manager,
++                   GTK_PRIMARY_SELECTION_DEVICE_MANAGER_DESTROY);
+ 
+-	wl_proxy_destroy((struct wl_proxy *) gtk_primary_selection_device_manager);
++  wl_proxy_destroy((struct wl_proxy*)gtk_primary_selection_device_manager);
+ }
+ 
+ /**
+@@ -257,46 +274,47 @@ gtk_primary_selection_device_manager_destroy(struct gtk_primary_selection_device
+  * @struct gtk_primary_selection_device_listener
+  */
+ struct gtk_primary_selection_device_listener {
+-	/**
+-	 * introduce a new wp_primary_selection_offer
+-	 *
+-	 * Introduces a new wp_primary_selection_offer object that may be
+-	 * used to receive the current primary selection. Immediately
+-	 * following this event, the new wp_primary_selection_offer object
+-	 * will send wp_primary_selection_offer.offer events to describe
+-	 * the offered mime types.
+-	 */
+-	void (*data_offer)(void *data,
+-			   struct gtk_primary_selection_device *gtk_primary_selection_device,
+-			   struct gtk_primary_selection_offer *offer);
+-	/**
+-	 * advertise a new primary selection
+-	 *
+-	 * The wp_primary_selection_device.selection event is sent to
+-	 * notify the client of a new primary selection. This event is sent
+-	 * after the wp_primary_selection.data_offer event introducing this
+-	 * object, and after the offer has announced its mimetypes through
+-	 * wp_primary_selection_offer.offer.
+-	 *
+-	 * The data_offer is valid until a new offer or NULL is received or
+-	 * until the client loses keyboard focus. The client must destroy
+-	 * the previous selection data_offer, if any, upon receiving this
+-	 * event.
+-	 */
+-	void (*selection)(void *data,
+-			  struct gtk_primary_selection_device *gtk_primary_selection_device,
+-			  struct gtk_primary_selection_offer *id);
++  /**
++   * introduce a new wp_primary_selection_offer
++   *
++   * Introduces a new wp_primary_selection_offer object that may be
++   * used to receive the current primary selection. Immediately
++   * following this event, the new wp_primary_selection_offer object
++   * will send wp_primary_selection_offer.offer events to describe
++   * the offered mime types.
++   */
++  void (*data_offer)(
++      void* data,
++      struct gtk_primary_selection_device* gtk_primary_selection_device,
++      struct gtk_primary_selection_offer* offer);
++  /**
++   * advertise a new primary selection
++   *
++   * The wp_primary_selection_device.selection event is sent to
++   * notify the client of a new primary selection. This event is sent
++   * after the wp_primary_selection.data_offer event introducing this
++   * object, and after the offer has announced its mimetypes through
++   * wp_primary_selection_offer.offer.
++   *
++   * The data_offer is valid until a new offer or NULL is received or
++   * until the client loses keyboard focus. The client must destroy
++   * the previous selection data_offer, if any, upon receiving this
++   * event.
++   */
++  void (*selection)(
++      void* data,
++      struct gtk_primary_selection_device* gtk_primary_selection_device,
++      struct gtk_primary_selection_offer* id);
+ };
+ 
+ /**
+  * @ingroup iface_gtk_primary_selection_device
+  */
+-static inline int
+-gtk_primary_selection_device_add_listener(struct gtk_primary_selection_device *gtk_primary_selection_device,
+-					  const struct gtk_primary_selection_device_listener *listener, void *data)
+-{
+-	return wl_proxy_add_listener((struct wl_proxy *) gtk_primary_selection_device,
+-				     (void (**)(void)) listener, data);
++static inline int gtk_primary_selection_device_add_listener(
++    struct gtk_primary_selection_device* gtk_primary_selection_device,
++    const struct gtk_primary_selection_device_listener* listener, void* data) {
++  return wl_proxy_add_listener((struct wl_proxy*)gtk_primary_selection_device,
++                               (void (**)(void))listener, data);
+ }
+ 
+ #define GTK_PRIMARY_SELECTION_DEVICE_SET_SELECTION 0
+@@ -321,23 +339,22 @@ gtk_primary_selection_device_add_listener(struct gtk_primary_selection_device *g
+ #define GTK_PRIMARY_SELECTION_DEVICE_DESTROY_SINCE_VERSION 1
+ 
+ /** @ingroup iface_gtk_primary_selection_device */
+-static inline void
+-gtk_primary_selection_device_set_user_data(struct gtk_primary_selection_device *gtk_primary_selection_device, void *user_data)
+-{
+-	wl_proxy_set_user_data((struct wl_proxy *) gtk_primary_selection_device, user_data);
++static inline void gtk_primary_selection_device_set_user_data(
++    struct gtk_primary_selection_device* gtk_primary_selection_device,
++    void* user_data) {
++  wl_proxy_set_user_data((struct wl_proxy*)gtk_primary_selection_device,
++                         user_data);
+ }
+ 
+ /** @ingroup iface_gtk_primary_selection_device */
+-static inline void *
+-gtk_primary_selection_device_get_user_data(struct gtk_primary_selection_device *gtk_primary_selection_device)
+-{
+-	return wl_proxy_get_user_data((struct wl_proxy *) gtk_primary_selection_device);
++static inline void* gtk_primary_selection_device_get_user_data(
++    struct gtk_primary_selection_device* gtk_primary_selection_device) {
++  return wl_proxy_get_user_data((struct wl_proxy*)gtk_primary_selection_device);
+ }
+ 
+-static inline uint32_t
+-gtk_primary_selection_device_get_version(struct gtk_primary_selection_device *gtk_primary_selection_device)
+-{
+-	return wl_proxy_get_version((struct wl_proxy *) gtk_primary_selection_device);
++static inline uint32_t gtk_primary_selection_device_get_version(
++    struct gtk_primary_selection_device* gtk_primary_selection_device) {
++  return wl_proxy_get_version((struct wl_proxy*)gtk_primary_selection_device);
+ }
+ 
+ /**
+@@ -348,11 +365,11 @@ gtk_primary_selection_device_get_version(struct gtk_primary_selection_device *gt
+  *
+  * To unset the selection, set the source to NULL.
+  */
+-static inline void
+-gtk_primary_selection_device_set_selection(struct gtk_primary_selection_device *gtk_primary_selection_device, struct gtk_primary_selection_source *source, uint32_t serial)
+-{
+-	wl_proxy_marshal((struct wl_proxy *) gtk_primary_selection_device,
+-			 GTK_PRIMARY_SELECTION_DEVICE_SET_SELECTION, source, serial);
++static inline void gtk_primary_selection_device_set_selection(
++    struct gtk_primary_selection_device* gtk_primary_selection_device,
++    struct gtk_primary_selection_source* source, uint32_t serial) {
++  wl_proxy_marshal((struct wl_proxy*)gtk_primary_selection_device,
++                   GTK_PRIMARY_SELECTION_DEVICE_SET_SELECTION, source, serial);
+ }
+ 
+ /**
+@@ -360,13 +377,12 @@ gtk_primary_selection_device_set_selection(struct gtk_primary_selection_device *
+  *
+  * Destroy the primary selection device.
+  */
+-static inline void
+-gtk_primary_selection_device_destroy(struct gtk_primary_selection_device *gtk_primary_selection_device)
+-{
+-	wl_proxy_marshal((struct wl_proxy *) gtk_primary_selection_device,
+-			 GTK_PRIMARY_SELECTION_DEVICE_DESTROY);
++static inline void gtk_primary_selection_device_destroy(
++    struct gtk_primary_selection_device* gtk_primary_selection_device) {
++  wl_proxy_marshal((struct wl_proxy*)gtk_primary_selection_device,
++                   GTK_PRIMARY_SELECTION_DEVICE_DESTROY);
+ 
+-	wl_proxy_destroy((struct wl_proxy *) gtk_primary_selection_device);
++  wl_proxy_destroy((struct wl_proxy*)gtk_primary_selection_device);
+ }
+ 
+ /**
+@@ -374,28 +390,27 @@ gtk_primary_selection_device_destroy(struct gtk_primary_selection_device *gtk_pr
+  * @struct gtk_primary_selection_offer_listener
+  */
+ struct gtk_primary_selection_offer_listener {
+-	/**
+-	 * advertise offered mime type
+-	 *
+-	 * Sent immediately after creating announcing the
+-	 * wp_primary_selection_offer through
+-	 * wp_primary_selection_device.data_offer. One event is sent per
+-	 * offered mime type.
+-	 */
+-	void (*offer)(void *data,
+-		      struct gtk_primary_selection_offer *gtk_primary_selection_offer,
+-		      const char *mime_type);
++  /**
++   * advertise offered mime type
++   *
++   * Sent immediately after creating announcing the
++   * wp_primary_selection_offer through
++   * wp_primary_selection_device.data_offer. One event is sent per
++   * offered mime type.
++   */
++  void (*offer)(void* data,
++                struct gtk_primary_selection_offer* gtk_primary_selection_offer,
++                const char* mime_type);
+ };
+ 
+ /**
+  * @ingroup iface_gtk_primary_selection_offer
+  */
+-static inline int
+-gtk_primary_selection_offer_add_listener(struct gtk_primary_selection_offer *gtk_primary_selection_offer,
+-					 const struct gtk_primary_selection_offer_listener *listener, void *data)
+-{
+-	return wl_proxy_add_listener((struct wl_proxy *) gtk_primary_selection_offer,
+-				     (void (**)(void)) listener, data);
++static inline int gtk_primary_selection_offer_add_listener(
++    struct gtk_primary_selection_offer* gtk_primary_selection_offer,
++    const struct gtk_primary_selection_offer_listener* listener, void* data) {
++  return wl_proxy_add_listener((struct wl_proxy*)gtk_primary_selection_offer,
++                               (void (**)(void))listener, data);
+ }
+ 
+ #define GTK_PRIMARY_SELECTION_OFFER_RECEIVE 0
+@@ -416,23 +431,22 @@ gtk_primary_selection_offer_add_listener(struct gtk_primary_selection_offer *gtk
+ #define GTK_PRIMARY_SELECTION_OFFER_DESTROY_SINCE_VERSION 1
+ 
+ /** @ingroup iface_gtk_primary_selection_offer */
+-static inline void
+-gtk_primary_selection_offer_set_user_data(struct gtk_primary_selection_offer *gtk_primary_selection_offer, void *user_data)
+-{
+-	wl_proxy_set_user_data((struct wl_proxy *) gtk_primary_selection_offer, user_data);
++static inline void gtk_primary_selection_offer_set_user_data(
++    struct gtk_primary_selection_offer* gtk_primary_selection_offer,
++    void* user_data) {
++  wl_proxy_set_user_data((struct wl_proxy*)gtk_primary_selection_offer,
++                         user_data);
+ }
+ 
+ /** @ingroup iface_gtk_primary_selection_offer */
+-static inline void *
+-gtk_primary_selection_offer_get_user_data(struct gtk_primary_selection_offer *gtk_primary_selection_offer)
+-{
+-	return wl_proxy_get_user_data((struct wl_proxy *) gtk_primary_selection_offer);
++static inline void* gtk_primary_selection_offer_get_user_data(
++    struct gtk_primary_selection_offer* gtk_primary_selection_offer) {
++  return wl_proxy_get_user_data((struct wl_proxy*)gtk_primary_selection_offer);
+ }
+ 
+-static inline uint32_t
+-gtk_primary_selection_offer_get_version(struct gtk_primary_selection_offer *gtk_primary_selection_offer)
+-{
+-	return wl_proxy_get_version((struct wl_proxy *) gtk_primary_selection_offer);
++static inline uint32_t gtk_primary_selection_offer_get_version(
++    struct gtk_primary_selection_offer* gtk_primary_selection_offer) {
++  return wl_proxy_get_version((struct wl_proxy*)gtk_primary_selection_offer);
+ }
+ 
+ /**
+@@ -448,11 +462,11 @@ gtk_primary_selection_offer_get_version(struct gtk_primary_selection_offer *gtk_
+  * The receiving client reads from the read end of the pipe until EOF and
+  * closes its end, at which point the transfer is complete.
+  */
+-static inline void
+-gtk_primary_selection_offer_receive(struct gtk_primary_selection_offer *gtk_primary_selection_offer, const char *mime_type, int32_t fd)
+-{
+-	wl_proxy_marshal((struct wl_proxy *) gtk_primary_selection_offer,
+-			 GTK_PRIMARY_SELECTION_OFFER_RECEIVE, mime_type, fd);
++static inline void gtk_primary_selection_offer_receive(
++    struct gtk_primary_selection_offer* gtk_primary_selection_offer,
++    const char* mime_type, int32_t fd) {
++  wl_proxy_marshal((struct wl_proxy*)gtk_primary_selection_offer,
++                   GTK_PRIMARY_SELECTION_OFFER_RECEIVE, mime_type, fd);
+ }
+ 
+ /**
+@@ -460,13 +474,12 @@ gtk_primary_selection_offer_receive(struct gtk_primary_selection_offer *gtk_prim
+  *
+  * Destroy the primary selection offer.
+  */
+-static inline void
+-gtk_primary_selection_offer_destroy(struct gtk_primary_selection_offer *gtk_primary_selection_offer)
+-{
+-	wl_proxy_marshal((struct wl_proxy *) gtk_primary_selection_offer,
+-			 GTK_PRIMARY_SELECTION_OFFER_DESTROY);
++static inline void gtk_primary_selection_offer_destroy(
++    struct gtk_primary_selection_offer* gtk_primary_selection_offer) {
++  wl_proxy_marshal((struct wl_proxy*)gtk_primary_selection_offer,
++                   GTK_PRIMARY_SELECTION_OFFER_DESTROY);
+ 
+-	wl_proxy_destroy((struct wl_proxy *) gtk_primary_selection_offer);
++  wl_proxy_destroy((struct wl_proxy*)gtk_primary_selection_offer);
+ }
+ 
+ /**
+@@ -474,36 +487,36 @@ gtk_primary_selection_offer_destroy(struct gtk_primary_selection_offer *gtk_prim
+  * @struct gtk_primary_selection_source_listener
+  */
+ struct gtk_primary_selection_source_listener {
+-	/**
+-	 * send the primary selection contents
+-	 *
+-	 * Request for the current primary selection contents from the
+-	 * client. Send the specified mime type over the passed file
+-	 * descriptor, then close it.
+-	 */
+-	void (*send)(void *data,
+-		     struct gtk_primary_selection_source *gtk_primary_selection_source,
+-		     const char *mime_type,
+-		     int32_t fd);
+-	/**
+-	 * request for primary selection contents was canceled
+-	 *
+-	 * This primary selection source is no longer valid. The client
+-	 * should clean up and destroy this primary selection source.
+-	 */
+-	void (*cancelled)(void *data,
+-			  struct gtk_primary_selection_source *gtk_primary_selection_source);
++  /**
++   * send the primary selection contents
++   *
++   * Request for the current primary selection contents from the
++   * client. Send the specified mime type over the passed file
++   * descriptor, then close it.
++   */
++  void (*send)(
++      void* data,
++      struct gtk_primary_selection_source* gtk_primary_selection_source,
++      const char* mime_type, int32_t fd);
++  /**
++   * request for primary selection contents was canceled
++   *
++   * This primary selection source is no longer valid. The client
++   * should clean up and destroy this primary selection source.
++   */
++  void (*cancelled)(
++      void* data,
++      struct gtk_primary_selection_source* gtk_primary_selection_source);
+ };
+ 
+ /**
+  * @ingroup iface_gtk_primary_selection_source
+  */
+-static inline int
+-gtk_primary_selection_source_add_listener(struct gtk_primary_selection_source *gtk_primary_selection_source,
+-					  const struct gtk_primary_selection_source_listener *listener, void *data)
+-{
+-	return wl_proxy_add_listener((struct wl_proxy *) gtk_primary_selection_source,
+-				     (void (**)(void)) listener, data);
++static inline int gtk_primary_selection_source_add_listener(
++    struct gtk_primary_selection_source* gtk_primary_selection_source,
++    const struct gtk_primary_selection_source_listener* listener, void* data) {
++  return wl_proxy_add_listener((struct wl_proxy*)gtk_primary_selection_source,
++                               (void (**)(void))listener, data);
+ }
+ 
+ #define GTK_PRIMARY_SELECTION_SOURCE_OFFER 0
+@@ -528,23 +541,22 @@ gtk_primary_selection_source_add_listener(struct gtk_primary_selection_source *g
+ #define GTK_PRIMARY_SELECTION_SOURCE_DESTROY_SINCE_VERSION 1
+ 
+ /** @ingroup iface_gtk_primary_selection_source */
+-static inline void
+-gtk_primary_selection_source_set_user_data(struct gtk_primary_selection_source *gtk_primary_selection_source, void *user_data)
+-{
+-	wl_proxy_set_user_data((struct wl_proxy *) gtk_primary_selection_source, user_data);
++static inline void gtk_primary_selection_source_set_user_data(
++    struct gtk_primary_selection_source* gtk_primary_selection_source,
++    void* user_data) {
++  wl_proxy_set_user_data((struct wl_proxy*)gtk_primary_selection_source,
++                         user_data);
+ }
+ 
+ /** @ingroup iface_gtk_primary_selection_source */
+-static inline void *
+-gtk_primary_selection_source_get_user_data(struct gtk_primary_selection_source *gtk_primary_selection_source)
+-{
+-	return wl_proxy_get_user_data((struct wl_proxy *) gtk_primary_selection_source);
++static inline void* gtk_primary_selection_source_get_user_data(
++    struct gtk_primary_selection_source* gtk_primary_selection_source) {
++  return wl_proxy_get_user_data((struct wl_proxy*)gtk_primary_selection_source);
+ }
+ 
+-static inline uint32_t
+-gtk_primary_selection_source_get_version(struct gtk_primary_selection_source *gtk_primary_selection_source)
+-{
+-	return wl_proxy_get_version((struct wl_proxy *) gtk_primary_selection_source);
++static inline uint32_t gtk_primary_selection_source_get_version(
++    struct gtk_primary_selection_source* gtk_primary_selection_source) {
++  return wl_proxy_get_version((struct wl_proxy*)gtk_primary_selection_source);
+ }
+ 
+ /**
+@@ -553,11 +565,11 @@ gtk_primary_selection_source_get_version(struct gtk_primary_selection_source *gt
+  * This request adds a mime type to the set of mime types advertised to
+  * targets. Can be called several times to offer multiple types.
+  */
+-static inline void
+-gtk_primary_selection_source_offer(struct gtk_primary_selection_source *gtk_primary_selection_source, const char *mime_type)
+-{
+-	wl_proxy_marshal((struct wl_proxy *) gtk_primary_selection_source,
+-			 GTK_PRIMARY_SELECTION_SOURCE_OFFER, mime_type);
++static inline void gtk_primary_selection_source_offer(
++    struct gtk_primary_selection_source* gtk_primary_selection_source,
++    const char* mime_type) {
++  wl_proxy_marshal((struct wl_proxy*)gtk_primary_selection_source,
++                   GTK_PRIMARY_SELECTION_SOURCE_OFFER, mime_type);
+ }
+ 
+ /**
+@@ -565,16 +577,15 @@ gtk_primary_selection_source_offer(struct gtk_primary_selection_source *gtk_prim
+  *
+  * Destroy the primary selection source.
+  */
+-static inline void
+-gtk_primary_selection_source_destroy(struct gtk_primary_selection_source *gtk_primary_selection_source)
+-{
+-	wl_proxy_marshal((struct wl_proxy *) gtk_primary_selection_source,
+-			 GTK_PRIMARY_SELECTION_SOURCE_DESTROY);
++static inline void gtk_primary_selection_source_destroy(
++    struct gtk_primary_selection_source* gtk_primary_selection_source) {
++  wl_proxy_marshal((struct wl_proxy*)gtk_primary_selection_source,
++                   GTK_PRIMARY_SELECTION_SOURCE_DESTROY);
+ 
+-	wl_proxy_destroy((struct wl_proxy *) gtk_primary_selection_source);
++  wl_proxy_destroy((struct wl_proxy*)gtk_primary_selection_source);
+ }
+ 
+-#ifdef  __cplusplus
++#ifdef __cplusplus
+ }
+ #endif
+ 
 -- 
 2.34.1
 
