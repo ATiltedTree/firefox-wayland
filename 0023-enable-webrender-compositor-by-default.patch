@@ -1,7 +1,7 @@
-From 9a2ab1bdf9d70c1fd5dc7a9d945859a64130edda Mon Sep 17 00:00:00 2001
+From b394593f3bbc0598a707ec6a2eb1f1902d0f7886 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:08:13 +0100
-Subject: [PATCH 22/23] enable webrender compositor by default
+Subject: [PATCH 23/24] enable webrender compositor by default
 
 ---
  gfx/thebes/gfxPlatformGtk.cpp | 1 +

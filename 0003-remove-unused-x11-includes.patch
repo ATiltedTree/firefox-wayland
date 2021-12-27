@@ -1,7 +1,7 @@
-From 4f67e89d4c095b6201f6187658761aba4672a04c Mon Sep 17 00:00:00 2001
+From 1dd9c495e9c4cef18aeb93541651f029c4f58215 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:38:49 +0100
-Subject: [PATCH 02/23] remove unused x11 includes
+Subject: [PATCH 03/24] remove unused x11 includes
 
 ---
  gfx/layers/client/TextureClient.cpp                | 2 --

@@ -1,7 +1,7 @@
-From cdc80b1474476decfab16ef1ee0cf683c5b03b25 Mon Sep 17 00:00:00 2001
+From ae2fe5674c761a6275bb59b46952cf85a0e89e70 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 13 Dec 2021 22:42:39 +0100
-Subject: [PATCH 21/23] remove mozgtk and mozwayland
+Subject: [PATCH 22/24] remove mozgtk and mozwayland
 
 ---
  browser/installer/package-manifest.in         |   6 -
@@ -76,7 +76,7 @@ index 2c3f86948ed16..68e6b57076c50 100644
  if CONFIG["MOZ_JPROF"]:
      USE_LIBS += [
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 7d0f041775799..ad56d51d0674e 100644
+index 4946885a06cef..ee76253696815 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
 @@ -328,7 +328,7 @@ def with_wayland(value, toolkit_gtk, artifacts):

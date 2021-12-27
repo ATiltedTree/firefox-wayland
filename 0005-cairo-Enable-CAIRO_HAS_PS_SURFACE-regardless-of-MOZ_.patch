@@ -1,7 +1,7 @@
-From ce43bf10ecc0f6cf0d5a374b3f9bd751394e2aec Mon Sep 17 00:00:00 2001
+From cab9d56cb33689d448f00f7a37674075898ea754 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:40:17 +0100
-Subject: [PATCH 04/23] cairo: Enable CAIRO_HAS_PS_SURFACE regardless of
+Subject: [PATCH 05/24] cairo: Enable CAIRO_HAS_PS_SURFACE regardless of
  MOZ_X11
 
 ---
