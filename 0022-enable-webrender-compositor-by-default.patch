@@ -1,0 +1,41 @@
+From 9a2ab1bdf9d70c1fd5dc7a9d945859a64130edda Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Mon, 27 Dec 2021 18:08:13 +0100
+Subject: [PATCH 22/23] enable webrender compositor by default
+
+---
+ gfx/thebes/gfxPlatformGtk.cpp | 1 +
+ widget/gtk/GfxInfo.cpp        | 5 -----
+ 2 files changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
+index 4360d62d5cb16..9112b9f511162 100644
+--- a/gfx/thebes/gfxPlatformGtk.cpp
++++ b/gfx/thebes/gfxPlatformGtk.cpp
+@@ -233,6 +233,7 @@ void gfxPlatformGtk::InitWebRenderConfig() {
+   }
+ 
+   FeatureState& feature = gfxConfig::GetFeature(Feature::WEBRENDER_COMPOSITOR);
++  feature.EnableByDefault();
+   if (feature.IsEnabled()) {
+     if (!(gfxConfig::IsEnabled(Feature::WEBRENDER) ||
+           gfxConfig::IsEnabled(Feature::WEBRENDER_SOFTWARE))) {
+diff --git a/widget/gtk/GfxInfo.cpp b/widget/gtk/GfxInfo.cpp
+index d5a6007290dd6..b3f29598891c6 100644
+--- a/widget/gtk/GfxInfo.cpp
++++ b/widget/gtk/GfxInfo.cpp
+@@ -809,11 +809,6 @@ const nsTArray<GfxDriverInfo>& GfxInfo::GetGfxDriverInfo() {
+ 
+     ////////////////////////////////////
+     // FEATURE_WEBRENDER_COMPOSITOR
+-    APPEND_TO_DRIVER_BLOCKLIST(
+-        OperatingSystem::Linux, DeviceFamily::All,
+-        nsIGfxInfo::FEATURE_WEBRENDER_COMPOSITOR,
+-        nsIGfxInfo::FEATURE_BLOCKED_DEVICE, DRIVER_COMPARISON_IGNORED,
+-        V(0, 0, 0, 0), "FEATURE_FAILURE_WEBRENDER_COMPOSITOR_DISABLED", "");
+ 
+     ////////////////////////////////////
+     // FEATURE_X11_EGL
+-- 
+2.34.1
+

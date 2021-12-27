@@ -1,7 +1,7 @@
-From 01d5ae9e6676940370063973a702e839e1490939 Mon Sep 17 00:00:00 2001
+From d019cecf5b7ee2b23a771a8a1516612bf3d64202 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
-Subject: [PATCH 19/23] allow turning on/off of X11 and wayland
+Subject: [PATCH 18/23] allow turning on/off of X11 and wayland
 
 ---
  python/mozboot/mozboot/gentoo.py |  1 -
