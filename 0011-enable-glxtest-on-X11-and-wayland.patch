@@ -1,14 +1,14 @@
-From 73a2ee74e420d622d1761ea013d3befdaf08f13a Mon Sep 17 00:00:00 2001
+From 4abd69e5fb693ae9aa3fbd435dcb50ea87bc59a2 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:46:17 +0100
-Subject: [PATCH 11/24] enable glxtest on X11 and wayland
+Subject: [PATCH 11/23] enable glxtest on X11 and wayland
 
 ---
  toolkit/xre/moz.build | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
-index 089b38759104a..89fd7b0289d10 100644
+index e39d75d60330b..a612c296f68bc 100644
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
 @@ -156,7 +156,7 @@ SOURCES += [

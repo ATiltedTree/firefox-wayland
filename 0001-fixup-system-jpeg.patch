@@ -1,17 +1,17 @@
-From 26146ecb2f3307bd305c0b251aee1df7e689c099 Mon Sep 17 00:00:00 2001
+From fbfba08ea4d6479cd5cb4f7693982314d8b44ece Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Tue, 28 Dec 2021 00:14:23 +0100
-Subject: [PATCH 01/24] fixup system-jpeg
+Subject: [PATCH 01/23] fixup system-jpeg
 
 ---
  toolkit/moz.configure | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index a78a32bdc0c94..d7c4b1e74ce64 100644
+index 00698656f686e..09970cd2dde6a 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
-@@ -1798,6 +1798,7 @@ with only_when(compile_environment):
+@@ -1799,6 +1799,7 @@ with only_when(compile_environment):
  
          set_config("MOZ_JPEG_CFLAGS", jpeg_flags.cflags)
          set_config("MOZ_JPEG_LIBS", jpeg_flags.ldflags)

@@ -1,7 +1,7 @@
-From 6a9d3ba4fe37879e67b39bde73c2d0c8962f4158 Mon Sep 17 00:00:00 2001
+From 4e3beafdae74165665668001ef554e717ee10091 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:33:13 +0100
-Subject: [PATCH 02/24] move keysym2ucs to widget/gtk
+Subject: [PATCH 02/23] move keysym2ucs to widget/gtk
 
 ---
  widget/{x11 => gtk}/keysym2ucs.c |  0
@@ -23,7 +23,7 @@ similarity index 100%
 rename from widget/x11/keysym2ucs.h
 rename to widget/gtk/keysym2ucs.h
 diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
-index 291e3a78c8c2d..9412db2fa4919 100644
+index 06b29cb23c8f6..6c3cc298ef7fa 100644
 --- a/widget/gtk/moz.build
 +++ b/widget/gtk/moz.build
 @@ -42,6 +42,7 @@ UNIFIED_SOURCES += [
@@ -35,10 +35,10 @@ index 291e3a78c8c2d..9412db2fa4919 100644
      "MPRISServiceHandler.cpp",
      "NativeKeyBindings.cpp",
 diff --git a/widget/moz.build b/widget/moz.build
-index 4724d667d8ac3..17de96e2d68f2 100644
+index 9b89bfb0826e0..56341f1fa213f 100644
 --- a/widget/moz.build
 +++ b/widget/moz.build
-@@ -262,9 +262,6 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
+@@ -268,9 +268,6 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
  
  EXPORTS.ipc = ["nsGUIEventIPC.h"]
  

@@ -1,7 +1,7 @@
-From dcfa84a4606c6aa7d510b8a78b0319c9a992cafc Mon Sep 17 00:00:00 2001
+From ad95809db352b0d823d84e7970d8e5cca120f698 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:47:23 +0100
-Subject: [PATCH 13/24] enable OOP Compositing regardless of X11
+Subject: [PATCH 13/23] enable OOP Compositing regardless of X11
 
 ---
  widget/CompositorWidget.h |  2 +-
@@ -10,20 +10,20 @@ Subject: [PATCH 13/24] enable OOP Compositing regardless of X11
  3 files changed, 10 insertions(+), 12 deletions(-)
 
 diff --git a/widget/CompositorWidget.h b/widget/CompositorWidget.h
-index 20eb3634f38fc..e41264a6e6be9 100644
+index 0c3a693f47875..7214d7891daa9 100644
 --- a/widget/CompositorWidget.h
 +++ b/widget/CompositorWidget.h
 @@ -62,7 +62,7 @@ class CompositorWidgetDelegate {
  };
  
  // Platforms that support out-of-process widgets.
--#if defined(XP_WIN) || defined(MOZ_X11)
-+#if defined(XP_WIN) || defined(MOZ_WIDGET_GTK)
+-#if defined(XP_WIN) || defined(MOZ_X11) || defined(MOZ_WIDGET_ANDROID)
++#if defined(XP_WIN) || defined(MOZ_WIDGET_GTK) || defined(MOZ_WIDGET_ANDROID)
  // CompositorWidgetParent should implement CompositorWidget and
  // PCompositorWidgetParent.
  class CompositorWidgetParent;
 diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
-index 9412db2fa4919..fdea8c6ce3c13 100644
+index 6c3cc298ef7fa..3e2936ad56897 100644
 --- a/widget/gtk/moz.build
 +++ b/widget/gtk/moz.build
 @@ -33,15 +33,22 @@ EXPORTS += [
@@ -49,15 +49,15 @@ index 9412db2fa4919..fdea8c6ce3c13 100644
      "keysym2ucs.c",
      "MozContainer.cpp",
      "MPRISServiceHandler.cpp",
-@@ -59,6 +66,7 @@ UNIFIED_SOURCES += [
-     "nsNativeBasicThemeGTK.cpp",
+@@ -58,6 +65,7 @@ UNIFIED_SOURCES += [
+     "nsLookAndFeel.cpp",
      "nsSound.cpp",
      "nsToolkit.cpp",
 +    "nsUserIdleServiceGTK.cpp",
      "nsWidgetFactory.cpp",
      "ScreenHelperGTK.cpp",
      "TaskbarProgress.cpp",
-@@ -102,22 +110,12 @@ if CONFIG["MOZ_WAYLAND"]:
+@@ -101,22 +109,12 @@ if CONFIG["MOZ_WAYLAND"]:
  
  if CONFIG["MOZ_X11"]:
      UNIFIED_SOURCES += [
@@ -81,10 +81,10 @@ index 9412db2fa4919..fdea8c6ce3c13 100644
  if CONFIG["NS_PRINTING"]:
      UNIFIED_SOURCES += [
 diff --git a/widget/moz.build b/widget/moz.build
-index 17de96e2d68f2..a73e447cd0136 100644
+index 56341f1fa213f..f85269122704b 100644
 --- a/widget/moz.build
 +++ b/widget/moz.build
-@@ -306,7 +306,7 @@ if toolkit == "windows":
+@@ -312,7 +312,7 @@ if toolkit == "windows":
          "windows/PCompositorWidget.ipdl",
          "windows/PlatformWidgetTypes.ipdlh",
      ]

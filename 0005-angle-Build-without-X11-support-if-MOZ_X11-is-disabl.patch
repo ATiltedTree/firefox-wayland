@@ -1,7 +1,7 @@
-From 0adfcd4a33376e6613b9d1d9af5d04c137e16fe1 Mon Sep 17 00:00:00 2001
+From 6814c406c6d2b67a91e210d32360de2eda829dd0 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:39:47 +0100
-Subject: [PATCH 04/24] angle: Build without X11 support if MOZ_X11 is disabled
+Subject: [PATCH 05/23] angle: Build without X11 support if MOZ_X11 is disabled
 
 ---
  gfx/angle/moz.build.common | 3 +++

@@ -1,7 +1,7 @@
-From c54df78ea0043d6c258445c349b9344eae018f3e Mon Sep 17 00:00:00 2001
+From 0960ca054016db4bc6734e67ff6982fd6ecd320f Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
-Subject: [PATCH 19/24] allow turning on/off of X11 and wayland
+Subject: [PATCH 19/23] allow turning on/off of X11 and wayland
 
 ---
  python/mozboot/mozboot/gentoo.py |  1 -
@@ -9,7 +9,7 @@ Subject: [PATCH 19/24] allow turning on/off of X11 and wayland
  2 files changed, 29 insertions(+), 20 deletions(-)
 
 diff --git a/python/mozboot/mozboot/gentoo.py b/python/mozboot/mozboot/gentoo.py
-index 545eaaacbc134..acb2a26d910be 100644
+index a33677a0a19f5..cb9e3dd3381cd 100644
 --- a/python/mozboot/mozboot/gentoo.py
 +++ b/python/mozboot/mozboot/gentoo.py
 @@ -33,7 +33,6 @@ class GentooBootstrapper(LinuxBootstrapper, BaseBootstrapper):
@@ -21,7 +21,7 @@ index 545eaaacbc134..acb2a26d910be 100644
          )
  
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index d7c4b1e74ce64..d0b84cbc71856 100644
+index 09970cd2dde6a..16d5749a07b7a 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
 @@ -265,7 +265,7 @@ def toolkit_choices(target):
@@ -103,7 +103,7 @@ index d7c4b1e74ce64..d0b84cbc71856 100644
  def x11_libs(webrtc):
      libs = [
          "x11",
-@@ -1197,8 +1207,8 @@ def x11_libs(webrtc):
+@@ -1198,8 +1208,8 @@ def x11_libs(webrtc):
      return libs
  
  

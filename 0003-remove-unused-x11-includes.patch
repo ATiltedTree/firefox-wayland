@@ -1,7 +1,7 @@
-From 1dd9c495e9c4cef18aeb93541651f029c4f58215 Mon Sep 17 00:00:00 2001
+From 1a7aaae03b970fc9b6af0f4c45b0eeb63df3cbf1 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:38:49 +0100
-Subject: [PATCH 03/24] remove unused x11 includes
+Subject: [PATCH 03/23] remove unused x11 includes
 
 ---
  gfx/layers/client/TextureClient.cpp                | 2 --
@@ -13,7 +13,7 @@ Subject: [PATCH 03/24] remove unused x11 includes
  6 files changed, 8 deletions(-)
 
 diff --git a/gfx/layers/client/TextureClient.cpp b/gfx/layers/client/TextureClient.cpp
-index 054e90ebfd14a..5a30d9ea5f974 100644
+index aaec3c35103b4..65bee9f8693b9 100644
 --- a/gfx/layers/client/TextureClient.cpp
 +++ b/gfx/layers/client/TextureClient.cpp
 @@ -48,8 +48,6 @@
@@ -26,7 +26,7 @@ index 054e90ebfd14a..5a30d9ea5f974 100644
  #  include "mozilla/layers/DMABUFTextureClientOGL.h"
  #  include "mozilla/widget/nsWaylandDisplay.h"
 diff --git a/gfx/webrender_bindings/RenderCompositorOGLSWGL.cpp b/gfx/webrender_bindings/RenderCompositorOGLSWGL.cpp
-index cf3fc3c2cacfa..f5b5be7ec6513 100644
+index 00a6c3ef6d6d3..78c4235268870 100644
 --- a/gfx/webrender_bindings/RenderCompositorOGLSWGL.cpp
 +++ b/gfx/webrender_bindings/RenderCompositorOGLSWGL.cpp
 @@ -27,7 +27,6 @@
@@ -50,7 +50,7 @@ index 95832dc03d956..0d6585c2d4cda 100644
  #include "mozilla/WidgetUtilsGtk.h"
  
 diff --git a/widget/gtk/mozwayland/mozwayland.c b/widget/gtk/mozwayland/mozwayland.c
-index 7a448e6321e2e..8dcf5c9c18fd6 100644
+index 1a86468b4f3d1..eee67ed3a9788 100644
 --- a/widget/gtk/mozwayland/mozwayland.c
 +++ b/widget/gtk/mozwayland/mozwayland.c
 @@ -8,7 +8,6 @@
@@ -62,7 +62,7 @@ index 7a448e6321e2e..8dcf5c9c18fd6 100644
  
  union wl_argument;
 diff --git a/widget/gtk/nsClipboard.cpp b/widget/gtk/nsClipboard.cpp
-index ed15e549de198..112ac5a426e49 100644
+index 631f8aea47504..f8b6ed3d2b716 100644
 --- a/widget/gtk/nsClipboard.cpp
 +++ b/widget/gtk/nsClipboard.cpp
 @@ -37,7 +37,6 @@
@@ -74,7 +74,7 @@ index ed15e549de198..112ac5a426e49 100644
  #include "mozilla/Encoding.h"
  
 diff --git a/widget/gtk/nsDragService.cpp b/widget/gtk/nsDragService.cpp
-index fcd423626159c..9b458a4a858c7 100644
+index ea57c4f3c0ec6..5355fbe467df0 100644
 --- a/widget/gtk/nsDragService.cpp
 +++ b/widget/gtk/nsDragService.cpp
 @@ -23,7 +23,6 @@

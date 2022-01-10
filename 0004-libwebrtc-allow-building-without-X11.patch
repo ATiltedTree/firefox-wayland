@@ -1,0 +1,156 @@
+From 6e7aafc245ef31e8650e0bb484df37f552aa7f4d Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Mon, 27 Dec 2021 18:09:54 +0100
+Subject: [PATCH 04/23] libwebrtc: allow building without X11
+
+---
+ .../video_engine/desktop_device_info_x11.cc   |  4 ---
+ .../desktop_capture_generic_gn/moz.build      | 34 ++++++++-----------
+ .../desktop_capture_gn/moz.build              | 10 ------
+ third_party/libwebrtc/webrtc_gn/moz.build     |  9 -----
+ 4 files changed, 14 insertions(+), 43 deletions(-)
+
+diff --git a/dom/media/systemservices/video_engine/desktop_device_info_x11.cc b/dom/media/systemservices/video_engine/desktop_device_info_x11.cc
+index a9f88f0f9033d..7cfe45533cf42 100644
+--- a/dom/media/systemservices/video_engine/desktop_device_info_x11.cc
++++ b/dom/media/systemservices/video_engine/desktop_device_info_x11.cc
+@@ -7,10 +7,6 @@
+ 
+ #include <inttypes.h>
+ 
+-#if !defined(WEBRTC_USE_X11) || !defined(MOZ_X11)
+-#  error Bad build setup, some X11 defines are missing
+-#endif
+-
+ namespace webrtc {
+ 
+ DesktopDeviceInfo* DesktopDeviceInfoImpl::Create() {
+diff --git a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
+index e95094ab6f41a..7659168cbbe09 100644
+--- a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
++++ b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
+@@ -94,11 +94,9 @@ if CONFIG["OS_TARGET"] == "Linux":
+     DEFINES["USE_NSS_CERTS"] = "1"
+     DEFINES["USE_OZONE"] = "1"
+     DEFINES["USE_UDEV"] = True
+-    DEFINES["USE_X11"] = "1"
+     DEFINES["WEBRTC_LINUX"] = True
+     DEFINES["WEBRTC_POSIX"] = True
+     DEFINES["WEBRTC_USE_PIPEWIRE"] = True
+-    DEFINES["WEBRTC_USE_X11"] = True
+     DEFINES["_FILE_OFFSET_BITS"] = "64"
+     DEFINES["_GNU_SOURCE"] = True
+     DEFINES["_LARGEFILE64_SOURCE"] = True
+@@ -114,14 +112,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+     OS_LIBS += [
+         "dl",
+         "rt",
+-        "X11",
+-        "Xcomposite",
+-        "Xdamage",
+-        "Xext",
+-        "Xfixes",
+-        "Xrandr",
+-        "Xrender",
+-        "Xtst"
+     ]
+ 
+     SOURCES += [
+@@ -129,23 +119,27 @@ if CONFIG["OS_TARGET"] == "Linux":
+     ]
+ 
+     UNIFIED_SOURCES += [
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/mouse_cursor_monitor_x11.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/linux/screen_capturer_pipewire.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/screen_capturer_x11.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/shared_x_display.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/linux/window_capturer_pipewire.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/window_capturer_x11.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/window_finder_x11.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/window_list_utils.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/x_atom_cache.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/x_error_trap.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/x_server_pixel_buffer.cc",
+-        "/third_party/libwebrtc/modules/desktop_capture/linux/x_window_property.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/mouse_cursor_monitor_linux.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/screen_capturer_linux.cc",
+         "/third_party/libwebrtc/modules/desktop_capture/window_capturer_linux.cc"
+     ]
+ 
++    if CONFIG["MOZ_X11"]:
++        UNIFIED_SOURCES += [
++            "/third_party/libwebrtc/modules/desktop_capture/linux/mouse_cursor_monitor_x11.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/screen_capturer_x11.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/shared_x_display.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/window_capturer_x11.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/window_finder_x11.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/window_list_utils.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/x_atom_cache.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/x_error_trap.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/x_server_pixel_buffer.cc",
++            "/third_party/libwebrtc/modules/desktop_capture/linux/x_window_property.cc"
++        ]
++
+ if CONFIG["OS_TARGET"] == "WINNT":
+ 
+     DEFINES["CERT_CHAIN_PARA_HAS_EXTRA_FIELDS"] = True
+diff --git a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
+index 9b1c42eecc1c0..a224245c30256 100644
+--- a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
++++ b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
+@@ -54,10 +54,8 @@ if CONFIG["OS_TARGET"] == "Linux":
+     DEFINES["USE_NSS_CERTS"] = "1"
+     DEFINES["USE_OZONE"] = "1"
+     DEFINES["USE_UDEV"] = True
+-    DEFINES["USE_X11"] = "1"
+     DEFINES["WEBRTC_LINUX"] = True
+     DEFINES["WEBRTC_POSIX"] = True
+-    DEFINES["WEBRTC_USE_X11"] = True
+     DEFINES["_FILE_OFFSET_BITS"] = "64"
+     DEFINES["_GNU_SOURCE"] = True
+     DEFINES["_LARGEFILE64_SOURCE"] = True
+@@ -68,14 +66,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+     OS_LIBS += [
+         "dl",
+         "rt",
+-        "X11",
+-        "Xcomposite",
+-        "Xdamage",
+-        "Xext",
+-        "Xfixes",
+-        "Xrandr",
+-        "Xrender",
+-        "Xtst"
+     ]
+ 
+ if CONFIG["OS_TARGET"] == "WINNT":
+diff --git a/third_party/libwebrtc/webrtc_gn/moz.build b/third_party/libwebrtc/webrtc_gn/moz.build
+index c5d06aa1d6871..51a8f0d86c78f 100644
+--- a/third_party/libwebrtc/webrtc_gn/moz.build
++++ b/third_party/libwebrtc/webrtc_gn/moz.build
+@@ -72,7 +72,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+     DEFINES["USE_NSS_CERTS"] = "1"
+     DEFINES["USE_OZONE"] = "1"
+     DEFINES["USE_UDEV"] = True
+-    DEFINES["USE_X11"] = "1"
+     DEFINES["WEBRTC_LINUX"] = True
+     DEFINES["WEBRTC_POSIX"] = True
+     DEFINES["_FILE_OFFSET_BITS"] = "64"
+@@ -86,14 +85,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+         "dl",
+         "m",
+         "rt",
+-        "X11",
+-        "Xcomposite",
+-        "Xdamage",
+-        "Xext",
+-        "Xfixes",
+-        "Xrandr",
+-        "Xrender",
+-        "Xtst"
+     ]
+ 
+ if CONFIG["OS_TARGET"] == "WINNT":
+-- 
+2.34.1
+

@@ -1,7 +1,7 @@
-From b394593f3bbc0598a707ec6a2eb1f1902d0f7886 Mon Sep 17 00:00:00 2001
+From 16c38d799b1451e3565a42858e05dd9b965d8eb0 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:08:13 +0100
-Subject: [PATCH 23/24] enable webrender compositor by default
+Subject: [PATCH 22/23] enable webrender compositor by default
 
 ---
  gfx/thebes/gfxPlatformGtk.cpp | 1 +
@@ -21,7 +21,7 @@ index 4360d62d5cb16..9112b9f511162 100644
      if (!(gfxConfig::IsEnabled(Feature::WEBRENDER) ||
            gfxConfig::IsEnabled(Feature::WEBRENDER_SOFTWARE))) {
 diff --git a/widget/gtk/GfxInfo.cpp b/widget/gtk/GfxInfo.cpp
-index d5a6007290dd6..b3f29598891c6 100644
+index 44ab5de9bac6a..65d8cd7de801e 100644
 --- a/widget/gtk/GfxInfo.cpp
 +++ b/widget/gtk/GfxInfo.cpp
 @@ -809,11 +809,6 @@ const nsTArray<GfxDriverInfo>& GfxInfo::GetGfxDriverInfo() {

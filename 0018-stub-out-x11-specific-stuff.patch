@@ -1,7 +1,7 @@
-From 3d1725adbda10ef01bcde516b72679e7d2f2e8a2 Mon Sep 17 00:00:00 2001
+From 7f3647fce2c7b552d284e71da128513aeab01140 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
-Subject: [PATCH 18/24] stub out x11 specific stuff
+Subject: [PATCH 18/23] stub out x11 specific stuff
 
 ---
  gfx/thebes/gfxPlatformGtk.cpp      |  4 +-
@@ -96,7 +96,7 @@ index 2aad109eab1a5..396f39b5e7e54 100644
    return NS_OK;
  }
 diff --git a/widget/gtk/nsClipboard.cpp b/widget/gtk/nsClipboard.cpp
-index 112ac5a426e49..be3295a487587 100644
+index f8b6ed3d2b716..71401cf48d366 100644
 --- a/widget/gtk/nsClipboard.cpp
 +++ b/widget/gtk/nsClipboard.cpp
 @@ -9,7 +9,9 @@
@@ -350,7 +350,7 @@ index 07d60c27a60a1..62afb49e01163 100644
    /**
     * Signal handlers.
 diff --git a/widget/gtk/nsPrintDialogGTK.cpp b/widget/gtk/nsPrintDialogGTK.cpp
-index 0050af3af37f5..6354e65ef30ea 100644
+index f36693a50fcc6..0dc4b3859a32f 100644
 --- a/widget/gtk/nsPrintDialogGTK.cpp
 +++ b/widget/gtk/nsPrintDialogGTK.cpp
 @@ -5,6 +5,9 @@
@@ -363,7 +363,7 @@ index 0050af3af37f5..6354e65ef30ea 100644
  #include <stdlib.h>
  
  #include "mozilla/ArrayUtils.h"
-@@ -25,8 +28,6 @@
+@@ -27,8 +30,6 @@
  #include "WidgetUtilsGtk.h"
  #include "nsIObserverService.h"
  
@@ -372,7 +372,7 @@ index 0050af3af37f5..6354e65ef30ea 100644
  #include <sys/types.h>
  #include <sys/stat.h>
  #include <fcntl.h>
-@@ -525,6 +526,7 @@ static void wayland_window_handle_exported(GdkWindow* window,
+@@ -527,6 +528,7 @@ static void wayland_window_handle_exported(GdkWindow* window,
  static gboolean window_export_handle(GtkWindow* window,
                                       GtkWindowHandleExported callback,
                                       gpointer user_data) {
@@ -380,7 +380,7 @@ index 0050af3af37f5..6354e65ef30ea 100644
    if (GdkIsX11Display()) {
      GdkWindow* gdk_window = gtk_widget_get_window(GTK_WIDGET(window));
      char* handle_str;
-@@ -535,8 +537,9 @@ static gboolean window_export_handle(GtkWindow* window,
+@@ -537,8 +539,9 @@ static gboolean window_export_handle(GtkWindow* window,
      g_free(handle_str);
      return true;
    }
@@ -392,7 +392,7 @@ index 0050af3af37f5..6354e65ef30ea 100644
      WaylandWindowHandleExportedData* data;
  
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
-index 620e2f47f2b2d..1af1e37c73a36 100644
+index 0abded9175a79..943bee63dad0b 100644
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
 @@ -58,7 +58,6 @@
@@ -457,7 +457,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  
  }  // namespace mozilla
  
-@@ -2525,6 +2528,7 @@ void nsWindow::SetSizeMode(nsSizeMode aMode) {
+@@ -2570,6 +2573,7 @@ void nsWindow::SetSizeMode(nsSizeMode aMode) {
    mSizeState = mSizeMode;
  }
  
@@ -465,7 +465,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  static bool GetWindowManagerName(GdkWindow* gdk_window, nsACString& wmName) {
    if (!GdkIsX11Display()) {
      return false;
-@@ -2594,10 +2598,12 @@ static bool GetWindowManagerName(GdkWindow* gdk_window, nsACString& wmName) {
+@@ -2639,10 +2643,12 @@ static bool GetWindowManagerName(GdkWindow* gdk_window, nsACString& wmName) {
    wmName = reinterpret_cast<const char*>(prop_return);
    return true;
  }
@@ -478,7 +478,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  static bool WorkspaceManagementDisabled(GdkWindow* gdk_window) {
    if (Preferences::GetBool("widget.disable-workspace-management", false)) {
      return true;
-@@ -2642,8 +2648,10 @@ static bool WorkspaceManagementDisabled(GdkWindow* gdk_window) {
+@@ -2687,8 +2693,10 @@ static bool WorkspaceManagementDisabled(GdkWindow* gdk_window) {
  
    return false;
  }
@@ -489,7 +489,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    workspaceID.Truncate();
  
    if (!GdkIsX11Display() || !mShell) {
-@@ -2684,9 +2692,11 @@ void nsWindow::GetWorkspaceID(nsAString& workspaceID) {
+@@ -2729,9 +2737,11 @@ void nsWindow::GetWorkspaceID(nsAString& workspaceID) {
    LOG("  got workspace ID %d", (int32_t)wm_desktop[0]);
    workspaceID.AppendInt((int32_t)wm_desktop[0]);
    g_free(wm_desktop);
@@ -501,7 +501,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    nsresult rv = NS_OK;
    int32_t workspaceID = workspaceIDStr.ToInteger(&rv);
  
-@@ -2731,6 +2741,7 @@ void nsWindow::MoveToWorkspace(const nsAString& workspaceIDStr) {
+@@ -2776,6 +2786,7 @@ void nsWindow::MoveToWorkspace(const nsAString& workspaceIDStr) {
  
    XFlush(xdisplay);
    LOG("  moved to workspace");
@@ -509,7 +509,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  }
  
  using SetUserTimeFunc = void (*)(GdkWindow*, guint32);
-@@ -2770,10 +2781,7 @@ guint32 nsWindow::GetLastUserInputTime() {
+@@ -2815,10 +2826,7 @@ guint32 nsWindow::GetLastUserInputTime() {
    // WM_DELETE_WINDOW delete events, but not usually mouse motion nor
    // button and key releases.  Therefore use the most recent of
    // gdk_x11_display_get_user_time and the last time that we have seen.
@@ -521,7 +521,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  
    if (sLastUserInputTime != GDK_CURRENT_TIME &&
        TimestampIsNewerThan(sLastUserInputTime, timestamp)) {
-@@ -2937,6 +2945,7 @@ void nsWindow::UpdateClientOffsetFromFrameExtents() {
+@@ -3051,6 +3059,7 @@ void nsWindow::UpdateClientOffsetFromFrameExtents() {
      return;
    }
  
@@ -529,7 +529,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    GdkAtom cardinal_atom = gdk_x11_xatom_to_atom(XA_CARDINAL);
  
    GdkAtom type_returned;
-@@ -2962,6 +2971,7 @@ void nsWindow::UpdateClientOffsetFromFrameExtents() {
+@@ -3076,6 +3085,7 @@ void nsWindow::UpdateClientOffsetFromFrameExtents() {
  
      mClientOffset = nsIntPoint(left, top);
    }
@@ -537,7 +537,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  
    // Send a WindowMoved notification. This ensures that BrowserParent
    // picks up the new client offset and sends it to the child process
-@@ -2987,9 +2997,11 @@ gboolean nsWindow::OnPropertyNotifyEvent(GtkWidget* aWidget,
+@@ -3101,9 +3111,11 @@ gboolean nsWindow::OnPropertyNotifyEvent(GtkWidget* aWidget,
    if (!mGdkWindow) {
      return FALSE;
    }
@@ -549,7 +549,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    return FALSE;
  }
  
-@@ -3127,9 +3139,11 @@ void* nsWindow::GetNativeData(uint32_t aDataType) {
+@@ -3241,9 +3253,11 @@ void* nsWindow::GetNativeData(uint32_t aDataType) {
        return GetToplevelWidget();
  
      case NS_NATIVE_WINDOW_WEBRTC_DEVICE_ID:
@@ -561,7 +561,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
        NS_WARNING(
            "nsWindow::GetNativeData(): NS_NATIVE_WINDOW_WEBRTC_DEVICE_ID is not "
            "handled on Wayland!");
-@@ -3150,11 +3164,13 @@ void* nsWindow::GetNativeData(uint32_t aDataType) {
+@@ -3264,11 +3278,13 @@ void* nsWindow::GetNativeData(uint32_t aDataType) {
        return nullptr;
      case NS_NATIVE_EGL_WINDOW: {
        void* eglWindow = nullptr;
@@ -576,7 +576,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
          eglWindow = moz_container_wayland_get_egl_window(
              mContainer, FractionalScaleFactor());
        }
-@@ -3477,8 +3493,6 @@ gboolean nsWindow::OnExposeEvent(cairo_t* cr) {
+@@ -3523,8 +3539,6 @@ gboolean nsWindow::OnExposeEvent(cairo_t* cr) {
    nsIWidgetListener* listener = GetListener();
    if (!listener) return FALSE;
  
@@ -585,7 +585,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    LayoutDeviceIntRegion exposeRegion;
    if (!ExtractExposeRegion(exposeRegion, cr)) {
      return FALSE;
-@@ -4020,6 +4034,7 @@ void nsWindow::OnMotionNotifyEvent(GdkEventMotion* aEvent) {
+@@ -4064,6 +4078,7 @@ void nsWindow::OnMotionNotifyEvent(GdkEventMotion* aEvent) {
      MOZ_ASSERT(gdk_window, "gdk_window_get_toplevel should not return null");
  
      bool canDrag = true;
@@ -593,7 +593,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
      if (GdkIsX11Display()) {
        // Workaround for https://bugzilla.gnome.org/show_bug.cgi?id=789054
        // To avoid crashes disable double-click on WM without _NET_WM_MOVERESIZE.
-@@ -4030,6 +4045,7 @@ void nsWindow::OnMotionNotifyEvent(GdkEventMotion* aEvent) {
+@@ -4074,6 +4089,7 @@ void nsWindow::OnMotionNotifyEvent(GdkEventMotion* aEvent) {
          canDrag = false;
        }
      }
@@ -601,7 +601,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  
      if (canDrag) {
        gdk_window_begin_move_drag(gdk_window, 1, aEvent->x_root, aEvent->y_root,
-@@ -4472,6 +4488,7 @@ TimeStamp nsWindow::GetEventTimeStamp(guint32 aEventTime) {
+@@ -4515,6 +4531,7 @@ TimeStamp nsWindow::GetEventTimeStamp(guint32 aEventTime) {
  
    TimeStamp eventTimeStamp;
  
@@ -609,7 +609,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    if (GdkIsWaylandDisplay()) {
      // Wayland compositors use monotonic time to set timestamps.
      int64_t timestampTime = g_get_monotonic_time() / 1000;
-@@ -4481,16 +4498,21 @@ TimeStamp nsWindow::GetEventTimeStamp(guint32 aEventTime) {
+@@ -4524,16 +4541,21 @@ TimeStamp nsWindow::GetEventTimeStamp(guint32 aEventTime) {
      int64_t tick =
          BaseTimeDurationPlatformUtils::TicksFromMilliseconds(timestampTime);
      eventTimeStamp = TimeStamp::FromSystemTime(tick);
@@ -632,15 +632,15 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  mozilla::CurrentX11TimeGetter* nsWindow::GetCurrentTimeGetter() {
    MOZ_ASSERT(mGdkWindow, "Expected mGdkWindow to be set");
    if (MOZ_UNLIKELY(!mCurrentTimeGetter)) {
-@@ -4498,6 +4520,7 @@ mozilla::CurrentX11TimeGetter* nsWindow::GetCurrentTimeGetter() {
+@@ -4541,6 +4563,7 @@ mozilla::CurrentX11TimeGetter* nsWindow::GetCurrentTimeGetter() {
    }
    return mCurrentTimeGetter.get();
  }
 +#endif
  
  gboolean nsWindow::OnKeyPressEvent(GdkEventKey* aEvent) {
-   LOG("OnKeyPressEvent [%p]\n", (void*)this);
-@@ -5161,11 +5184,15 @@ void nsWindow::EnableRenderingToWindow() {
+   LOG("OnKeyPressEvent");
+@@ -5202,11 +5225,15 @@ void nsWindow::EnableRenderingToWindow() {
    LOG("nsWindow::EnableRenderingToWindow()");
  
    if (mCompositorWidgetDelegate) {
@@ -657,7 +657,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
      moz_container_wayland_add_initial_draw_callback(
          mContainer, [self = RefPtr{this}, this]() -> void {
            LOG("moz_container_wayland initial create "
-@@ -5173,11 +5200,15 @@ void nsWindow::EnableRenderingToWindow() {
+@@ -5214,11 +5241,15 @@ void nsWindow::EnableRenderingToWindow() {
            self->ResumeCompositorHiddenWindow();
            self->WaylandStartVsync();
          });
@@ -674,7 +674,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  }
  
  void nsWindow::DisableRenderingToWindow() {
-@@ -5257,9 +5288,6 @@ void nsWindow::ConfigureGdkWindow() {
+@@ -5307,9 +5338,6 @@ void nsWindow::ConfigureGdkWindow() {
    if (mHasMappedToplevel) {
      EnsureGrabs();
    }
@@ -684,10 +684,10 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  }
  
  void nsWindow::ReleaseGdkWindow() {
-@@ -5804,10 +5832,6 @@ nsresult nsWindow::Create(nsIWidget* aParent, nsNativeWidget aNativeParent,
+@@ -5848,10 +5876,6 @@ nsresult nsWindow::Create(nsIWidget* aParent, nsNativeWidget aNativeParent,
+                    nullptr);
  
-   LOG("nsWindow [%p] type %d %s\n", (void*)this, mWindowType,
-       mIsPIPWindow ? "PIP window" : "");
+   LOG("nsWindow type %d %s\n", mWindowType, mIsPIPWindow ? "PIP window" : "");
 -  LOG("\tmShell %p mContainer %p mGdkWindow %p XID 0x%lx\n", mShell, mContainer,
 -      mGdkWindow,
 -      (GdkIsX11Display() && mGdkWindow) ? gdk_x11_window_get_xid(mGdkWindow)
@@ -695,7 +695,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  
    // Set default application name when it's empty.
    if (mGtkWindowAppName.IsEmpty()) {
-@@ -6655,6 +6679,7 @@ void nsWindow::UpdateTitlebarTransparencyBitmap() {
+@@ -6696,6 +6720,7 @@ void nsWindow::UpdateTitlebarTransparencyBitmap() {
      cairo_surface_destroy(surface);
    }
  
@@ -703,7 +703,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    if (!mNeedsShow) {
      Display* xDisplay = GDK_WINDOW_XDISPLAY(mGdkWindow);
      Window xDrawable = GDK_WINDOW_XID(mGdkWindow);
-@@ -6675,6 +6700,7 @@ void nsWindow::UpdateTitlebarTransparencyBitmap() {
+@@ -6716,6 +6741,7 @@ void nsWindow::UpdateTitlebarTransparencyBitmap() {
  
      XFreePixmap(xDisplay, maskPixmap);
    }
@@ -711,7 +711,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  }
  
  void nsWindow::GrabPointer(guint32 aTime) {
-@@ -6949,7 +6975,7 @@ static bool IsFullscreenSupported(GtkWidget* aShell) {
+@@ -6989,7 +7015,7 @@ static bool IsFullscreenSupported(GtkWidget* aShell) {
    GdkScreen* screen = gtk_widget_get_screen(aShell);
    GdkAtom atom = gdk_atom_intern("_NET_WM_STATE_FULLSCREEN", FALSE);
    return gdk_x11_screen_supports_net_wm_hint(screen, atom);
@@ -720,7 +720,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    return true;
  #endif
  }
-@@ -8215,6 +8241,7 @@ bool nsWindow::GetDragInfo(WidgetMouseEvent* aMouseEvent, GdkWindow** aWindow,
+@@ -8273,6 +8299,7 @@ bool nsWindow::GetDragInfo(WidgetMouseEvent* aMouseEvent, GdkWindow** aWindow,
      return false;
    }
  
@@ -728,7 +728,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
    if (GdkIsX11Display()) {
      // Workaround for https://bugzilla.gnome.org/show_bug.cgi?id=789054
      // To avoid crashes disable double-click on WM without _NET_WM_MOVERESIZE.
-@@ -8230,6 +8257,7 @@ bool nsWindow::GetDragInfo(WidgetMouseEvent* aMouseEvent, GdkWindow** aWindow,
+@@ -8288,6 +8315,7 @@ bool nsWindow::GetDragInfo(WidgetMouseEvent* aMouseEvent, GdkWindow** aWindow,
        }
      }
    }
@@ -736,7 +736,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  
    // FIXME: It would be nice to have the widget position at the time
    // of the event, but it's relatively unlikely that the widget has
-@@ -8941,10 +8969,14 @@ void nsWindow::GetCompositorWidgetInitData(
+@@ -9001,10 +9029,14 @@ void nsWindow::GetCompositorWidgetInitData(
      XFlush(display);
      displayName = nsCString(XDisplayString(display));
    }
@@ -753,7 +753,7 @@ index 620e2f47f2b2d..1af1e37c73a36 100644
  
  #ifdef MOZ_X11
 diff --git a/widget/gtk/nsWindow.h b/widget/gtk/nsWindow.h
-index 74d914328eb8d..4d91adf1f05cd 100644
+index c54d5776f3d0b..2ff43534995b0 100644
 --- a/widget/gtk/nsWindow.h
 +++ b/widget/gtk/nsWindow.h
 @@ -95,7 +95,9 @@ typedef struct _GdkEventTouchpadPinch GdkEventTouchpadPinch;
@@ -776,7 +776,7 @@ index 74d914328eb8d..4d91adf1f05cd 100644
  
    virtual void SetInputContext(const InputContext& aContext,
                                 const InputContextAction& aAction) override;
-@@ -819,7 +823,9 @@ class nsWindow final : public nsBaseWidget {
+@@ -824,7 +828,9 @@ class nsWindow final : public nsBaseWidget {
     */
    RefPtr<mozilla::widget::IMContextWrapper> mIMContext;
  
