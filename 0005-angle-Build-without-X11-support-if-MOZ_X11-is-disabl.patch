@@ -1,4 +1,4 @@
-From 6814c406c6d2b67a91e210d32360de2eda829dd0 Mon Sep 17 00:00:00 2001
+From c38e104bc4629f37f10abdbd3b9e514d1a220e1e Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:39:47 +0100
 Subject: [PATCH 05/23] angle: Build without X11 support if MOZ_X11 is disabled

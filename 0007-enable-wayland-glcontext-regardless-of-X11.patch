@@ -1,4 +1,4 @@
-From 2fc7f98ed34bb0d19e7be403e4263e7dfdf44966 Mon Sep 17 00:00:00 2001
+From 22e202808ed7ca1b73690f29238e3ca6dcde0e11 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:41:56 +0100
 Subject: [PATCH 07/23] enable wayland glcontext regardless of X11
