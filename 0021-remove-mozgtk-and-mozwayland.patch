@@ -1,4 +1,4 @@
-From d2a99a76a8f809716ec2721f4e447cd57182e23e Mon Sep 17 00:00:00 2001
+From a90752a2669c51dc9eb8011a450fb328428de040 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 13 Dec 2021 22:42:39 +0100
 Subject: [PATCH 21/23] remove mozgtk and mozwayland

@@ -1,4 +1,4 @@
-From fbbc934f315e9ad29f176e1950a14ed9e8c8063a Mon Sep 17 00:00:00 2001
+From a046f27d217c5431db7741cd1ad26aa35bf48aa5 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:47:23 +0100
 Subject: [PATCH 13/23] enable OOP Compositing regardless of X11
@@ -10,7 +10,7 @@ Subject: [PATCH 13/23] enable OOP Compositing regardless of X11
  3 files changed, 10 insertions(+), 12 deletions(-)
 
 diff --git a/widget/CompositorWidget.h b/widget/CompositorWidget.h
-index 0c3a693f47875..7214d7891daa9 100644
+index 4d38bc6220358..09e19945a9799 100644
 --- a/widget/CompositorWidget.h
 +++ b/widget/CompositorWidget.h
 @@ -62,7 +62,7 @@ class CompositorWidgetDelegate {

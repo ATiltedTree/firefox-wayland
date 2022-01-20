@@ -1,4 +1,4 @@
-From 72ec30cfa926c735fb383a446ca25306d516e201 Mon Sep 17 00:00:00 2001
+From c468e20e59909520e5c7da376f566234518b1b9a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 12:31:16 +0100
 Subject: [PATCH 17/23] If only wayland is enabled, always use it regardless of
