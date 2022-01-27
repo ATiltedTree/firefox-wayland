@@ -1,4 +1,4 @@
-From 74565587c2f635bffa30d2866a0efe486c7be2f2 Mon Sep 17 00:00:00 2001
+From 6a1f4d63d1d6c264ad47132871c03d38ebb9036d Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sun, 28 Nov 2021 11:59:21 +0100
 Subject: [PATCH 23/23] use xdg
@@ -773,5 +773,5 @@ index ef974f99048f8..03b7cb299d094 100644
  // Mac    : :Documents:Mozilla:Profiles:
  //----------------------------------------------------------------------------------------
 -- 
-2.34.1
+2.35.0
 

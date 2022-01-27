@@ -1,4 +1,4 @@
-From 82325c87d07b72299d6dafd820d2e47661859df7 Mon Sep 17 00:00:00 2001
+From 07751364531cdcef83cb44984a230343ebab2552 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:46:17 +0100
 Subject: [PATCH 11/23] enable glxtest on X11 and wayland
@@ -30,5 +30,5 @@ index e39d75d60330b..a612c296f68bc 100644
  
  for var in (
 -- 
-2.34.1
+2.35.0
 

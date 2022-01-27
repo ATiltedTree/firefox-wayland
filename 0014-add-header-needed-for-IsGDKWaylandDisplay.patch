@@ -1,4 +1,4 @@
-From c73ea16b3637c3bc3ece5e348f13d3bbc8fcb144 Mon Sep 17 00:00:00 2001
+From 689057f8143185527f4d3350ac35460e1dceefb9 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:48:11 +0100
 Subject: [PATCH 14/23] add header needed for IsGDKWaylandDisplay
@@ -20,5 +20,5 @@ index a1183cbbe4f58..3b43e6ae71e3b 100644
  #ifdef MOZ_WAYLAND
  #  include "mozilla/StaticPrefs_widget.h"
 -- 
-2.34.1
+2.35.0
 

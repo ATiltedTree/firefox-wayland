@@ -1,4 +1,4 @@
-From 782ee5540a453db00a8a29cee2f7c65172a829f8 Mon Sep 17 00:00:00 2001
+From 429b03f23143a0f54f04c0bd6731c3152ef09c63 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
 Subject: [PATCH 19/23] allow turning on/off of X11 and wayland
@@ -115,5 +115,5 @@ index 09970cd2dde6a..16d5749a07b7a 100644
  
  # ASan Reporter Addon
 -- 
-2.34.1
+2.35.0
 

@@ -1,4 +1,4 @@
-From 45285b70dafcec220b46b3940cc512ca976463ba Mon Sep 17 00:00:00 2001
+From c8eb4dcbb9bd2f0e277062d1e447302e8a96cce5 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:09:54 +0100
 Subject: [PATCH 04/23] libwebrtc: allow building without X11
@@ -152,5 +152,5 @@ index c5d06aa1d6871..51a8f0d86c78f 100644
  
  if CONFIG["OS_TARGET"] == "WINNT":
 -- 
-2.34.1
+2.35.0
 

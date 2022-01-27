@@ -1,4 +1,4 @@
-From 41a2bd490c0c51c006f11e46d86d7f7e4d8773cb Mon Sep 17 00:00:00 2001
+From 194290289079a657035d0099128026d36d6034d1 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:45:18 +0100
 Subject: [PATCH 10/23] only enable nsGTKRemoteServer when DBus is not
@@ -27,5 +27,5 @@ index b2499d8191ed3..b4539f3e976c2 100644
  #elif defined(XP_WIN)
  #  include "nsWinRemoteServer.h"
 -- 
-2.34.1
+2.35.0
 

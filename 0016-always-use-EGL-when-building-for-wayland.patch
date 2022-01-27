@@ -1,4 +1,4 @@
-From 2a01ca55db8fc1aa6f8b0e5c7edaeb0a9036fcab Mon Sep 17 00:00:00 2001
+From f57d1aae27908b41f98c9dc03cccac788b0db19f Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:53:43 +0100
 Subject: [PATCH 16/23] always use EGL when building for wayland
@@ -21,5 +21,5 @@ index 368490d06ba30..af395989ef34a 100644
      else:
          gl_provider = "GLX"
 -- 
-2.34.1
+2.35.0
 

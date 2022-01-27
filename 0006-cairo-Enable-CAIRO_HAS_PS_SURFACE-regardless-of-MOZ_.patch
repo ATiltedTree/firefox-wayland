@@ -1,4 +1,4 @@
-From cee5ee5203d37abc0e4cb329409a4318ce2960f8 Mon Sep 17 00:00:00 2001
+From 2cf98ccab403e0a240baad43e149834e28091a80 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:40:17 +0100
 Subject: [PATCH 06/23] cairo: Enable CAIRO_HAS_PS_SURFACE regardless of
@@ -29,5 +29,5 @@ index cfed9d9a2f7b7..ad9abeaab1c7e 100644
  #ifdef USE_FC_FREETYPE
  #define CAIRO_HAS_FC_FONT 1
 -- 
-2.34.1
+2.35.0
 

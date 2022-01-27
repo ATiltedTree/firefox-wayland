@@ -1,4 +1,4 @@
-From 4276b994b97e4e8bafb4b01c2c0be05093d6110d Mon Sep 17 00:00:00 2001
+From c85e98f1256752b1e2af1f330a07bfe1ec0331e6 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Tue, 28 Dec 2021 00:14:23 +0100
 Subject: [PATCH 01/23] fixup system-jpeg
@@ -20,5 +20,5 @@ index 00698656f686e..09970cd2dde6a 100644
      @depends("--with-system-jpeg", target)
      def in_tree_jpeg_arm(system_jpeg, target):
 -- 
-2.34.1
+2.35.0
 

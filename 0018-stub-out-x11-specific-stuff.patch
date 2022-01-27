@@ -1,4 +1,4 @@
-From 91f59af739ed93a916bfd5b1becbf2caf7f09b9f Mon Sep 17 00:00:00 2001
+From bcb6a6450b82e8ffc1454dbdca4e6d05ce41453a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
 Subject: [PATCH 18/23] stub out x11 specific stuff
@@ -787,5 +787,5 @@ index c54d5776f3d0b..2ff43534995b0 100644
  
    static bool sTransparentMainWindow;
 -- 
-2.34.1
+2.35.0
 
