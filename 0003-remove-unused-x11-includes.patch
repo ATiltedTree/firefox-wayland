@@ -1,4 +1,4 @@
-From 70636513c6ae8744793c8d015d427d349769cf62 Mon Sep 17 00:00:00 2001
+From 97248141e1a50572b1e668d2a3a9772b9865bf91 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:38:49 +0100
 Subject: [PATCH 03/23] remove unused x11 includes
@@ -62,7 +62,7 @@ index 1a86468b4f3d1..eee67ed3a9788 100644
  
  union wl_argument;
 diff --git a/widget/gtk/nsClipboard.cpp b/widget/gtk/nsClipboard.cpp
-index 631f8aea47504..f8b6ed3d2b716 100644
+index 8fdd8e38dc879..add4e65ea755c 100644
 --- a/widget/gtk/nsClipboard.cpp
 +++ b/widget/gtk/nsClipboard.cpp
 @@ -37,7 +37,6 @@
@@ -94,5 +94,5 @@ index ea57c4f3c0ec6..5355fbe467df0 100644
  #include "nsImageToPixbuf.h"
  #include "nsPresContext.h"
 -- 
-2.35.0
+2.35.1
 

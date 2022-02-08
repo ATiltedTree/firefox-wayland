@@ -1,4 +1,4 @@
-From 4c19eb6660264b757936d533c1ed4868efd69e0f Mon Sep 17 00:00:00 2001
+From b3beba5d83b97fb4037bbff5cc7781f1080c620d Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:47:23 +0100
 Subject: [PATCH 13/23] enable OOP Compositing regardless of X11
@@ -23,10 +23,10 @@ index 4d38bc6220358..09e19945a9799 100644
  // PCompositorWidgetParent.
  class CompositorWidgetParent;
 diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
-index 6c3cc298ef7fa..3e2936ad56897 100644
+index e1ee137ca4737..98af9fca3dabb 100644
 --- a/widget/gtk/moz.build
 +++ b/widget/gtk/moz.build
-@@ -33,15 +33,22 @@ EXPORTS += [
+@@ -34,15 +34,22 @@ EXPORTS += [
  EXPORTS.mozilla += ["WidgetUtilsGtk.h"]
  
  EXPORTS.mozilla.widget += [
@@ -49,7 +49,7 @@ index 6c3cc298ef7fa..3e2936ad56897 100644
      "keysym2ucs.c",
      "MozContainer.cpp",
      "MPRISServiceHandler.cpp",
-@@ -58,6 +65,7 @@ UNIFIED_SOURCES += [
+@@ -59,6 +66,7 @@ UNIFIED_SOURCES += [
      "nsLookAndFeel.cpp",
      "nsSound.cpp",
      "nsToolkit.cpp",
@@ -57,7 +57,7 @@ index 6c3cc298ef7fa..3e2936ad56897 100644
      "nsWidgetFactory.cpp",
      "ScreenHelperGTK.cpp",
      "TaskbarProgress.cpp",
-@@ -101,22 +109,12 @@ if CONFIG["MOZ_WAYLAND"]:
+@@ -102,22 +110,12 @@ if CONFIG["MOZ_WAYLAND"]:
  
  if CONFIG["MOZ_X11"]:
      UNIFIED_SOURCES += [
@@ -81,10 +81,10 @@ index 6c3cc298ef7fa..3e2936ad56897 100644
  if CONFIG["NS_PRINTING"]:
      UNIFIED_SOURCES += [
 diff --git a/widget/moz.build b/widget/moz.build
-index 56341f1fa213f..f85269122704b 100644
+index fbe8164fe2769..8ad6c12c267cb 100644
 --- a/widget/moz.build
 +++ b/widget/moz.build
-@@ -312,7 +312,7 @@ if toolkit == "windows":
+@@ -315,7 +315,7 @@ if toolkit == "windows":
          "windows/PCompositorWidget.ipdl",
          "windows/PlatformWidgetTypes.ipdlh",
      ]
@@ -94,5 +94,5 @@ index 56341f1fa213f..f85269122704b 100644
          "gtk/PCompositorWidget.ipdl",
          "gtk/PlatformWidgetTypes.ipdlh",
 -- 
-2.35.0
+2.35.1
 

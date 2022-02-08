@@ -1,4 +1,4 @@
-From 09b2d797aaec96c38d295730b28b23f828b3ec79 Mon Sep 17 00:00:00 2001
+From 1b261f58fd2d2b2a2da8abb9c1c5fa595204f400 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:43:38 +0100
 Subject: [PATCH 08/23] enable nsIClipboard regardless of X11
@@ -39,5 +39,5 @@ index d649c7e0bfe6c..70b47d5124fc0 100644
  nsresult nsWidgetGtk2ModuleCtor() { return nsAppShellInit(); }
  
 -- 
-2.35.0
+2.35.1
 

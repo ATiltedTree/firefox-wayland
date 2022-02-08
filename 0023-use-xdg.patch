@@ -1,4 +1,4 @@
-From 6a1f4d63d1d6c264ad47132871c03d38ebb9036d Mon Sep 17 00:00:00 2001
+From 9de7d40c6eab8b770910312ce8772dcf9a652386 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sun, 28 Nov 2021 11:59:21 +0100
 Subject: [PATCH 23/23] use xdg
@@ -120,10 +120,10 @@ index 3d72e37503d70..dcb1e8070d04c 100644
  }
  
 diff --git a/toolkit/moz.build b/toolkit/moz.build
-index 14f4638b693ec..0223dccbff237 100644
+index d464f7eb8092b..4ee2649e3cc85 100644
 --- a/toolkit/moz.build
 +++ b/toolkit/moz.build
-@@ -55,6 +55,9 @@ TEST_HARNESS_FILES.testing.mochitest.browser.toolkit.crashreporter.test.browser
+@@ -59,6 +59,9 @@ TEST_HARNESS_FILES.testing.mochitest.browser.toolkit.crashreporter.test.browser
      "crashreporter/test/browser/crashreport.sjs",
  ]
  
@@ -463,10 +463,10 @@ index 0000000000000..30e2ec9cf1014
 +
 +FINAL_LIBRARY = "xul-gtest"
 diff --git a/toolkit/xre/nsXREDirProvider.cpp b/toolkit/xre/nsXREDirProvider.cpp
-index 50a64a2b469c0..d89559eb43b81 100644
+index f7bdd075e4b4b..71ca4ad17330a 100644
 --- a/toolkit/xre/nsXREDirProvider.cpp
 +++ b/toolkit/xre/nsXREDirProvider.cpp
-@@ -410,14 +410,7 @@ nsXREDirProvider::GetFile(const char* aProperty, bool* aPersistent,
+@@ -412,14 +412,7 @@ nsXREDirProvider::GetFile(const char* aProperty, bool* aPersistent,
      }
    } else if (!strcmp(aProperty, XRE_USER_NATIVE_MANIFESTS)) {
      nsCOMPtr<nsIFile> localDir;
@@ -482,7 +482,7 @@ index 50a64a2b469c0..d89559eb43b81 100644
      if (NS_SUCCEEDED(rv)) {
        localDir.swap(file);
      }
-@@ -1379,6 +1372,7 @@ nsresult nsXREDirProvider::SetUserDataProfileDirectory(nsCOMPtr<nsIFile>& aFile,
+@@ -1366,6 +1359,7 @@ nsresult nsXREDirProvider::SetUserDataProfileDirectory(nsCOMPtr<nsIFile>& aFile,
    return NS_OK;
  }
  
@@ -490,7 +490,7 @@ index 50a64a2b469c0..d89559eb43b81 100644
  nsresult nsXREDirProvider::GetUserDataDirectoryHome(nsIFile** aFile,
                                                      bool aLocal) {
    // Copied from nsAppFileLocationProvider (more or less)
-@@ -1440,29 +1434,25 @@ nsresult nsXREDirProvider::GetUserDataDirectoryHome(nsIFile** aFile,
+@@ -1427,29 +1421,25 @@ nsresult nsXREDirProvider::GetUserDataDirectoryHome(nsIFile** aFile,
    NS_ENSURE_SUCCESS(rv, rv);
  
    rv = NS_NewLocalFile(path, true, getter_AddRefs(localDir));
@@ -532,7 +532,7 @@ index 50a64a2b469c0..d89559eb43b81 100644
  #else
  #  error "Don't know how to get product dir on your platform"
  #endif
-@@ -1471,6 +1461,23 @@ nsresult nsXREDirProvider::GetUserDataDirectoryHome(nsIFile** aFile,
+@@ -1458,6 +1448,23 @@ nsresult nsXREDirProvider::GetUserDataDirectoryHome(nsIFile** aFile,
    return rv;
  }
  
@@ -556,7 +556,7 @@ index 50a64a2b469c0..d89559eb43b81 100644
  nsresult nsXREDirProvider::GetSysUserExtensionsDirectory(nsIFile** aFile) {
    nsCOMPtr<nsIFile> localDir;
    nsresult rv = GetUserDataDirectoryHome(getter_AddRefs(localDir), false);
-@@ -1569,9 +1576,11 @@ nsresult nsXREDirProvider::AppendSysUserExtensionPath(nsIFile* aFile) {
+@@ -1556,9 +1563,11 @@ nsresult nsXREDirProvider::AppendSysUserExtensionPath(nsIFile* aFile) {
  
  #elif defined(XP_UNIX)
  
@@ -568,7 +568,7 @@ index 50a64a2b469c0..d89559eb43b81 100644
  
    static const char* const sExtensions = "extensions";
    rv = aFile->AppendNative(nsDependentCString(sExtensions));
-@@ -1583,6 +1592,82 @@ nsresult nsXREDirProvider::AppendSysUserExtensionPath(nsIFile* aFile) {
+@@ -1570,6 +1579,82 @@ nsresult nsXREDirProvider::AppendSysUserExtensionPath(nsIFile* aFile) {
    return NS_OK;
  }
  
@@ -651,7 +651,7 @@ index 50a64a2b469c0..d89559eb43b81 100644
  nsresult nsXREDirProvider::AppendProfilePath(nsIFile* aFile, bool aLocal) {
    NS_ASSERTION(aFile, "Null pointer!");
  
-@@ -1659,8 +1744,12 @@ nsresult nsXREDirProvider::AppendProfilePath(nsIFile* aFile, bool aLocal) {
+@@ -1646,8 +1731,12 @@ nsresult nsXREDirProvider::AppendProfilePath(nsIFile* aFile, bool aLocal) {
        folder.Append(vendor);
        ToLowerCase(folder);
  
@@ -691,10 +691,10 @@ index 40cd9c8eb06a4..0f4799679e5ec 100644
  #if defined(XP_UNIX) || defined(XP_MACOSX)
    static nsresult GetSystemExtensionsDirectory(nsIFile** aFile);
 diff --git a/xpcom/io/moz.build b/xpcom/io/moz.build
-index d28c426e7bd73..835bf5930a587 100644
+index 7da420754cf5b..98c1b53da1ceb 100644
 --- a/xpcom/io/moz.build
 +++ b/xpcom/io/moz.build
-@@ -152,4 +152,5 @@ if CONFIG["OS_ARCH"] == "Linux" and "lib64" in CONFIG["libdir"]:
+@@ -153,4 +153,5 @@ if CONFIG["OS_ARCH"] == "Linux" and "lib64" in CONFIG["libdir"]:
  LOCAL_INCLUDES += [
      "!..",
      "../build",
@@ -773,5 +773,5 @@ index ef974f99048f8..03b7cb299d094 100644
  // Mac    : :Documents:Mozilla:Profiles:
  //----------------------------------------------------------------------------------------
 -- 
-2.35.0
+2.35.1
 

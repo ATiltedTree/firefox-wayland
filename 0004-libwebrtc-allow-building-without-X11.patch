@@ -1,4 +1,4 @@
-From c8eb4dcbb9bd2f0e277062d1e447302e8a96cce5 Mon Sep 17 00:00:00 2001
+From b2ec3ee486bce88c086c96fe8a0b4a29ddff5d3e Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:09:54 +0100
 Subject: [PATCH 04/23] libwebrtc: allow building without X11
@@ -26,10 +26,10 @@ index a9f88f0f9033d..7cfe45533cf42 100644
  
  DesktopDeviceInfo* DesktopDeviceInfoImpl::Create() {
 diff --git a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
-index e95094ab6f41a..7659168cbbe09 100644
+index a5cf9234d1228..ddce223c1992d 100644
 --- a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
 +++ b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
-@@ -94,11 +94,9 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -93,11 +93,9 @@ if CONFIG["OS_TARGET"] == "Linux":
      DEFINES["USE_NSS_CERTS"] = "1"
      DEFINES["USE_OZONE"] = "1"
      DEFINES["USE_UDEV"] = True
@@ -41,7 +41,7 @@ index e95094ab6f41a..7659168cbbe09 100644
      DEFINES["_FILE_OFFSET_BITS"] = "64"
      DEFINES["_GNU_SOURCE"] = True
      DEFINES["_LARGEFILE64_SOURCE"] = True
-@@ -114,14 +112,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -115,14 +113,6 @@ if CONFIG["OS_TARGET"] == "Linux":
      OS_LIBS += [
          "dl",
          "rt",
@@ -56,7 +56,7 @@ index e95094ab6f41a..7659168cbbe09 100644
      ]
  
      SOURCES += [
-@@ -129,23 +119,27 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -130,22 +120,26 @@ if CONFIG["OS_TARGET"] == "Linux":
      ]
  
      UNIFIED_SOURCES += [
@@ -76,7 +76,7 @@ index e95094ab6f41a..7659168cbbe09 100644
          "/third_party/libwebrtc/modules/desktop_capture/screen_capturer_linux.cc",
          "/third_party/libwebrtc/modules/desktop_capture/window_capturer_linux.cc"
      ]
- 
++    
 +    if CONFIG["MOZ_X11"]:
 +        UNIFIED_SOURCES += [
 +            "/third_party/libwebrtc/modules/desktop_capture/linux/mouse_cursor_monitor_x11.cc",
@@ -90,15 +90,14 @@ index e95094ab6f41a..7659168cbbe09 100644
 +            "/third_party/libwebrtc/modules/desktop_capture/linux/x_server_pixel_buffer.cc",
 +            "/third_party/libwebrtc/modules/desktop_capture/linux/x_window_property.cc"
 +        ]
-+
- if CONFIG["OS_TARGET"] == "WINNT":
  
-     DEFINES["CERT_CHAIN_PARA_HAS_EXTRA_FIELDS"] = True
+ if CONFIG["OS_TARGET"] == "OpenBSD":
+ 
 diff --git a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
-index 9b1c42eecc1c0..a224245c30256 100644
+index 4cf85ddfa75bf..e5873468ca336 100644
 --- a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
 +++ b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_gn/moz.build
-@@ -54,10 +54,8 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -53,10 +53,8 @@ if CONFIG["OS_TARGET"] == "Linux":
      DEFINES["USE_NSS_CERTS"] = "1"
      DEFINES["USE_OZONE"] = "1"
      DEFINES["USE_UDEV"] = True
@@ -109,7 +108,7 @@ index 9b1c42eecc1c0..a224245c30256 100644
      DEFINES["_FILE_OFFSET_BITS"] = "64"
      DEFINES["_GNU_SOURCE"] = True
      DEFINES["_LARGEFILE64_SOURCE"] = True
-@@ -68,14 +66,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -67,14 +65,6 @@ if CONFIG["OS_TARGET"] == "Linux":
      OS_LIBS += [
          "dl",
          "rt",
@@ -123,12 +122,12 @@ index 9b1c42eecc1c0..a224245c30256 100644
 -        "Xtst"
      ]
  
- if CONFIG["OS_TARGET"] == "WINNT":
+ if CONFIG["OS_TARGET"] == "OpenBSD":
 diff --git a/third_party/libwebrtc/webrtc_gn/moz.build b/third_party/libwebrtc/webrtc_gn/moz.build
-index c5d06aa1d6871..51a8f0d86c78f 100644
+index 625bd0b5dd9b4..2b0e2276c66c6 100644
 --- a/third_party/libwebrtc/webrtc_gn/moz.build
 +++ b/third_party/libwebrtc/webrtc_gn/moz.build
-@@ -72,7 +72,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -71,7 +71,6 @@ if CONFIG["OS_TARGET"] == "Linux":
      DEFINES["USE_NSS_CERTS"] = "1"
      DEFINES["USE_OZONE"] = "1"
      DEFINES["USE_UDEV"] = True
@@ -136,7 +135,7 @@ index c5d06aa1d6871..51a8f0d86c78f 100644
      DEFINES["WEBRTC_LINUX"] = True
      DEFINES["WEBRTC_POSIX"] = True
      DEFINES["_FILE_OFFSET_BITS"] = "64"
-@@ -86,14 +85,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -85,14 +84,6 @@ if CONFIG["OS_TARGET"] == "Linux":
          "dl",
          "m",
          "rt",
@@ -150,7 +149,7 @@ index c5d06aa1d6871..51a8f0d86c78f 100644
 -        "Xtst"
      ]
  
- if CONFIG["OS_TARGET"] == "WINNT":
+ if CONFIG["OS_TARGET"] == "OpenBSD":
 -- 
-2.35.0
+2.35.1
 

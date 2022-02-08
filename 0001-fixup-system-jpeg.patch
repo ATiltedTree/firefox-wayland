@@ -1,4 +1,4 @@
-From c85e98f1256752b1e2af1f330a07bfe1ec0331e6 Mon Sep 17 00:00:00 2001
+From 6541837ed16a740acd7c6ab15e3158b265f249f8 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Tue, 28 Dec 2021 00:14:23 +0100
 Subject: [PATCH 01/23] fixup system-jpeg
@@ -8,10 +8,10 @@ Subject: [PATCH 01/23] fixup system-jpeg
  1 file changed, 1 insertion(+)
 
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 00698656f686e..09970cd2dde6a 100644
+index 539433a6ef886..e06f94600bdf2 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
-@@ -1799,6 +1799,7 @@ with only_when(compile_environment):
+@@ -1834,6 +1834,7 @@ with only_when(compile_environment):
  
          set_config("MOZ_JPEG_CFLAGS", jpeg_flags.cflags)
          set_config("MOZ_JPEG_LIBS", jpeg_flags.ldflags)
@@ -20,5 +20,5 @@ index 00698656f686e..09970cd2dde6a 100644
      @depends("--with-system-jpeg", target)
      def in_tree_jpeg_arm(system_jpeg, target):
 -- 
-2.35.0
+2.35.1
 

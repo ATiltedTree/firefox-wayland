@@ -1,4 +1,4 @@
-From 429b03f23143a0f54f04c0bd6731c3152ef09c63 Mon Sep 17 00:00:00 2001
+From 362bb471d91f314544a4dca8f35048c79e7b05d0 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
 Subject: [PATCH 19/23] allow turning on/off of X11 and wayland
@@ -21,10 +21,10 @@ index a33677a0a19f5..cb9e3dd3381cd 100644
          )
  
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 09970cd2dde6a..16d5749a07b7a 100644
+index e06f94600bdf2..c3793ec1756a4 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
-@@ -265,7 +265,7 @@ def toolkit_choices(target):
+@@ -286,7 +286,7 @@ def toolkit_choices(target):
      elif target.os == "Android":
          return ("cairo-android",)
      else:
@@ -33,7 +33,7 @@ index 09970cd2dde6a..16d5749a07b7a 100644
  
  
  @depends(toolkit_choices)
-@@ -316,23 +316,24 @@ def toolkit_gtk(toolkit):
+@@ -338,23 +338,24 @@ def toolkit_gtk(toolkit):
  
  # Wayland support
  # ==============================================================
@@ -70,7 +70,7 @@ index 09970cd2dde6a..16d5749a07b7a 100644
  
  # GL Provider
  # ==============================================================
-@@ -354,7 +355,7 @@ def gl_provider_define(provider):
+@@ -376,7 +377,7 @@ def gl_provider_define(provider):
  set_define("MOZ_GL_PROVIDER", gl_provider_define)
  
  
@@ -79,7 +79,7 @@ index 09970cd2dde6a..16d5749a07b7a 100644
  def gl_default_provider(value, wayland, toolkit_gtk):
      if value:
          return value
-@@ -1170,11 +1171,20 @@ set_define("MOZ_RAW", depends_if("--enable-raw")(lambda _: True))
+@@ -1197,11 +1198,20 @@ set_define("MOZ_RAW", depends_if("--enable-raw")(lambda _: True))
  
  # X11
  # ==============================================================
@@ -103,7 +103,7 @@ index 09970cd2dde6a..16d5749a07b7a 100644
  def x11_libs(webrtc):
      libs = [
          "x11",
-@@ -1198,8 +1208,8 @@ def x11_libs(webrtc):
+@@ -1225,8 +1235,8 @@ def x11_libs(webrtc):
      return libs
  
  
@@ -115,5 +115,5 @@ index 09970cd2dde6a..16d5749a07b7a 100644
  
  # ASan Reporter Addon
 -- 
-2.35.0
+2.35.1
 

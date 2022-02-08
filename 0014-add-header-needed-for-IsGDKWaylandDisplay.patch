@@ -1,4 +1,4 @@
-From 689057f8143185527f4d3350ac35460e1dceefb9 Mon Sep 17 00:00:00 2001
+From a8eba41e424a90ee1dfe317a63ba9652cbd4c94c Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:48:11 +0100
 Subject: [PATCH 14/23] add header needed for IsGDKWaylandDisplay
@@ -8,7 +8,7 @@ Subject: [PATCH 14/23] add header needed for IsGDKWaylandDisplay
  1 file changed, 1 insertion(+)
 
 diff --git a/widget/gtk/WindowSurfaceProvider.cpp b/widget/gtk/WindowSurfaceProvider.cpp
-index a1183cbbe4f58..3b43e6ae71e3b 100644
+index 403af8e445bc8..94ba1be0ff171 100644
 --- a/widget/gtk/WindowSurfaceProvider.cpp
 +++ b/widget/gtk/WindowSurfaceProvider.cpp
 @@ -10,6 +10,7 @@
@@ -20,5 +20,5 @@ index a1183cbbe4f58..3b43e6ae71e3b 100644
  #ifdef MOZ_WAYLAND
  #  include "mozilla/StaticPrefs_widget.h"
 -- 
-2.35.0
+2.35.1
 

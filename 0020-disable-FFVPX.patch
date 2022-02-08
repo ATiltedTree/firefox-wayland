@@ -1,4 +1,4 @@
-From eaa90e2f72bf659d1ce95dbccd119d6e92889459 Mon Sep 17 00:00:00 2001
+From 30a22ab3c6653992cd8fb1146f4a7c2a6109c605 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 13 Dec 2021 22:43:55 +0100
 Subject: [PATCH 20/23] disable FFVPX
@@ -8,10 +8,10 @@ Subject: [PATCH 20/23] disable FFVPX
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 16d5749a07b7a..2e196226f17b3 100644
+index c3793ec1756a4..7725dbef45e89 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
-@@ -1898,7 +1898,7 @@ with only_when(compile_environment):
+@@ -1987,7 +1987,7 @@ with only_when(compile_environment):
  
      @depends(target)
      def libav_fft(target):
@@ -20,7 +20,7 @@ index 16d5749a07b7a..2e196226f17b3 100644
  
      set_config("MOZ_LIBAV_FFT", depends(when=libav_fft)(lambda: True))
      set_define("MOZ_LIBAV_FFT", depends(when=libav_fft)(lambda: True))
-@@ -1909,7 +1909,7 @@ with only_when(compile_environment | artifact_builds):
+@@ -1998,7 +1998,7 @@ with only_when(compile_environment | artifact_builds):
  
      @depends(target)
      def ffvpx(target):
@@ -30,5 +30,5 @@ index 16d5749a07b7a..2e196226f17b3 100644
          flags = []
  
 -- 
-2.35.0
+2.35.1
 
