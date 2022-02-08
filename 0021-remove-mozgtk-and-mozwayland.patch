@@ -1,4 +1,4 @@
-From ac47d98b7909f599ccfdf4a66fce1f9ed9d408b9 Mon Sep 17 00:00:00 2001
+From 3c1fa9bca3700b6360e4c829e1b2679cb5408664 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 13 Dec 2021 22:42:39 +0100
 Subject: [PATCH 21/23] remove mozgtk and mozwayland
@@ -639,7 +639,7 @@ index a828a0a361965..99b2d00e2165b 100644
  #include "mozilla/widget/gtk-primary-selection-client-protocol.h"
  #include "mozilla/widget/idle-inhibit-unstable-v1-client-protocol.h"
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
-index e055be1070950..5876df6b8ad34 100644
+index 7e02a5bc8a139..a4c9e92f47a7d 100644
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
 @@ -5303,10 +5303,6 @@ void nsWindow::ConfigureGdkWindow() {

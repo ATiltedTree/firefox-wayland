@@ -1,4 +1,4 @@
-From 3973020f53b7c9b7fb43c39be002647e34cf3325 Mon Sep 17 00:00:00 2001
+From 934f370fa47a3d56aa1019f98a470b7c2cfa43ff Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
 Subject: [PATCH 18/23] stub out x11 specific stuff
@@ -9,12 +9,12 @@ Subject: [PATCH 18/23] stub out x11 specific stuff
  widget/gtk/GtkCompositorWidget.cpp |  4 +-
  widget/gtk/TaskbarProgress.cpp     |  2 -
  widget/gtk/nsClipboard.cpp         | 12 +++--
- widget/gtk/nsGtkKeyUtils.cpp       | 31 ++++++++++---
+ widget/gtk/nsGtkKeyUtils.cpp       | 31 +++++++++---
  widget/gtk/nsGtkKeyUtils.h         | 14 +++++-
  widget/gtk/nsPrintDialogGTK.cpp    |  9 ++--
- widget/gtk/nsWindow.cpp            | 72 +++++++++++++++++++++---------
- widget/gtk/nsWindow.h              |  6 +++
- 10 files changed, 113 insertions(+), 43 deletions(-)
+ widget/gtk/nsWindow.cpp            | 76 ++++++++++++++++++++----------
+ widget/gtk/nsWindow.h              |  8 +++-
+ 10 files changed, 116 insertions(+), 46 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
 index 1b46a2aab890f..4360d62d5cb16 100644
@@ -392,7 +392,7 @@ index 8fb56543b71ee..9a562eb1245ad 100644
      WaylandWindowHandleExportedData* data;
  
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
-index 84566449ab51b..e055be1070950 100644
+index 84566449ab51b..7e02a5bc8a139 100644
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
 @@ -58,7 +58,6 @@
@@ -667,14 +667,17 @@ index 84566449ab51b..e055be1070950 100644
  }
  
  void nsWindow::DisableRenderingToWindow() {
-@@ -5237,7 +5264,11 @@ void nsWindow::DisableRenderingToWindow() {
+@@ -5236,8 +5263,12 @@ void nsWindow::DisableRenderingToWindow() {
+   }
  }
  
- Window nsWindow::GetX11Window() {
+-Window nsWindow::GetX11Window() {
+-  return GdkIsX11Display() ? gdk_x11_window_get_xid(mGdkWindow) : X11None;
++uintptr_t nsWindow::GetX11Window() {
 +#ifdef MOZ_X11
-   return GdkIsX11Display() ? gdk_x11_window_get_xid(mGdkWindow) : X11None;
++  return (uintptr_t)(GdkIsX11Display() ? gdk_x11_window_get_xid(mGdkWindow) : X11None);
 +#else
-+  return (Window) nullptr;
++  return (uintptr_t) nullptr;
 +#endif
  }
  
@@ -742,7 +745,7 @@ index 84566449ab51b..e055be1070950 100644
    // FIXME: It would be nice to have the widget position at the time
    // of the event, but it's relatively unlikely that the widget has
 diff --git a/widget/gtk/nsWindow.h b/widget/gtk/nsWindow.h
-index 9baa034477de0..4f7eff4b4abcb 100644
+index 9baa034477de0..cfd4a6c1787f6 100644
 --- a/widget/gtk/nsWindow.h
 +++ b/widget/gtk/nsWindow.h
 @@ -98,7 +98,9 @@ typedef struct _GdkEventTouchpadPinch GdkEventTouchpadPinch;
@@ -765,6 +768,15 @@ index 9baa034477de0..4f7eff4b4abcb 100644
  
    void SetInputContext(const InputContext& aContext,
                         const InputContextAction& aAction) override;
+@@ -473,7 +477,7 @@ class nsWindow final : public nsBaseWidget {
+   void DestroyChildWindows();
+   GtkWidget* GetToplevelWidget();
+   nsWindow* GetContainerWindow();
+-  Window GetX11Window();
++  uintptr_t GetX11Window();
+   bool GetShapedState();
+   void EnsureGdkWindow();
+   void SetUrgencyHint(GtkWidget* top_window, bool state);
 @@ -835,7 +839,9 @@ class nsWindow final : public nsBaseWidget {
     */
    RefPtr<mozilla::widget::IMContextWrapper> mIMContext;
