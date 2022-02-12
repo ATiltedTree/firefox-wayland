@@ -1,7 +1,7 @@
-From 6541837ed16a740acd7c6ab15e3158b265f249f8 Mon Sep 17 00:00:00 2001
+From a2cad8a1a9d1d2562e90858df96775d1f9f9edcd Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Tue, 28 Dec 2021 00:14:23 +0100
-Subject: [PATCH 01/23] fixup system-jpeg
+Subject: [PATCH 01/22] fixup system-jpeg
 
 ---
  toolkit/moz.configure | 1 +

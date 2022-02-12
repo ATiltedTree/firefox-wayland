@@ -1,7 +1,7 @@
-From 15257602848cf44bc3d4d6423c008e4fb58cdf93 Mon Sep 17 00:00:00 2001
+From 5f9090eed2e288813088eccc37f4e014e235504b Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sun, 28 Nov 2021 11:59:21 +0100
-Subject: [PATCH 23/23] use xdg
+Subject: [PATCH 22/22] use xdg
 
 ---
  .../test/browser_content_sandbox_fs_xdg.js    |   5 +

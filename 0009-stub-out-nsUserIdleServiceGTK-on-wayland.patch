@@ -1,7 +1,7 @@
-From 4a9de70778060365819ef6176404cabc39b0612d Mon Sep 17 00:00:00 2001
+From 72f9834701e6d032e4a93e083b42beea908beee4 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:44:30 +0100
-Subject: [PATCH 09/23] stub out nsUserIdleServiceGTK on wayland
+Subject: [PATCH 09/22] stub out nsUserIdleServiceGTK on wayland
 
 ---
  widget/gtk/nsUserIdleServiceGTK.cpp | 17 +++++++++++++----
