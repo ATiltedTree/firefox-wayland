@@ -1,0 +1,58 @@
+From 0fbe50a4c9dca2f88938d3c15492ed472faeb305 Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Sat, 12 Feb 2022 22:06:51 +0100
+Subject: [PATCH 19/23] mozgtk: make sure we link with xul
+
+---
+ widget/gtk/mozgtk/mozgtk.c | 14 +-------------
+ widget/gtk/nsWindow.cpp    |  7 +++++++
+ 2 files changed, 8 insertions(+), 13 deletions(-)
+
+diff --git a/widget/gtk/mozgtk/mozgtk.c b/widget/gtk/mozgtk/mozgtk.c
+index 677f9b356160a..e375cab31fd94 100644
+--- a/widget/gtk/mozgtk/mozgtk.c
++++ b/widget/gtk/mozgtk/mozgtk.c
+@@ -6,16 +6,4 @@
+ 
+ #include "mozilla/Types.h"
+ 
+-#include <X11/Xlib.h>
+-// Bug 1271100
+-// We need to trick system Cairo into not using the XShm extension due to
+-// a race condition in it that results in frequent BadAccess errors. Cairo
+-// relies upon XShmQueryExtension to initially detect if XShm is available.
+-// So we define our own stub that always indicates XShm not being present.
+-// mozgtk loads before libXext/libcairo and so this stub will take priority.
+-// Our tree usage goes through xcb and remains unaffected by this.
+-//
+-// This is also used to force libxul to depend on the mozgtk library. If we
+-// ever can remove this workaround for system Cairo, we'll need something
+-// to replace it for that purpose.
+-MOZ_EXPORT Bool XShmQueryExtension(Display* aDisplay) { return False; }
++MOZ_EXPORT void PleaseLinkWithMe() {}
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+index 7e02a5bc8a139..1f2142673e1e0 100644
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -5371,11 +5371,18 @@ void nsWindow::ReleaseGdkWindow() {
+   mSurfaceProvider.CleanupResources();
+ }
+ 
++extern "C" {
++// Make sure mozgtk gets linked
++MOZ_EXPORT void PleaseLinkWithMe();
++}
++
+ nsresult nsWindow::Create(nsIWidget* aParent, nsNativeWidget aNativeParent,
+                           const LayoutDeviceIntRect& aRect,
+                           nsWidgetInitData* aInitData) {
+   LOG("nsWindow::Create\n");
+ 
++  PleaseLinkWithMe();
++
+   // only set the base parent if we're going to be a dialog or a
+   // toplevel
+   nsIWidget* baseParent =
+-- 
+2.35.1
+
