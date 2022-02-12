@@ -1,7 +1,7 @@
-From cffc9d45ac61cf9ae0c541ac9ca1da9812892815 Mon Sep 17 00:00:00 2001
+From 6b930bcee0ba667b01b8ba9ce881192b55ac699c Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 13 Dec 2021 22:43:55 +0100
-Subject: [PATCH 20/22] disable FFVPX
+Subject: [PATCH 21/23] disable FFVPX
 
 ---
  toolkit/moz.configure | 4 ++--
