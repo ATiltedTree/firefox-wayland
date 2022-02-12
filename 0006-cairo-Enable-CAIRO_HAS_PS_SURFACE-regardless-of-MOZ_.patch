@@ -1,33 +1,47 @@
-From 64a8ecc7a241b5d042642b96e90eaa2332ce850f Mon Sep 17 00:00:00 2001
+From 9470f44f0d902c954f0fb0fc0dfd8fbfba36cd36 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:40:17 +0100
 Subject: [PATCH 06/23] cairo: Enable CAIRO_HAS_PS_SURFACE regardless of
  MOZ_X11
 
 ---
- gfx/cairo/cairo/src/cairo-features.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ gfx/cairo/cairo/src/cairo-features.h.in | 2 ++
+ old-configure.in                        | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/gfx/cairo/cairo/src/cairo-features.h b/gfx/cairo/cairo/src/cairo-features.h
-index cfed9d9a2f7b7..ad9abeaab1c7e 100644
---- a/gfx/cairo/cairo/src/cairo-features.h
-+++ b/gfx/cairo/cairo/src/cairo-features.h
-@@ -56,7 +56,6 @@
- #endif
+diff --git a/gfx/cairo/cairo/src/cairo-features.h.in b/gfx/cairo/cairo/src/cairo-features.h.in
+index 5b00b2bd3ec3e..be30f8899e569 100644
+--- a/gfx/cairo/cairo/src/cairo-features.h.in
++++ b/gfx/cairo/cairo/src/cairo-features.h.in
+@@ -57,9 +57,11 @@
  
- #ifdef MOZ_X11
--#define CAIRO_HAS_PS_SURFACE 1
- #define CAIRO_HAS_XLIB_XRENDER_SURFACE 0
- #define CAIRO_HAS_XLIB_SURFACE 1
- #endif
-@@ -78,6 +77,7 @@
- #endif
+ @SVG_SURFACE_FEATURE@
  
- #define CAIRO_HAS_TEE_SURFACE 1
-+#define CAIRO_HAS_PS_SURFACE 1
++#ifdef MOZ_X11
+ @XLIB_SURFACE_FEATURE@
  
- #ifdef USE_FC_FREETYPE
- #define CAIRO_HAS_FC_FONT 1
+ @XLIB_XRENDER_SURFACE_FEATURE@
++#endif
+ 
+ @QUARTZ_SURFACE_FEATURE@
+ 
+diff --git a/old-configure.in b/old-configure.in
+index bf86baaa53136..647d20739497a 100644
+--- a/old-configure.in
++++ b/old-configure.in
+@@ -2323,11 +2323,11 @@ if test "$OS_ARCH" = "WINNT"; then
+ fi
+ 
+ # Define macros for cairo-features.h
++PS_SURFACE_FEATURE="#define CAIRO_HAS_PS_SURFACE 1"
+ TEE_SURFACE_FEATURE="#define CAIRO_HAS_TEE_SURFACE 1"
+ if test "$MOZ_X11"; then
+     XLIB_SURFACE_FEATURE="#define CAIRO_HAS_XLIB_SURFACE 1"
+     XLIB_XRENDER_SURFACE_FEATURE="#define CAIRO_HAS_XLIB_XRENDER_SURFACE 1"
+-    PS_SURFACE_FEATURE="#define CAIRO_HAS_PS_SURFACE 1"
+ fi
+ if test "$_HAVE_FREETYPE2"; then
+     FT_FONT_FEATURE="#define CAIRO_HAS_FT_FONT 1"
 -- 
 2.35.1
 

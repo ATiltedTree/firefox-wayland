@@ -1,4 +1,4 @@
-From a8eba41e424a90ee1dfe317a63ba9652cbd4c94c Mon Sep 17 00:00:00 2001
+From f606f85f5ca6125b5717d001205d34149bf4d927 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:48:11 +0100
 Subject: [PATCH 14/23] add header needed for IsGDKWaylandDisplay
@@ -8,7 +8,7 @@ Subject: [PATCH 14/23] add header needed for IsGDKWaylandDisplay
  1 file changed, 1 insertion(+)
 
 diff --git a/widget/gtk/WindowSurfaceProvider.cpp b/widget/gtk/WindowSurfaceProvider.cpp
-index 403af8e445bc8..94ba1be0ff171 100644
+index 059aa9722e111..c23bd6e752558 100644
 --- a/widget/gtk/WindowSurfaceProvider.cpp
 +++ b/widget/gtk/WindowSurfaceProvider.cpp
 @@ -10,6 +10,7 @@

@@ -1,31 +1,77 @@
-From 035bcf9562af4ea8f552cf2f4b51bcacffffc081 Mon Sep 17 00:00:00 2001
+From 9c3aae7d5ef88858dd83780e182a3cf94ac31542 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:45:18 +0100
 Subject: [PATCH 10/23] only enable nsGTKRemoteServer when DBus is not
  available
 
 ---
- toolkit/components/remote/nsRemoteService.cpp | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ toolkit/components/remote/moz.build           | 7 +++++--
+ toolkit/components/remote/nsRemoteService.cpp | 9 +++++++--
+ 2 files changed, 12 insertions(+), 4 deletions(-)
 
+diff --git a/toolkit/components/remote/moz.build b/toolkit/components/remote/moz.build
+index 235580d6b709a..a304dd38aa3e1 100644
+--- a/toolkit/components/remote/moz.build
++++ b/toolkit/components/remote/moz.build
+@@ -15,10 +15,13 @@ if CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+     SOURCES += [
+         "nsGTKRemoteServer.cpp",
+         "nsUnixRemoteServer.cpp",
+-        "nsXRemoteClient.cpp",
+-        "nsXRemoteServer.cpp",
+         "RemoteUtils.cpp",
+     ]
++    if CONFIG["MOZ_X11"]:
++        SOURCES += [
++            "nsXRemoteClient.cpp",
++            "nsXRemoteServer.cpp",
++        ]
+     if CONFIG["MOZ_ENABLE_DBUS"]:
+         SOURCES += [
+             "nsDBusRemoteClient.cpp",
 diff --git a/toolkit/components/remote/nsRemoteService.cpp b/toolkit/components/remote/nsRemoteService.cpp
-index b2499d8191ed3..b4539f3e976c2 100644
+index 289fa506f4b20..a029b3ebe61fc 100644
 --- a/toolkit/components/remote/nsRemoteService.cpp
 +++ b/toolkit/components/remote/nsRemoteService.cpp
-@@ -12,12 +12,12 @@
+@@ -12,11 +12,12 @@
  
  #ifdef MOZ_WIDGET_GTK
  #  include "mozilla/WidgetUtilsGtk.h"
 -#  include "nsGTKRemoteServer.h"
+-#  include "nsXRemoteClient.h"
  #  ifdef MOZ_ENABLE_DBUS
  #    include "nsDBusRemoteServer.h"
  #    include "nsDBusRemoteClient.h"
- #  else
- #    include "nsXRemoteClient.h"
++#  else
 +#    include "nsGTKRemoteServer.h"
++#    include "nsXRemoteClient.h"
  #  endif
  #elif defined(XP_WIN)
  #  include "nsWinRemoteServer.h"
+@@ -111,9 +112,11 @@ RemoteResult nsRemoteService::StartClient(const char* aDesktopStartupID) {
+     client = MakeUnique<nsDBusRemoteClient>();
+   }
+ #  endif
++#  ifdef MOZ_X11
+   if (!client && useX11Remote) {
+     client = MakeUnique<nsXRemoteClient>();
+   }
++#  endif
+ #elif defined(XP_WIN)
+   client = MakeUnique<nsWinRemoteClient>();
+ #elif defined(XP_DARWIN)
+@@ -160,9 +163,11 @@ void nsRemoteService::StartupServer() {
+     mRemoteServer = MakeUnique<nsDBusRemoteServer>();
+   }
+ #  endif
++#  ifdef MOZ_X11
+   if (!mRemoteServer && useX11Remote) {
+     mRemoteServer = MakeUnique<nsGTKRemoteServer>();
+   }
++#  endif
+ #elif defined(XP_WIN)
+   mRemoteServer = MakeUnique<nsWinRemoteServer>();
+ #elif defined(XP_DARWIN)
 -- 
 2.35.1
 

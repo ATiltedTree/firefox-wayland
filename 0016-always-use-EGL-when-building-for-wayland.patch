@@ -1,4 +1,4 @@
-From e900885529d690347c9305563c81e603e4adf2bf Mon Sep 17 00:00:00 2001
+From cfd413d39d7e9a418a5386c5c74188b05bd85f9c Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:53:43 +0100
 Subject: [PATCH 16/23] always use EGL when building for wayland
@@ -8,7 +8,7 @@ Subject: [PATCH 16/23] always use EGL when building for wayland
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/gfx/gl/moz.build b/gfx/gl/moz.build
-index 03434957ccb51..16a7f4961b7e6 100644
+index 24f7fcd6beabe..8101bf00f87e2 100644
 --- a/gfx/gl/moz.build
 +++ b/gfx/gl/moz.build
 @@ -13,7 +13,7 @@ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "cocoa":

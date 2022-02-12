@@ -1,4 +1,4 @@
-From a0ebd8a79b12f3470959d0f17668e3543bf511ab Mon Sep 17 00:00:00 2001
+From 305dde13809df0d8990bc9f4f6f8f7ba5d4e8305 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:33:13 +0100
 Subject: [PATCH 02/23] move keysym2ucs to widget/gtk
@@ -23,10 +23,10 @@ similarity index 100%
 rename from widget/x11/keysym2ucs.h
 rename to widget/gtk/keysym2ucs.h
 diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
-index 1d82fc36c2ddc..e1ee137ca4737 100644
+index d288acb36fdcc..91a98cd71017e 100644
 --- a/widget/gtk/moz.build
 +++ b/widget/gtk/moz.build
-@@ -43,6 +43,7 @@ UNIFIED_SOURCES += [
+@@ -42,6 +42,7 @@ UNIFIED_SOURCES += [
      "gtk3drawing.cpp",
      "GtkCompositorWidget.cpp",
      "IMContextWrapper.cpp",
@@ -35,10 +35,10 @@ index 1d82fc36c2ddc..e1ee137ca4737 100644
      "MPRISServiceHandler.cpp",
      "NativeKeyBindings.cpp",
 diff --git a/widget/moz.build b/widget/moz.build
-index 9cef92614bce2..fbe8164fe2769 100644
+index 07e6970e56212..5a0ec16340e12 100644
 --- a/widget/moz.build
 +++ b/widget/moz.build
-@@ -271,9 +271,6 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
+@@ -258,9 +258,6 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
  
  EXPORTS.ipc = ["nsGUIEventIPC.h"]
  
@@ -50,7 +50,7 @@ index 9cef92614bce2..fbe8164fe2769 100644
          "nsBaseClipboard.cpp",
 diff --git a/widget/x11/moz.build b/widget/x11/moz.build
 deleted file mode 100644
-index 81d345c0af6c8..0000000000000
+index cef080906a225..0000000000000
 --- a/widget/x11/moz.build
 +++ /dev/null
 @@ -1,16 +0,0 @@
@@ -69,7 +69,7 @@ index 81d345c0af6c8..0000000000000
 -
 -FINAL_LIBRARY = "xul"
 -
--CFLAGS += CONFIG["MOZ_X11_CFLAGS"]
+-CXXFLAGS += CONFIG["TK_CFLAGS"]
 -- 
 2.35.1
 

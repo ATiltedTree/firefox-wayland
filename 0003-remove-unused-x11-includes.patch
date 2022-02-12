@@ -1,4 +1,4 @@
-From 97248141e1a50572b1e668d2a3a9772b9865bf91 Mon Sep 17 00:00:00 2001
+From f55465d9b35c924bee4dfd05620253bfffc07c51 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:38:49 +0100
 Subject: [PATCH 03/23] remove unused x11 includes
@@ -13,11 +13,11 @@ Subject: [PATCH 03/23] remove unused x11 includes
  6 files changed, 8 deletions(-)
 
 diff --git a/gfx/layers/client/TextureClient.cpp b/gfx/layers/client/TextureClient.cpp
-index aaec3c35103b4..65bee9f8693b9 100644
+index f02c3d61cc679..eca06e9d96bbf 100644
 --- a/gfx/layers/client/TextureClient.cpp
 +++ b/gfx/layers/client/TextureClient.cpp
-@@ -48,8 +48,6 @@
- #  include "mozilla/layers/TextureD3D11.h"
+@@ -55,8 +55,6 @@
+ #  include "mozilla/layers/TextureClientX11.h"
  #endif
  #ifdef MOZ_WAYLAND
 -#  include <gtk/gtkx.h>
@@ -26,7 +26,7 @@ index aaec3c35103b4..65bee9f8693b9 100644
  #  include "mozilla/layers/DMABUFTextureClientOGL.h"
  #  include "mozilla/widget/nsWaylandDisplay.h"
 diff --git a/gfx/webrender_bindings/RenderCompositorOGLSWGL.cpp b/gfx/webrender_bindings/RenderCompositorOGLSWGL.cpp
-index 00a6c3ef6d6d3..78c4235268870 100644
+index 6f548d1d15b94..f72cdd2e07479 100644
 --- a/gfx/webrender_bindings/RenderCompositorOGLSWGL.cpp
 +++ b/gfx/webrender_bindings/RenderCompositorOGLSWGL.cpp
 @@ -27,7 +27,6 @@
@@ -38,7 +38,7 @@ index 00a6c3ef6d6d3..78c4235268870 100644
  
  namespace mozilla {
 diff --git a/widget/gtk/MozContainer.cpp b/widget/gtk/MozContainer.cpp
-index 95832dc03d956..0d6585c2d4cda 100644
+index a1c1c2b124706..c72c05f58d07e 100644
 --- a/widget/gtk/MozContainer.cpp
 +++ b/widget/gtk/MozContainer.cpp
 @@ -9,7 +9,6 @@
@@ -47,8 +47,8 @@ index 95832dc03d956..0d6585c2d4cda 100644
  #include <gtk/gtk.h>
 -#include <gdk/gdkx.h>
  #include <stdio.h>
- #include "mozilla/WidgetUtilsGtk.h"
  
+ #ifdef ACCESSIBILITY
 diff --git a/widget/gtk/mozwayland/mozwayland.c b/widget/gtk/mozwayland/mozwayland.c
 index 1a86468b4f3d1..eee67ed3a9788 100644
 --- a/widget/gtk/mozwayland/mozwayland.c
@@ -62,10 +62,10 @@ index 1a86468b4f3d1..eee67ed3a9788 100644
  
  union wl_argument;
 diff --git a/widget/gtk/nsClipboard.cpp b/widget/gtk/nsClipboard.cpp
-index 8fdd8e38dc879..add4e65ea755c 100644
+index f99bef9422041..079705bd3be56 100644
 --- a/widget/gtk/nsClipboard.cpp
 +++ b/widget/gtk/nsClipboard.cpp
-@@ -37,7 +37,6 @@
+@@ -32,7 +32,6 @@
  #include "imgIContainer.h"
  
  #include <gtk/gtk.h>
@@ -74,7 +74,7 @@ index 8fdd8e38dc879..add4e65ea755c 100644
  #include "mozilla/Encoding.h"
  
 diff --git a/widget/gtk/nsDragService.cpp b/widget/gtk/nsDragService.cpp
-index ea57c4f3c0ec6..5355fbe467df0 100644
+index 6983dc1b2cf43..a1007715de230 100644
 --- a/widget/gtk/nsDragService.cpp
 +++ b/widget/gtk/nsDragService.cpp
 @@ -23,7 +23,6 @@
@@ -85,7 +85,7 @@ index ea57c4f3c0ec6..5355fbe467df0 100644
  #include "nsCRT.h"
  #include "mozilla/BasicEvents.h"
  #include "mozilla/Services.h"
-@@ -34,7 +33,6 @@
+@@ -33,7 +32,6 @@
  #include "mozilla/WidgetUtilsGtk.h"
  #include "GRefPtr.h"
  

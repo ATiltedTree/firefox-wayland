@@ -1,4 +1,4 @@
-From ae4dc2ea6058b2a6b6284d871a4630b87073f870 Mon Sep 17 00:00:00 2001
+From a9119e119198253acaf7a601a2ea53c24dc19cd1 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:08:13 +0100
 Subject: [PATCH 22/23] enable webrender compositor by default
@@ -9,10 +9,10 @@ Subject: [PATCH 22/23] enable webrender compositor by default
  2 files changed, 1 insertion(+), 5 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
-index 4360d62d5cb16..9112b9f511162 100644
+index 0df83ac0609ce..548729133b92f 100644
 --- a/gfx/thebes/gfxPlatformGtk.cpp
 +++ b/gfx/thebes/gfxPlatformGtk.cpp
-@@ -233,6 +233,7 @@ void gfxPlatformGtk::InitWebRenderConfig() {
+@@ -235,6 +235,7 @@ void gfxPlatformGtk::InitWebRenderConfig() {
    }
  
    FeatureState& feature = gfxConfig::GetFeature(Feature::WEBRENDER_COMPOSITOR);
@@ -21,11 +21,11 @@ index 4360d62d5cb16..9112b9f511162 100644
      if (!(gfxConfig::IsEnabled(Feature::WEBRENDER) ||
            gfxConfig::IsEnabled(Feature::WEBRENDER_SOFTWARE))) {
 diff --git a/widget/gtk/GfxInfo.cpp b/widget/gtk/GfxInfo.cpp
-index 92c54e4764861..f8319506fa0e5 100644
+index b7358e80b6554..729760c198077 100644
 --- a/widget/gtk/GfxInfo.cpp
 +++ b/widget/gtk/GfxInfo.cpp
-@@ -811,11 +811,6 @@ const nsTArray<GfxDriverInfo>& GfxInfo::GetGfxDriverInfo() {
- 
+@@ -816,11 +816,6 @@ const nsTArray<GfxDriverInfo>& GfxInfo::GetGfxDriverInfo() {
+ #endif
      ////////////////////////////////////
      // FEATURE_WEBRENDER_COMPOSITOR
 -    APPEND_TO_DRIVER_BLOCKLIST(
