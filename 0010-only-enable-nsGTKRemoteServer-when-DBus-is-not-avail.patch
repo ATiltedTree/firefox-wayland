@@ -1,21 +1,23 @@
-From 9c3aae7d5ef88858dd83780e182a3cf94ac31542 Mon Sep 17 00:00:00 2001
+From ff47d6b6f2e9c51376bdcaed6ad597adecb523ff Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:45:18 +0100
 Subject: [PATCH 10/22] only enable nsGTKRemoteServer when DBus is not
  available
 
 ---
- toolkit/components/remote/moz.build           | 7 +++++--
+ toolkit/components/remote/moz.build           | 9 ++++++---
  toolkit/components/remote/nsRemoteService.cpp | 9 +++++++--
- 2 files changed, 12 insertions(+), 4 deletions(-)
+ 2 files changed, 13 insertions(+), 5 deletions(-)
 
 diff --git a/toolkit/components/remote/moz.build b/toolkit/components/remote/moz.build
-index 235580d6b709a..a304dd38aa3e1 100644
+index 235580d6b709a..b407dce197451 100644
 --- a/toolkit/components/remote/moz.build
 +++ b/toolkit/components/remote/moz.build
-@@ -15,10 +15,13 @@ if CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+@@ -13,12 +13,15 @@ SOURCES += [
+ 
+ if CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
      SOURCES += [
-         "nsGTKRemoteServer.cpp",
+-        "nsGTKRemoteServer.cpp",
          "nsUnixRemoteServer.cpp",
 -        "nsXRemoteClient.cpp",
 -        "nsXRemoteServer.cpp",
@@ -23,6 +25,7 @@ index 235580d6b709a..a304dd38aa3e1 100644
      ]
 +    if CONFIG["MOZ_X11"]:
 +        SOURCES += [
++            "nsGTKRemoteServer.cpp",
 +            "nsXRemoteClient.cpp",
 +            "nsXRemoteServer.cpp",
 +        ]

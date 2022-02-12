@@ -1,4 +1,4 @@
-From 74ccb410848fe5be299b4c5ab976dce426fec8a1 Mon Sep 17 00:00:00 2001
+From 0825c9106999c863324477fb1bb43ca9b1d5b48b Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:47:23 +0100
 Subject: [PATCH 13/22] enable OOP Compositing regardless of X11

@@ -1,4 +1,4 @@
-From c62ab4b4878660c326459cbacf1efecff3b9c172 Mon Sep 17 00:00:00 2001
+From fdfefa50312ffdaf1d73358531112842c9aaf33e Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:08:13 +0100
 Subject: [PATCH 21/22] enable webrender compositor by default

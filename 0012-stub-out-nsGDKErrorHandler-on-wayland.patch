@@ -1,4 +1,4 @@
-From 0ba9dc28d760405c8c1618db080b19886f4c8f47 Mon Sep 17 00:00:00 2001
+From 7703b3846d90378f45b0010f883a394323fb31f7 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:46:41 +0100
 Subject: [PATCH 12/22] stub out nsGDKErrorHandler on wayland
