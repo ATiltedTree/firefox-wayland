@@ -1,7 +1,7 @@
 From 2f37dad8ae18e1a12559fe54f9d33b8a5a08ca6f Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
-Subject: [PATCH 18/23] stub out x11 specific stuff
+Subject: [PATCH 18/22] stub out x11 specific stuff
 
 ---
  gfx/layers/ipc/CompositorBridgeParent.cpp |  4 +-

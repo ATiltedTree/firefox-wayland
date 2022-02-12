@@ -1,7 +1,7 @@
 From 9ad284f3f4a1c3fdee20744af9a984585cbae35d Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:09:54 +0100
-Subject: [PATCH 04/23] libwebrtc: allow building without X11
+Subject: [PATCH 04/22] libwebrtc: allow building without X11
 
 ---
  .../desktop_capture_generic_gn/moz.build      | 35 ++++++++-----------
