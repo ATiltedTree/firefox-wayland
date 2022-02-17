@@ -1,7 +1,7 @@
 From 8cef551de26c7a97a9d333ebd8e38e52bcad0970 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
-Subject: [PATCH 18/23] stub out x11 specific stuff
+Subject: [PATCH 18/20] stub out x11 specific stuff
 
 ---
  gfx/thebes/gfxPlatformGtk.cpp      |  4 +-
