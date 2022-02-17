@@ -1,4 +1,4 @@
-From 383039d3434f2549c0119e67db65f12cc9f34b6b Mon Sep 17 00:00:00 2001
+From 7ad12d3bc5984c0ebee803bf5a180f335be85281 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:48:11 +0100
 Subject: [PATCH 14/23] add header needed for IsGDKWaylandDisplay

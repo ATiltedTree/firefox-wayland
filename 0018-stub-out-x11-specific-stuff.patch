@@ -1,4 +1,4 @@
-From b8a744805218f49adc5c08042e1db76c3281b42a Mon Sep 17 00:00:00 2001
+From 8cef551de26c7a97a9d333ebd8e38e52bcad0970 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
 Subject: [PATCH 18/23] stub out x11 specific stuff
@@ -12,9 +12,9 @@ Subject: [PATCH 18/23] stub out x11 specific stuff
  widget/gtk/nsGtkKeyUtils.cpp       | 31 +++++++++---
  widget/gtk/nsGtkKeyUtils.h         | 14 +++++-
  widget/gtk/nsPrintDialogGTK.cpp    |  9 ++--
- widget/gtk/nsWindow.cpp            | 76 ++++++++++++++++++++----------
+ widget/gtk/nsWindow.cpp            | 77 ++++++++++++++++++++----------
  widget/gtk/nsWindow.h              |  8 +++-
- 10 files changed, 116 insertions(+), 46 deletions(-)
+ 10 files changed, 116 insertions(+), 47 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
 index 1b46a2aab890f..4360d62d5cb16 100644
@@ -392,7 +392,7 @@ index 8fb56543b71ee..9a562eb1245ad 100644
      WaylandWindowHandleExportedData* data;
  
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
-index 84566449ab51b..7e02a5bc8a139 100644
+index 59e01f0feaaed..9d1287777315a 100644
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
 @@ -58,7 +58,6 @@
@@ -667,22 +667,23 @@ index 84566449ab51b..7e02a5bc8a139 100644
  }
  
  void nsWindow::DisableRenderingToWindow() {
-@@ -5236,8 +5263,12 @@ void nsWindow::DisableRenderingToWindow() {
+@@ -5236,9 +5263,12 @@ void nsWindow::DisableRenderingToWindow() {
    }
  }
  
 -Window nsWindow::GetX11Window() {
--  return GdkIsX11Display() ? gdk_x11_window_get_xid(mGdkWindow) : X11None;
+-  return GdkIsX11Display() && mGdkWindow ? gdk_x11_window_get_xid(mGdkWindow)
+-                                         : X11None;
 +uintptr_t nsWindow::GetX11Window() {
 +#ifdef MOZ_X11
-+  return (uintptr_t)(GdkIsX11Display() ? gdk_x11_window_get_xid(mGdkWindow) : X11None);
++  return (uintptr_t)(GdkIsX11Display() && mGdkWindow ? gdk_x11_window_get_xid(mGdkWindow) : X11None);
 +#else
 +  return (uintptr_t) nullptr;
 +#endif
  }
  
  void nsWindow::EnsureGdkWindow() {
-@@ -5324,9 +5355,6 @@ void nsWindow::ConfigureGdkWindow() {
+@@ -5324,9 +5354,6 @@ void nsWindow::ConfigureGdkWindow() {
    if (mHasMappedToplevel) {
      EnsureGrabs();
    }
@@ -692,7 +693,7 @@ index 84566449ab51b..7e02a5bc8a139 100644
  }
  
  void nsWindow::ReleaseGdkWindow() {
-@@ -5865,10 +5893,6 @@ nsresult nsWindow::Create(nsIWidget* aParent, nsNativeWidget aNativeParent,
+@@ -5865,10 +5892,6 @@ nsresult nsWindow::Create(nsIWidget* aParent, nsNativeWidget aNativeParent,
                     nullptr);
  
    LOG("  nsWindow type %d %s\n", mWindowType, mIsPIPWindow ? "PIP window" : "");
@@ -703,7 +704,7 @@ index 84566449ab51b..7e02a5bc8a139 100644
  
    // Set default application name when it's empty.
    if (mGtkWindowAppName.IsEmpty()) {
-@@ -6720,6 +6744,7 @@ void nsWindow::UpdateTitlebarTransparencyBitmap() {
+@@ -6720,6 +6743,7 @@ void nsWindow::UpdateTitlebarTransparencyBitmap() {
      cairo_surface_destroy(surface);
    }
  
@@ -711,7 +712,7 @@ index 84566449ab51b..7e02a5bc8a139 100644
    if (!mNeedsShow) {
      Display* xDisplay = GDK_WINDOW_XDISPLAY(mGdkWindow);
      Window xDrawable = GDK_WINDOW_XID(mGdkWindow);
-@@ -6740,6 +6765,7 @@ void nsWindow::UpdateTitlebarTransparencyBitmap() {
+@@ -6740,6 +6764,7 @@ void nsWindow::UpdateTitlebarTransparencyBitmap() {
  
      XFreePixmap(xDisplay, maskPixmap);
    }
@@ -719,7 +720,7 @@ index 84566449ab51b..7e02a5bc8a139 100644
  }
  
  void nsWindow::GrabPointer(guint32 aTime) {
-@@ -7013,7 +7039,7 @@ static bool IsFullscreenSupported(GtkWidget* aShell) {
+@@ -7013,7 +7038,7 @@ static bool IsFullscreenSupported(GtkWidget* aShell) {
    GdkScreen* screen = gtk_widget_get_screen(aShell);
    GdkAtom atom = gdk_atom_intern("_NET_WM_STATE_FULLSCREEN", FALSE);
    return gdk_x11_screen_supports_net_wm_hint(screen, atom);
@@ -728,7 +729,7 @@ index 84566449ab51b..7e02a5bc8a139 100644
    return true;
  #endif
  }
-@@ -8297,6 +8323,7 @@ bool nsWindow::GetDragInfo(WidgetMouseEvent* aMouseEvent, GdkWindow** aWindow,
+@@ -8297,6 +8322,7 @@ bool nsWindow::GetDragInfo(WidgetMouseEvent* aMouseEvent, GdkWindow** aWindow,
      return false;
    }
  
@@ -736,7 +737,7 @@ index 84566449ab51b..7e02a5bc8a139 100644
    if (GdkIsX11Display()) {
      // Workaround for https://bugzilla.gnome.org/show_bug.cgi?id=789054
      // To avoid crashes disable double-click on WM without _NET_WM_MOVERESIZE.
-@@ -8312,6 +8339,7 @@ bool nsWindow::GetDragInfo(WidgetMouseEvent* aMouseEvent, GdkWindow** aWindow,
+@@ -8312,6 +8338,7 @@ bool nsWindow::GetDragInfo(WidgetMouseEvent* aMouseEvent, GdkWindow** aWindow,
        }
      }
    }
