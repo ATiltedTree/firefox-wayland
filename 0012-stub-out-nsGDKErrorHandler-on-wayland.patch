@@ -1,7 +1,7 @@
 From 7703b3846d90378f45b0010f883a394323fb31f7 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:46:41 +0100
-Subject: [PATCH 12/23] stub out nsGDKErrorHandler on wayland
+Subject: [PATCH 12/20] stub out nsGDKErrorHandler on wayland
 
 ---
  toolkit/xre/nsGDKErrorHandler.cpp | 15 +++++++++++++--

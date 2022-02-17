@@ -1,7 +1,7 @@
 From 3453382f13c506ee2ceb9d6bb669e7f0777b37a6 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:41:56 +0100
-Subject: [PATCH 07/23] enable wayland glcontext regardless of X11
+Subject: [PATCH 07/20] enable wayland glcontext regardless of X11
 
 ---
  gfx/gl/GLContextProvider.h          | 13 +++++++------
