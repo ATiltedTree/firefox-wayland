@@ -1,4 +1,4 @@
-From d0f0e0d2377af7ac82a507883ac7427b65d61edd Mon Sep 17 00:00:00 2001
+From 6020e7386b2beaa889406dac441ab44466ffa938 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
 Subject: [PATCH 16/18] stub out x11 specific stuff
@@ -16,7 +16,7 @@ Subject: [PATCH 16/18] stub out x11 specific stuff
  9 files changed, 113 insertions(+), 46 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
-index f42cfaec4471d..bab4b119186ea 100644
+index b90bfe9b43886..4a487e0b78518 100644
 --- a/gfx/thebes/gfxPlatformGtk.cpp
 +++ b/gfx/thebes/gfxPlatformGtk.cpp
 @@ -31,7 +31,6 @@
