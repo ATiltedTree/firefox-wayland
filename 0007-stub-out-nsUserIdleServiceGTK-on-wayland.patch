@@ -1,4 +1,4 @@
-From d9088e73a2328e2915fe76d15bbf66d25048bb2d Mon Sep 17 00:00:00 2001
+From 87a64a42119e28be365fc6bbf216b1ec46b4857a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:44:30 +0100
 Subject: [PATCH 07/18] stub out nsUserIdleServiceGTK on wayland

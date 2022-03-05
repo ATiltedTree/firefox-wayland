@@ -1,4 +1,4 @@
-From 8ebb7c712a2995ec209f5e6b622d96faf82ff0b5 Mon Sep 17 00:00:00 2001
+From d0f0e0d2377af7ac82a507883ac7427b65d61edd Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
 Subject: [PATCH 16/18] stub out x11 specific stuff
@@ -16,7 +16,7 @@ Subject: [PATCH 16/18] stub out x11 specific stuff
  9 files changed, 113 insertions(+), 46 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
-index 1b46a2aab890f..18f504426e41c 100644
+index f42cfaec4471d..bab4b119186ea 100644
 --- a/gfx/thebes/gfxPlatformGtk.cpp
 +++ b/gfx/thebes/gfxPlatformGtk.cpp
 @@ -31,7 +31,6 @@
@@ -27,7 +27,7 @@ index 1b46a2aab890f..18f504426e41c 100644
  #include "mozilla/Monitor.h"
  #include "mozilla/Preferences.h"
  #include "mozilla/StaticPrefs_gfx.h"
-@@ -52,6 +51,7 @@
+@@ -53,6 +52,7 @@
  #  include "GLXLibrary.h"
  #  include "mozilla/X11Util.h"
  #  include "SoftwareVsyncSource.h"

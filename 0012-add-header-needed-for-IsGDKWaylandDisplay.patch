@@ -1,12 +1,25 @@
-From ad5dc0a07374950cdeddfcf97f9053942ad4be02 Mon Sep 17 00:00:00 2001
+From dfb02fc92d56479c4c2ffcc28ea7f279134daaef Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:48:11 +0100
 Subject: [PATCH 12/18] add header needed for IsGDKWaylandDisplay
 
 ---
+ gfx/thebes/gfxPlatformGtk.cpp        | 1 +
  widget/gtk/WindowSurfaceProvider.cpp | 1 +
- 1 file changed, 1 insertion(+)
+ 2 files changed, 2 insertions(+)
 
+diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
+index 1b46a2aab890f..f42cfaec4471d 100644
+--- a/gfx/thebes/gfxPlatformGtk.cpp
++++ b/gfx/thebes/gfxPlatformGtk.cpp
+@@ -36,6 +36,7 @@
+ #include "mozilla/Preferences.h"
+ #include "mozilla/StaticPrefs_gfx.h"
+ #include "mozilla/StaticPrefs_layers.h"
++#include "mozilla/widget/WidgetUtilsGtk.h"
+ #include "nsAppRunner.h"
+ #include "nsIGfxInfo.h"
+ #include "nsMathUtils.h"
 diff --git a/widget/gtk/WindowSurfaceProvider.cpp b/widget/gtk/WindowSurfaceProvider.cpp
 index 403af8e445bc8..94ba1be0ff171 100644
 --- a/widget/gtk/WindowSurfaceProvider.cpp
