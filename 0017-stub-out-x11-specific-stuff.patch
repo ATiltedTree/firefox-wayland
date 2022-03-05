@@ -1,11 +1,10 @@
-From 8cef551de26c7a97a9d333ebd8e38e52bcad0970 Mon Sep 17 00:00:00 2001
+From 1523d25401c31331d3d5c750df902e5049bb1f02 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
-Subject: [PATCH 18/20] stub out x11 specific stuff
+Subject: [PATCH 17/19] stub out x11 specific stuff
 
 ---
- gfx/thebes/gfxPlatformGtk.cpp      |  4 +-
- gfx/thebes/gfxPlatformGtk.h        |  2 +-
+ gfx/thebes/gfxPlatformGtk.cpp      |  2 +-
  widget/gtk/GtkCompositorWidget.cpp |  4 +-
  widget/gtk/TaskbarProgress.cpp     |  2 -
  widget/gtk/nsClipboard.cpp         | 12 +++--
@@ -14,10 +13,10 @@ Subject: [PATCH 18/20] stub out x11 specific stuff
  widget/gtk/nsPrintDialogGTK.cpp    |  9 ++--
  widget/gtk/nsWindow.cpp            | 77 ++++++++++++++++++++----------
  widget/gtk/nsWindow.h              |  8 +++-
- 10 files changed, 116 insertions(+), 47 deletions(-)
+ 9 files changed, 113 insertions(+), 46 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
-index 1b46a2aab890f..4360d62d5cb16 100644
+index 1b46a2aab890f..18f504426e41c 100644
 --- a/gfx/thebes/gfxPlatformGtk.cpp
 +++ b/gfx/thebes/gfxPlatformGtk.cpp
 @@ -31,7 +31,6 @@
@@ -36,29 +35,6 @@ index 1b46a2aab890f..4360d62d5cb16 100644
  
  /* Undefine the Status from Xlib since it will conflict with system headers on
   * OSX */
-@@ -100,7 +100,9 @@ gfxPlatformGtk::gfxPlatformGtk() {
-   }
- 
-   mMaxGenericSubstitutions = UNINITIALIZED_VALUE;
-+#ifdef MOZ_X11
-   mIsX11Display = gfxPlatform::IsHeadless() ? false : GdkIsX11Display();
-+#endif
-   if (XRE_IsParentProcess()) {
-     InitX11EGLConfig();
-     if (IsWaylandDisplay() || gfxConfig::IsEnabled(Feature::X11_EGL)) {
-diff --git a/gfx/thebes/gfxPlatformGtk.h b/gfx/thebes/gfxPlatformGtk.h
-index 3a03f40dfcfea..5a8d5f1189fac 100644
---- a/gfx/thebes/gfxPlatformGtk.h
-+++ b/gfx/thebes/gfxPlatformGtk.h
-@@ -78,7 +78,7 @@ class gfxPlatformGtk final : public gfxPlatform {
-  private:
-   nsTArray<uint8_t> GetPlatformCMSOutputProfileData() override;
- 
--  bool mIsX11Display;
-+  bool mIsX11Display = false;
- };
- 
- #endif /* GFX_PLATFORM_GTK_H */
 diff --git a/widget/gtk/GtkCompositorWidget.cpp b/widget/gtk/GtkCompositorWidget.cpp
 index 89a8248bc0b90..2454006d0dd7b 100644
 --- a/widget/gtk/GtkCompositorWidget.cpp

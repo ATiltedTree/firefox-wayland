@@ -1,7 +1,7 @@
-From a4b09696721b60a1020ece07a205ca2168379f8f Mon Sep 17 00:00:00 2001
+From d153448b0bb66838795d783476a3d8697486013a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:33:13 +0100
-Subject: [PATCH 02/20] move keysym2ucs to widget/gtk
+Subject: [PATCH 02/19] move keysym2ucs to widget/gtk
 
 ---
  widget/{x11 => gtk}/keysym2ucs.c |  0
