@@ -1,7 +1,7 @@
-From ce2ee5f3c87619096229751a461bdeb4bb06bb70 Mon Sep 17 00:00:00 2001
+From a7a344f3c79e1cbf78dc1cf4c2374997b11a2d09 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:45:18 +0100
-Subject: [PATCH 09/19] only enable nsGTKRemoteServer when DBus is not
+Subject: [PATCH 08/18] only enable nsGTKRemoteServer when DBus is not
  available
 
 ---

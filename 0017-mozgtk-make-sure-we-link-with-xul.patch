@@ -1,7 +1,7 @@
-From cc011fd830cb42f8e1fcd8a407d1cca7241b4ef3 Mon Sep 17 00:00:00 2001
+From 708f6b6f1de2b1914bdbaf453e5b4d933c5ee109 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sat, 12 Feb 2022 22:06:51 +0100
-Subject: [PATCH 18/19] mozgtk: make sure we link with xul
+Subject: [PATCH 17/18] mozgtk: make sure we link with xul
 
 ---
  widget/gtk/mozgtk/mozgtk.c | 14 +-------------

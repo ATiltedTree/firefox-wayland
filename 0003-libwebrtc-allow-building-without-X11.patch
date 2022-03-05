@@ -1,7 +1,7 @@
-From f51240875ebf673c7dfce9488ae88d108aebc509 Mon Sep 17 00:00:00 2001
+From b34fc9a40a5c5967f38752465796eb0b49c3b52e Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:09:54 +0100
-Subject: [PATCH 04/19] libwebrtc: allow building without X11
+Subject: [PATCH 03/18] libwebrtc: allow building without X11
 
 ---
  .../video_engine/desktop_device_info_x11.cc   |  4 ---

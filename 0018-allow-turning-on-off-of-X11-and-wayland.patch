@@ -1,7 +1,7 @@
-From ef165e88195dd115dd0ba20abb37a739feaf4ecb Mon Sep 17 00:00:00 2001
+From 4e6d68d49052c76f6e9446c4ee9519f4a615d3a6 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
-Subject: [PATCH 19/19] allow turning on/off of X11 and wayland
+Subject: [PATCH 18/18] allow turning on/off of X11 and wayland
 
 ---
  python/mozboot/mozboot/gentoo.py |  1 -
@@ -21,7 +21,7 @@ index a33677a0a19f5..cb9e3dd3381cd 100644
          )
  
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index e06f94600bdf2..c3793ec1756a4 100644
+index 539433a6ef886..8599a3b8388d6 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
 @@ -286,7 +286,7 @@ def toolkit_choices(target):

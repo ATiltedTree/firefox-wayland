@@ -1,7 +1,7 @@
-From bd23bb7c3d362989285df9d720040f71873f7c86 Mon Sep 17 00:00:00 2001
+From fa72ab2f68a6a032374b0d97717742fe70a020ee Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 12:31:16 +0100
-Subject: [PATCH 16/19] If only wayland is enabled, always use it regardless of
+Subject: [PATCH 15/18] If only wayland is enabled, always use it regardless of
  MOZ_ENABLE_WAYLAND
 
 ---
