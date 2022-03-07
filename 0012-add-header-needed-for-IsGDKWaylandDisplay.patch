@@ -1,4 +1,4 @@
-From c87b8ddb833c4a71c2c3c28d929327f342c43a48 Mon Sep 17 00:00:00 2001
+From a984f139c0ecdf088de4ce881927a5de40cf6cd5 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:48:11 +0100
 Subject: [PATCH 12/18] add header needed for IsGDKWaylandDisplay
@@ -21,7 +21,7 @@ index 1b46a2aab890f..b90bfe9b43886 100644
  #include "nsIGfxInfo.h"
  #include "nsMathUtils.h"
 diff --git a/widget/gtk/WindowSurfaceProvider.cpp b/widget/gtk/WindowSurfaceProvider.cpp
-index 403af8e445bc8..94ba1be0ff171 100644
+index c0044b53c48a9..343311a91e03e 100644
 --- a/widget/gtk/WindowSurfaceProvider.cpp
 +++ b/widget/gtk/WindowSurfaceProvider.cpp
 @@ -10,6 +10,7 @@

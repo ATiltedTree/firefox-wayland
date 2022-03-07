@@ -1,4 +1,4 @@
-From cf198bdca4cf3ce6ce979b7d388363d5a94dbfe2 Mon Sep 17 00:00:00 2001
+From 03c4b9699345b360d0da3f53df2ef3bd64a16702 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
 Subject: [PATCH 18/18] allow turning on/off of X11 and wayland
@@ -21,10 +21,10 @@ index a33677a0a19f5..cb9e3dd3381cd 100644
          )
  
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 539433a6ef886..8599a3b8388d6 100644
+index b514193512f78..2488320e3f7ec 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
-@@ -286,7 +286,7 @@ def toolkit_choices(target):
+@@ -285,7 +285,7 @@ def toolkit_choices(target):
      elif target.os == "Android":
          return ("cairo-android",)
      else:
@@ -33,7 +33,7 @@ index 539433a6ef886..8599a3b8388d6 100644
  
  
  @depends(toolkit_choices)
-@@ -338,23 +338,24 @@ def toolkit_gtk(toolkit):
+@@ -337,23 +337,24 @@ def toolkit_gtk(toolkit):
  
  # Wayland support
  # ==============================================================
@@ -70,7 +70,7 @@ index 539433a6ef886..8599a3b8388d6 100644
  
  # GL Provider
  # ==============================================================
-@@ -376,7 +377,7 @@ def gl_provider_define(provider):
+@@ -375,7 +376,7 @@ def gl_provider_define(provider):
  set_define("MOZ_GL_PROVIDER", gl_provider_define)
  
  
@@ -79,7 +79,7 @@ index 539433a6ef886..8599a3b8388d6 100644
  def gl_default_provider(value, wayland, toolkit_gtk):
      if value:
          return value
-@@ -1197,11 +1198,20 @@ set_define("MOZ_RAW", depends_if("--enable-raw")(lambda _: True))
+@@ -1195,11 +1196,20 @@ set_define("MOZ_RAW", depends_if("--enable-raw")(lambda _: True))
  
  # X11
  # ==============================================================
@@ -103,7 +103,7 @@ index 539433a6ef886..8599a3b8388d6 100644
  def x11_libs(webrtc):
      libs = [
          "x11",
-@@ -1225,8 +1235,8 @@ def x11_libs(webrtc):
+@@ -1223,8 +1233,8 @@ def x11_libs(webrtc):
      return libs
  
  

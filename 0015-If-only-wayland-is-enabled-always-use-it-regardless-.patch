@@ -1,18 +1,18 @@
-From c5ca5c851857060187ab584b45f40a02c7822a7a Mon Sep 17 00:00:00 2001
+From 52d6e729abba0f3238d1943c010202291de3f2a2 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 12:31:16 +0100
 Subject: [PATCH 15/18] If only wayland is enabled, always use it regardless of
  MOZ_ENABLE_WAYLAND
 
 ---
- toolkit/xre/nsAppRunner.cpp | 4 ++++
- 1 file changed, 4 insertions(+)
+ toolkit/xre/nsAppRunner.cpp | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/toolkit/xre/nsAppRunner.cpp b/toolkit/xre/nsAppRunner.cpp
-index ce001e93821f3..80d1694a118f5 100644
+index d99749305db29..564b335a1ed59 100644
 --- a/toolkit/xre/nsAppRunner.cpp
 +++ b/toolkit/xre/nsAppRunner.cpp
-@@ -4116,6 +4116,7 @@ static void PR_CALLBACK ReadAheadDlls_ThreadStart(void* arg) {
+@@ -4493,6 +4493,7 @@ static void PR_CALLBACK ReadAheadDlls_ThreadStart(void* arg) {
  
  #if defined(MOZ_WAYLAND)
  bool IsWaylandEnabled() {
@@ -20,16 +20,28 @@ index ce001e93821f3..80d1694a118f5 100644
    const char* waylandDisplay = PR_GetEnv("WAYLAND_DISPLAY");
    if (!waylandDisplay) {
      return false;
-@@ -4145,6 +4146,9 @@ bool IsWaylandEnabled() {
-         "Running Wayland backend on Gtk3 < 3.22. Expect issues/glitches");
+@@ -4513,7 +4514,7 @@ bool IsWaylandEnabled() {
+       return true;
+     }
    }
-   return enabled;
+-#  ifdef EARLY_BETA_OR_EARLIER
++#   ifdef EARLY_BETA_OR_EARLIER
+   // Enable by default when we're running on a recent enough GTK version. We'd
+   // like to check further details like compositor version and so on ideally
+   // to make sure we don't enable it on old Mutter or what not, but we can't,
+@@ -4525,8 +4526,11 @@ bool IsWaylandEnabled() {
+   // GNOME / KDE  / known-good-desktop environments by checking
+   // XDG_CURRENT_DESKTOP or so...
+   return !gtk_check_version(3, 24, 30);
+-#  else
++#   else
+   return false;
++#   endif
 +#  else
 +  return true;
-+#  endif
+ #  endif
  }
  #endif
- 
 -- 
 2.35.1
 

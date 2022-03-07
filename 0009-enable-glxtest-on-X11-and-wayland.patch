@@ -1,4 +1,4 @@
-From e2925653686b4a209140a1808b744ee61157d44a Mon Sep 17 00:00:00 2001
+From c350b25de24274e14a5c5e0095ee83d6f4408def Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:46:17 +0100
 Subject: [PATCH 09/18] enable glxtest on X11 and wayland

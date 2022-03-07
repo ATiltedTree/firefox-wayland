@@ -1,35 +1,19 @@
-From c1436b78af3145a6f7767ec90d16e5b1ea8f2a84 Mon Sep 17 00:00:00 2001
+From 6e8f07ee0ce001e57d57c00828ce67fd9cf8de1d Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:09:54 +0100
 Subject: [PATCH 03/18] libwebrtc: allow building without X11
 
 ---
- .../video_engine/desktop_device_info_x11.cc   |  4 ---
  .../desktop_capture_generic_gn/moz.build      | 34 ++++++++-----------
  .../desktop_capture_gn/moz.build              | 10 ------
  third_party/libwebrtc/webrtc_gn/moz.build     |  9 -----
- 4 files changed, 14 insertions(+), 43 deletions(-)
+ 3 files changed, 14 insertions(+), 39 deletions(-)
 
-diff --git a/dom/media/systemservices/video_engine/desktop_device_info_x11.cc b/dom/media/systemservices/video_engine/desktop_device_info_x11.cc
-index a9f88f0f9033d..7cfe45533cf42 100644
---- a/dom/media/systemservices/video_engine/desktop_device_info_x11.cc
-+++ b/dom/media/systemservices/video_engine/desktop_device_info_x11.cc
-@@ -7,10 +7,6 @@
- 
- #include <inttypes.h>
- 
--#if !defined(WEBRTC_USE_X11) || !defined(MOZ_X11)
--#  error Bad build setup, some X11 defines are missing
--#endif
--
- namespace webrtc {
- 
- DesktopDeviceInfo* DesktopDeviceInfoImpl::Create() {
 diff --git a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
-index a5cf9234d1228..ddce223c1992d 100644
+index 617680177f8b2..3823422186f10 100644
 --- a/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
 +++ b/third_party/libwebrtc/modules/desktop_capture/desktop_capture_generic_gn/moz.build
-@@ -93,11 +93,9 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -92,11 +92,9 @@ if CONFIG["OS_TARGET"] == "Linux":
      DEFINES["USE_NSS_CERTS"] = "1"
      DEFINES["USE_OZONE"] = "1"
      DEFINES["USE_UDEV"] = True
@@ -41,7 +25,7 @@ index a5cf9234d1228..ddce223c1992d 100644
      DEFINES["_FILE_OFFSET_BITS"] = "64"
      DEFINES["_GNU_SOURCE"] = True
      DEFINES["_LARGEFILE64_SOURCE"] = True
-@@ -115,14 +113,6 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -114,14 +112,6 @@ if CONFIG["OS_TARGET"] == "Linux":
      OS_LIBS += [
          "dl",
          "rt",
@@ -56,7 +40,7 @@ index a5cf9234d1228..ddce223c1992d 100644
      ]
  
      SOURCES += [
-@@ -130,22 +120,26 @@ if CONFIG["OS_TARGET"] == "Linux":
+@@ -129,22 +119,26 @@ if CONFIG["OS_TARGET"] == "Linux":
      ]
  
      UNIFIED_SOURCES += [
