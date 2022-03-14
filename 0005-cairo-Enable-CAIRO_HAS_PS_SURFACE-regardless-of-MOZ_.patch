@@ -1,4 +1,4 @@
-From 01f765843dccece0fcb29f01b1b4509b82b67412 Mon Sep 17 00:00:00 2001
+From b84ea6c55f9ecf06a1d35432fc89791c62d3a54e Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:40:17 +0100
 Subject: [PATCH 05/18] cairo: Enable CAIRO_HAS_PS_SURFACE regardless of

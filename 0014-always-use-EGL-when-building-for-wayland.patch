@@ -1,4 +1,4 @@
-From e24ee6bd2924148fde758ad543f7fb86480bf388 Mon Sep 17 00:00:00 2001
+From a84c10851d12f0a65a4d46123569eef5f6939587 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:53:43 +0100
 Subject: [PATCH 14/18] always use EGL when building for wayland

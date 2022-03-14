@@ -1,4 +1,4 @@
-From 4ac226ddd904afa801e93e996b3204c241744c78 Mon Sep 17 00:00:00 2001
+From f077eb8329aeee5724243e7e16977bcd42da01e5 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sat, 12 Feb 2022 22:06:51 +0100
 Subject: [PATCH 17/18] mozgtk: make sure we link with xul

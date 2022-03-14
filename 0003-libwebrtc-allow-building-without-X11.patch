@@ -1,4 +1,4 @@
-From 6e8f07ee0ce001e57d57c00828ce67fd9cf8de1d Mon Sep 17 00:00:00 2001
+From e7f0ecfada158e2415ba62c07f654f79e1b405f4 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:09:54 +0100
 Subject: [PATCH 03/18] libwebrtc: allow building without X11
