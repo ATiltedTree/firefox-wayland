@@ -1,4 +1,4 @@
-From 326f6b92319e581a936371d18c3d032f7712474f Mon Sep 17 00:00:00 2001
+From a9a9354110275db464ee841afbbb4c5bf0416752 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:43:38 +0100
 Subject: [PATCH 06/18] enable nsIClipboard regardless of X11

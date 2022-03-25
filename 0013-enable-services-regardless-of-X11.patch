@@ -1,4 +1,4 @@
-From fd0fc8d8e3e2ed35100466433cebaad71dc2033f Mon Sep 17 00:00:00 2001
+From a7ee9226a4742155a629536b2b1eb3c27eedc0ba Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:52:21 +0100
 Subject: [PATCH 13/18] enable services regardless of X11
