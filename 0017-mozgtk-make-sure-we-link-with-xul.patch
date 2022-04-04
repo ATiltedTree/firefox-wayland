@@ -1,4 +1,4 @@
-From f7ea68d28f4ea541c9ffc66559f1f5063b5ca1a8 Mon Sep 17 00:00:00 2001
+From c4629253c9746d663c2d03be5491c8db3ac75e63 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sat, 12 Feb 2022 22:06:51 +0100
 Subject: [PATCH 17/18] mozgtk: make sure we link with xul
@@ -31,10 +31,10 @@ index 677f9b356160a..e375cab31fd94 100644
 -MOZ_EXPORT Bool XShmQueryExtension(Display* aDisplay) { return False; }
 +MOZ_EXPORT void PleaseLinkWithMe() {}
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
-index 44d141de615db..5dbdfb6edf400 100644
+index d0cad502996b4..72005a0a6358e 100644
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
-@@ -5386,11 +5386,18 @@ void nsWindow::ReleaseGdkWindow() {
+@@ -5324,11 +5324,18 @@ void nsWindow::ReleaseGdkWindow() {
    mSurfaceProvider.CleanupResources();
  }
  

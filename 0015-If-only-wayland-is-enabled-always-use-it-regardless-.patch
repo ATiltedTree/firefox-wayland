@@ -1,4 +1,4 @@
-From c4471970cebaa5225e47df71b8e3aedb3e11f409 Mon Sep 17 00:00:00 2001
+From feaf9e07492074d539ba0a9f55a3c1c2ad824697 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 12:31:16 +0100
 Subject: [PATCH 15/18] If only wayland is enabled, always use it regardless of
@@ -9,10 +9,10 @@ Subject: [PATCH 15/18] If only wayland is enabled, always use it regardless of
  1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/toolkit/xre/nsAppRunner.cpp b/toolkit/xre/nsAppRunner.cpp
-index d99749305db29..564b335a1ed59 100644
+index a7eb8622507df..a66c1d7c73c22 100644
 --- a/toolkit/xre/nsAppRunner.cpp
 +++ b/toolkit/xre/nsAppRunner.cpp
-@@ -4493,6 +4493,7 @@ static void PR_CALLBACK ReadAheadDlls_ThreadStart(void* arg) {
+@@ -4502,6 +4502,7 @@ static void PR_CALLBACK ReadAheadDlls_ThreadStart(void* arg) {
  
  #if defined(MOZ_WAYLAND)
  bool IsWaylandEnabled() {
@@ -20,7 +20,7 @@ index d99749305db29..564b335a1ed59 100644
    const char* waylandDisplay = PR_GetEnv("WAYLAND_DISPLAY");
    if (!waylandDisplay) {
      return false;
-@@ -4513,7 +4514,7 @@ bool IsWaylandEnabled() {
+@@ -4522,7 +4523,7 @@ bool IsWaylandEnabled() {
        return true;
      }
    }
@@ -29,7 +29,7 @@ index d99749305db29..564b335a1ed59 100644
    // Enable by default when we're running on a recent enough GTK version. We'd
    // like to check further details like compositor version and so on ideally
    // to make sure we don't enable it on old Mutter or what not, but we can't,
-@@ -4525,8 +4526,11 @@ bool IsWaylandEnabled() {
+@@ -4534,8 +4535,11 @@ bool IsWaylandEnabled() {
    // GNOME / KDE  / known-good-desktop environments by checking
    // XDG_CURRENT_DESKTOP or so...
    return !gtk_check_version(3, 24, 30);

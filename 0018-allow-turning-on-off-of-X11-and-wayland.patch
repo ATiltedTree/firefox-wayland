@@ -1,4 +1,4 @@
-From d473c2d2c8aaa2b516314c2d37b38debea5762cd Mon Sep 17 00:00:00 2001
+From 7e40489f59556d01034954c76eaf9d89dfadc211 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 19:31:01 +0100
 Subject: [PATCH 18/18] allow turning on/off of X11 and wayland
@@ -21,7 +21,7 @@ index a33677a0a19f5..cb9e3dd3381cd 100644
          )
  
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index b514193512f78..2488320e3f7ec 100644
+index 9be9de91152cd..73c40debe0489 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
 @@ -285,7 +285,7 @@ def toolkit_choices(target):
@@ -79,7 +79,7 @@ index b514193512f78..2488320e3f7ec 100644
  def gl_default_provider(value, wayland, toolkit_gtk):
      if value:
          return value
-@@ -1195,11 +1196,20 @@ set_define("MOZ_RAW", depends_if("--enable-raw")(lambda _: True))
+@@ -1227,11 +1228,20 @@ set_define("MOZ_RAW", depends_if("--enable-raw")(lambda _: True))
  
  # X11
  # ==============================================================
@@ -103,7 +103,7 @@ index b514193512f78..2488320e3f7ec 100644
  def x11_libs(webrtc):
      libs = [
          "x11",
-@@ -1223,8 +1233,8 @@ def x11_libs(webrtc):
+@@ -1255,8 +1265,8 @@ def x11_libs(webrtc):
      return libs
  
  

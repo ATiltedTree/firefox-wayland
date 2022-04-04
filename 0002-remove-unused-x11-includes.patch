@@ -1,4 +1,4 @@
-From 9db453f0d82a36cf22aa4ae807d8b7f33da48e93 Mon Sep 17 00:00:00 2001
+From ea110d687dff4bed4f90203dd380f8c8d697d265 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:38:49 +0100
 Subject: [PATCH 02/18] remove unused x11 includes
@@ -13,7 +13,7 @@ Subject: [PATCH 02/18] remove unused x11 includes
  6 files changed, 8 deletions(-)
 
 diff --git a/gfx/layers/client/TextureClient.cpp b/gfx/layers/client/TextureClient.cpp
-index 5d57c4bdaf28b..42296bca8f29c 100644
+index 3861d3ad72162..8dcad53c194ea 100644
 --- a/gfx/layers/client/TextureClient.cpp
 +++ b/gfx/layers/client/TextureClient.cpp
 @@ -48,8 +48,6 @@
@@ -62,10 +62,10 @@ index 1a86468b4f3d1..eee67ed3a9788 100644
  
  union wl_argument;
 diff --git a/widget/gtk/nsClipboard.cpp b/widget/gtk/nsClipboard.cpp
-index 800fde7e6a89b..33d116b8b626c 100644
+index a7d58c5665b79..2c34ccb0e200f 100644
 --- a/widget/gtk/nsClipboard.cpp
 +++ b/widget/gtk/nsClipboard.cpp
-@@ -36,7 +36,6 @@
+@@ -37,7 +37,6 @@
  #include "imgIContainer.h"
  
  #include <gtk/gtk.h>
@@ -74,7 +74,7 @@ index 800fde7e6a89b..33d116b8b626c 100644
  #include "mozilla/Encoding.h"
  
 diff --git a/widget/gtk/nsDragService.cpp b/widget/gtk/nsDragService.cpp
-index 11be09912db07..1b41b13c3d9a2 100644
+index 68d4c6a834969..e1e9847d0c1e4 100644
 --- a/widget/gtk/nsDragService.cpp
 +++ b/widget/gtk/nsDragService.cpp
 @@ -23,7 +23,6 @@
