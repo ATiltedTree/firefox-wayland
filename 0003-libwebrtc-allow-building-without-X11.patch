@@ -1,4 +1,4 @@
-From dd799956286431379c14a192c31276ea4e045a2b Mon Sep 17 00:00:00 2001
+From 825828fac3961f42a414fd66fbbb2276c1d0bf0a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Mon, 27 Dec 2021 18:09:54 +0100
 Subject: [PATCH 03/18] libwebrtc: allow building without X11
@@ -135,5 +135,5 @@ index 625bd0b5dd9b4..2b0e2276c66c6 100644
  
  if CONFIG["OS_TARGET"] == "OpenBSD":
 -- 
-2.35.1
+2.35.2
 

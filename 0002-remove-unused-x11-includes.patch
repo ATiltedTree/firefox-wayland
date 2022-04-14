@@ -1,4 +1,4 @@
-From ea110d687dff4bed4f90203dd380f8c8d697d265 Mon Sep 17 00:00:00 2001
+From 86699d9a4cfd3b8763efaf88a0d4f823587d6a4a Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:38:49 +0100
 Subject: [PATCH 02/18] remove unused x11 includes
@@ -94,5 +94,5 @@ index 68d4c6a834969..e1e9847d0c1e4 100644
  #include "nsImageToPixbuf.h"
  #include "nsPresContext.h"
 -- 
-2.35.1
+2.35.2
 

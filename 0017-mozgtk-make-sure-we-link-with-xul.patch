@@ -1,4 +1,4 @@
-From c4629253c9746d663c2d03be5491c8db3ac75e63 Mon Sep 17 00:00:00 2001
+From 8d216faa8a3483fcd36a6285e1b86feb6b8c69b4 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Sat, 12 Feb 2022 22:06:51 +0100
 Subject: [PATCH 17/18] mozgtk: make sure we link with xul
@@ -54,5 +54,5 @@ index d0cad502996b4..72005a0a6358e 100644
    // toplevel
    nsIWidget* baseParent =
 -- 
-2.35.1
+2.35.2
 

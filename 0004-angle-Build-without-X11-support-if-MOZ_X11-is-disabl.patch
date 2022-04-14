@@ -1,4 +1,4 @@
-From c46c769eb3abf44669277010607e04d64f30734e Mon Sep 17 00:00:00 2001
+From b9b8dac747dc2baf48c8861ba497d611c1065aad Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:39:47 +0100
 Subject: [PATCH 04/18] angle: Build without X11 support if MOZ_X11 is disabled
@@ -22,5 +22,5 @@ index 8769a2fe96cbf..6976853b35538 100644
      DEFINES['ANGLE_IS_WIN'] = True
  
 -- 
-2.35.1
+2.35.2
 

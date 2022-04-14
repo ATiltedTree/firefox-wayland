@@ -1,4 +1,4 @@
-From 4d9fc443cbd1430c51b84240d43ad9858b4ce008 Mon Sep 17 00:00:00 2001
+From 0cdad90a3e1a527a1ec8c37f8b8ac04ad61b9c29 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Wed, 1 Dec 2021 16:45:36 +0100
 Subject: [PATCH 16/18] stub out x11 specific stuff
@@ -7,13 +7,13 @@ Subject: [PATCH 16/18] stub out x11 specific stuff
  gfx/thebes/gfxPlatformGtk.cpp      |  2 +-
  widget/gtk/GtkCompositorWidget.cpp |  4 +-
  widget/gtk/TaskbarProgress.cpp     |  2 -
- widget/gtk/nsClipboard.cpp         | 12 +++--
+ widget/gtk/nsClipboard.cpp         | 16 +++++--
  widget/gtk/nsGtkKeyUtils.cpp       | 31 +++++++++---
  widget/gtk/nsGtkKeyUtils.h         | 14 +++++-
  widget/gtk/nsPrintDialogGTK.cpp    |  5 +-
  widget/gtk/nsWindow.cpp            | 77 ++++++++++++++++++++----------
  widget/gtk/nsWindow.h              |  8 +++-
- 9 files changed, 110 insertions(+), 45 deletions(-)
+ 9 files changed, 112 insertions(+), 47 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
 index 88254f9a76160..3b8505714b74f 100644
@@ -72,10 +72,16 @@ index 2aad109eab1a5..396f39b5e7e54 100644
    return NS_OK;
  }
 diff --git a/widget/gtk/nsClipboard.cpp b/widget/gtk/nsClipboard.cpp
-index 2c34ccb0e200f..330a446bd4858 100644
+index 2c34ccb0e200f..b9d6acfdcf6c3 100644
 --- a/widget/gtk/nsClipboard.cpp
 +++ b/widget/gtk/nsClipboard.cpp
-@@ -9,7 +9,9 @@
+@@ -5,11 +5,15 @@
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
++#include <gtk/gtk.h>
++
+ #include "mozilla/ArrayUtils.h"
  
  #include "nsArrayUtils.h"
  #include "nsClipboard.h"
@@ -86,6 +92,15 @@ index 2c34ccb0e200f..330a446bd4858 100644
  #if defined(MOZ_WAYLAND)
  #  include "nsClipboardWayland.h"
  #endif
+@@ -36,8 +40,6 @@
+ 
+ #include "imgIContainer.h"
+ 
+-#include <gtk/gtk.h>
+-
+ #include "mozilla/Encoding.h"
+ 
+ using namespace mozilla;
 @@ -201,13 +203,17 @@ nsClipboard::~nsClipboard() {
  NS_IMPL_ISUPPORTS(nsClipboard, nsIClipboard, nsIObserver)
  
@@ -742,5 +757,5 @@ index 48cfd89d1ef9b..669060f9a7570 100644
  
    static bool sTransparentMainWindow;
 -- 
-2.35.1
+2.35.2
 

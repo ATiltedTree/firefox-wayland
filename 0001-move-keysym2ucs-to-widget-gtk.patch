@@ -1,4 +1,4 @@
-From a66e3263784e54eaf6108066cdd7e406301c517f Mon Sep 17 00:00:00 2001
+From ed1ee8e2fedf0e728fbab8201fd6d9b066ef07aa Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:33:13 +0100
 Subject: [PATCH 01/18] move keysym2ucs to widget/gtk
@@ -71,5 +71,5 @@ index 81d345c0af6c8..0000000000000
 -
 -CFLAGS += CONFIG["MOZ_X11_CFLAGS"]
 -- 
-2.35.1
+2.35.2
 

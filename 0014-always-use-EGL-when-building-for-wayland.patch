@@ -1,4 +1,4 @@
-From fb0d3a7e06b6684d923c8cfd144a367e46330eed Mon Sep 17 00:00:00 2001
+From 4161584168b61c6f7b6c7adbee25077414808592 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:53:43 +0100
 Subject: [PATCH 14/18] always use EGL when building for wayland
@@ -38,5 +38,5 @@ index 03434957ccb51..c4727d79a1c3e 100644
  UNIFIED_SOURCES += [
      "AndroidSurfaceTexture.cpp",
 -- 
-2.35.1
+2.35.2
 

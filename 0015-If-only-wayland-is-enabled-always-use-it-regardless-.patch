@@ -1,4 +1,4 @@
-From feaf9e07492074d539ba0a9f55a3c1c2ad824697 Mon Sep 17 00:00:00 2001
+From 8b58f5db1f605003fe371c2df689d9b6732174cd Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 19 Nov 2021 12:31:16 +0100
 Subject: [PATCH 15/18] If only wayland is enabled, always use it regardless of
@@ -43,5 +43,5 @@ index a7eb8622507df..a66c1d7c73c22 100644
  }
  #endif
 -- 
-2.35.1
+2.35.2
 

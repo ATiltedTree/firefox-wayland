@@ -1,4 +1,4 @@
-From 2273871a40ef62242831a6dc33e75ceb72acab25 Mon Sep 17 00:00:00 2001
+From 18f2ab68b1d22f2b903294d6109c69b9c7f8209d Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:52:21 +0100
 Subject: [PATCH 13/18] enable services regardless of X11
@@ -107,5 +107,5 @@ index 82e24d33542df..2d2cb36bd0256 100644
      Classes += [
          {
 -- 
-2.35.1
+2.35.2
 

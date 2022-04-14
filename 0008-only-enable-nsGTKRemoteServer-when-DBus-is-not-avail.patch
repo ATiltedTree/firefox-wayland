@@ -1,4 +1,4 @@
-From 0cacc7ccf44040e4500e7ae38d9796b5f563cd61 Mon Sep 17 00:00:00 2001
+From 86216513c7c1c0d99b8dd96b7180d75d75817894 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Thu, 18 Nov 2021 15:45:18 +0100
 Subject: [PATCH 08/18] only enable nsGTKRemoteServer when DBus is not
@@ -69,5 +69,5 @@ index b2499d8191ed3..1d1dc42e9fabb 100644
  #elif defined(XP_WIN)
    mRemoteServer = MakeUnique<nsWinRemoteServer>();
 -- 
-2.35.1
+2.35.2
 
