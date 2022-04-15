@@ -1,0 +1,163 @@
+From 65cb7b2b8e39e5a778efb3b5ae9ec27c5fbed866 Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Fri, 15 Apr 2022 14:10:07 +0200
+Subject: [PATCH 05/11] Fix build system to handle undefined MOZ_X11
+
+---
+ gfx/angle/moz.build.common         |  3 +++
+ gfx/gl/moz.build                   | 11 +++++++----
+ testing/tools/screenshot/moz.build |  2 +-
+ toolkit/xre/moz.build              |  4 ++--
+ widget/gtk/moz.build               | 18 +++++++++++-------
+ widget/moz.build                   |  4 ++--
+ 6 files changed, 26 insertions(+), 16 deletions(-)
+
+diff --git a/gfx/angle/moz.build.common b/gfx/angle/moz.build.common
+index 8769a2fe96cbf..f9f46e830529c 100644
+--- a/gfx/angle/moz.build.common
++++ b/gfx/angle/moz.build.common
+@@ -29,3 +29,6 @@ DEFINES['__NDK_FPABI__'] = ''
+ DEFINES['ANGLE_SKIP_DXGI_1_2_CHECK'] = True
+ DEFINES['ANGLE_ENABLE_KEYEDMUTEX'] = True
+ DEFINES['ANGLE_TRANSLATOR_ESSL_ONLY'] = True
++
++if CONFIG["MOZ_WAYLAND"]:
++    CXXFLAGS += [ "-DWL_EGL_PLATFORM" ]
+diff --git a/gfx/gl/moz.build b/gfx/gl/moz.build
+index 03434957ccb51..2fb5f796fa71c 100644
+--- a/gfx/gl/moz.build
++++ b/gfx/gl/moz.build
+@@ -13,10 +13,10 @@ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "cocoa":
+ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "uikit":
+     gl_provider = "EAGL"
+ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+-    if CONFIG["MOZ_EGL_XRENDER_COMPOSITE"]:
+-        gl_provider = "EGL"
+-    else:
++    if CONFIG["MOZ_X11"]:
+         gl_provider = "GLX"
++    else:
++        gl_provider = "EGL"
+ elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "android":
+     gl_provider = "EGL"
+ 
+@@ -117,7 +117,10 @@ elif gl_provider == "GLX":
+     EXPORTS += ["GLContextGLX.h", "GLXLibrary.h"]
+ 
+ if CONFIG["MOZ_WAYLAND"]:
+-    SOURCES += ["GLContextProviderWayland.cpp", "SharedSurfaceDMABUF.cpp"]
++    SOURCES += ["SharedSurfaceDMABUF.cpp"]
++
++if CONFIG["MOZ_WAYLAND"] and CONFIG["MOZ_X11"]:
++    SOURCES += ["GLContextProviderWayland.cpp"]
+ 
+ UNIFIED_SOURCES += [
+     "AndroidSurfaceTexture.cpp",
+diff --git a/testing/tools/screenshot/moz.build b/testing/tools/screenshot/moz.build
+index eb87b72f64c54..9d530191fd142 100644
+--- a/testing/tools/screenshot/moz.build
++++ b/testing/tools/screenshot/moz.build
+@@ -4,7 +4,7 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-if CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk" and CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+     Program("screentopng")
+     SOURCES += [
+         "gdk-screenshot.cpp",
+diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
+index c19a11dd6e0e7..84af551f180cc 100644
+--- a/toolkit/xre/moz.build
++++ b/toolkit/xre/moz.build
+@@ -156,7 +156,7 @@ SOURCES += [
+     "ProfileReset.cpp",
+ ]
+ 
+-if CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
+     UNIFIED_SOURCES += [
+         "glxtest.cpp",
+     ]
+@@ -187,7 +187,7 @@ include("/ipc/chromium/chromium-config.mozbuild")
+ 
+ FINAL_LIBRARY = "xul"
+ 
+-if CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
+     DEFINES["USE_GLX_TEST"] = True
+ 
+ for var in (
+diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
+index 4832cace0a3ff..7b1fff94235e4 100644
+--- a/widget/gtk/moz.build
++++ b/widget/gtk/moz.build
+@@ -113,17 +113,12 @@ if CONFIG["MOZ_WAYLAND"]:
+         "mozva",
+     ]
+ 
+-if CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
+     UNIFIED_SOURCES += [
+         "CompositorWidgetChild.cpp",
+         "CompositorWidgetParent.cpp",
+         "InProcessGtkCompositorWidget.cpp",
+-        "nsClipboardX11.cpp",
+-        "nsShmImage.cpp",
+         "nsUserIdleServiceGTK.cpp",
+-        "WindowSurfaceX11.cpp",
+-        "WindowSurfaceX11Image.cpp",
+-        "WindowSurfaceX11SHM.cpp",
+     ]
+     EXPORTS.mozilla.widget += [
+         "CompositorWidgetChild.h",
+@@ -132,6 +127,15 @@ if CONFIG["MOZ_X11"]:
+         "InProcessGtkCompositorWidget.h",
+     ]
+ 
++if CONFIG["MOZ_X11"]:
++    UNIFIED_SOURCES += [
++        "nsClipboardX11.cpp",
++        "nsShmImage.cpp",
++        "WindowSurfaceX11.cpp",
++        "WindowSurfaceX11Image.cpp",
++        "WindowSurfaceX11SHM.cpp",
++    ]
++
+ if CONFIG["NS_PRINTING"]:
+     UNIFIED_SOURCES += [
+         "nsDeviceContextSpecG.cpp",
+@@ -159,7 +163,7 @@ LOCAL_INCLUDES += [
+     "/widget/headless",
+ ]
+ 
+-if CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
+     LOCAL_INCLUDES += [
+         "/widget/x11",
+     ]
+diff --git a/widget/moz.build b/widget/moz.build
+index e4d025f462542..fee92099240cb 100644
+--- a/widget/moz.build
++++ b/widget/moz.build
+@@ -293,7 +293,7 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
+ 
+ EXPORTS.ipc = ["nsGUIEventIPC.h"]
+ 
+-if CONFIG["MOZ_X11"]:
++if CONFIG["MOZ_X11"] or CONFIG["MOZ_WAYLAND"]:
+     DIRS += ["x11"]
+ 
+ if toolkit in ("cocoa", "windows"):
+@@ -340,7 +340,7 @@ if toolkit == "windows":
+         "windows/PCompositorWidget.ipdl",
+         "windows/PlatformWidgetTypes.ipdlh",
+     ]
+-elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk" and CONFIG["MOZ_X11"]:
++elif CONFIG["MOZ_WIDGET_TOOLKIT"] == "gtk":
+     IPDL_SOURCES = [
+         "gtk/PCompositorWidget.ipdl",
+         "gtk/PlatformWidgetTypes.ipdlh",
+-- 
+2.35.1
+

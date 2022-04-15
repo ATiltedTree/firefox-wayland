@@ -1,0 +1,109 @@
+From f7ea8c3a9f839ee846395e5357e0f558bf86e061 Mon Sep 17 00:00:00 2001
+From: Tilmann Meyer <me@atiltedtree.dev>
+Date: Fri, 15 Apr 2022 14:08:32 +0200
+Subject: [PATCH 04/11] Fix includes
+
+---
+ gfx/thebes/gfxPlatformGtk.cpp                  | 2 ++
+ widget/gtk/DMABufLibWrapper.cpp                | 1 +
+ widget/gtk/MozContainer.cpp                    | 1 -
+ widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp | 1 +
+ widget/gtk/nsDragService.cpp                   | 1 -
+ widget/gtk/nsGtkKeyUtils.cpp                   | 2 +-
+ widget/gtk/nsLookAndFeel.cpp                   | 2 ++
+ 7 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
+index ed680e14e43d8..e8f5e2b56ef34 100644
+--- a/gfx/thebes/gfxPlatformGtk.cpp
++++ b/gfx/thebes/gfxPlatformGtk.cpp
+@@ -41,7 +41,9 @@
+ #include "nsMathUtils.h"
+ #include "nsUnicharUtils.h"
+ #include "nsUnicodeProperties.h"
++#include "prenv.h"
+ #include "VsyncSource.h"
++#include "mozilla/WidgetUtilsGtk.h"
+ 
+ #ifdef MOZ_X11
+ #  include "mozilla/gfx/XlibDisplay.h"
+diff --git a/widget/gtk/DMABufLibWrapper.cpp b/widget/gtk/DMABufLibWrapper.cpp
+index b31cefc075ec7..9a4920e310d83 100644
+--- a/widget/gtk/DMABufLibWrapper.cpp
++++ b/widget/gtk/DMABufLibWrapper.cpp
+@@ -5,6 +5,7 @@
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
++#include "base/message_loop.h"  // for MessageLoop
+ #include "nsWaylandDisplay.h"
+ #include "DMABufLibWrapper.h"
+ #include "mozilla/StaticPrefs_widget.h"
+diff --git a/widget/gtk/MozContainer.cpp b/widget/gtk/MozContainer.cpp
+index 8141b7c792500..0d2e6f2ba22fb 100644
+--- a/widget/gtk/MozContainer.cpp
++++ b/widget/gtk/MozContainer.cpp
+@@ -9,7 +9,6 @@
+ 
+ #include <glib.h>
+ #include <gtk/gtk.h>
+-#include <gdk/gdkx.h>
+ #include <stdio.h>
+ #include "mozilla/WidgetUtilsGtk.h"
+ 
+diff --git a/widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp b/widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp
+index 756201b64a723..aabc77feb0a69 100644
+--- a/widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp
++++ b/widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp
+@@ -9,6 +9,7 @@
+ #include <errno.h>
+ #include <fcntl.h>
+ #include <sys/mman.h>
++#include <prenv.h>
+ 
+ #include "gfx2DGlue.h"
+ #include "gfxPlatform.h"
+diff --git a/widget/gtk/nsDragService.cpp b/widget/gtk/nsDragService.cpp
+index 1477e457e8139..e388e617f4edb 100644
+--- a/widget/gtk/nsDragService.cpp
++++ b/widget/gtk/nsDragService.cpp
+@@ -23,7 +23,6 @@
+ #include "prthread.h"
+ #include <dlfcn.h>
+ #include <gtk/gtk.h>
+-#include <gdk/gdkx.h>
+ #include "nsCRT.h"
+ #include "mozilla/BasicEvents.h"
+ #include "mozilla/Services.h"
+diff --git a/widget/gtk/nsGtkKeyUtils.cpp b/widget/gtk/nsGtkKeyUtils.cpp
+index 7fd24d53f6f7c..2121012626526 100644
+--- a/widget/gtk/nsGtkKeyUtils.cpp
++++ b/widget/gtk/nsGtkKeyUtils.cpp
+@@ -22,7 +22,7 @@
+ #include "IMContextWrapper.h"
+ #include "WidgetUtils.h"
+ #include "WidgetUtilsGtk.h"
+-#include "keysym2ucs.h"
++#include "x11/keysym2ucs.h"
+ #include "nsContentUtils.h"
+ #include "nsGtkUtils.h"
+ #include "nsIBidiKeyboard.h"
+diff --git a/widget/gtk/nsLookAndFeel.cpp b/widget/gtk/nsLookAndFeel.cpp
+index f51ed1bb3d2ae..8804a101fe33c 100644
+--- a/widget/gtk/nsLookAndFeel.cpp
++++ b/widget/gtk/nsLookAndFeel.cpp
+@@ -43,9 +43,11 @@
+ #include "mozilla/gfx/2D.h"
+ 
+ #include <cairo-gobject.h>
++#include <dlfcn.h>
+ #include "WidgetStyleCache.h"
+ #include "prenv.h"
+ #include "nsCSSColorUtils.h"
++#include "mozilla/Preferences.h"
+ 
+ using namespace mozilla;
+ using namespace mozilla::widget;
+-- 
+2.35.1
+
