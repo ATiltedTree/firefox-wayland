@@ -1,4 +1,4 @@
-From e78edf8fbe6fa64d1e8c1957567dc1dd3a359f64 Mon Sep 17 00:00:00 2001
+From d4d020cc082f77a6582d2f6914c47b54135ef1ce Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 15 Apr 2022 14:08:16 +0200
 Subject: [PATCH 03/11] Guard wayland specific code with MOZ_WAYLAND

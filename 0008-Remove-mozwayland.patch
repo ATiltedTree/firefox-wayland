@@ -1,4 +1,4 @@
-From 5c68ba33ba6cfab0995c98c1633c61c2b22e8818 Mon Sep 17 00:00:00 2001
+From f6a874c524f385ae8bedee0e0a6c007497a1428c Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 15 Apr 2022 14:58:36 +0200
 Subject: [PATCH 08/11] Remove mozwayland
@@ -47,10 +47,10 @@ index a1393ad6f4a13..70f301da411be 100644
  if CONFIG["MOZ_JPROF"]:
      USE_LIBS += [
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 9be9de91152cd..38d8d8fa2587c 100644
+index e80b6070ddf9c..7a1bb95944d8b 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
-@@ -339,7 +339,7 @@ def toolkit_gtk(toolkit):
+@@ -461,7 +461,7 @@ def toolkit_gtk(toolkit):
  # ==============================================================
  wayland_headers = pkg_check_modules(
      "MOZ_WAYLAND",

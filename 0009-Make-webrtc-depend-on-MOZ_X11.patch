@@ -1,4 +1,4 @@
-From 7208de8b92cc5d829c7f88dff93fe835fe682316 Mon Sep 17 00:00:00 2001
+From d31212faa5e39808589af9190289c26c5cc0a382 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 15 Apr 2022 14:18:20 +0200
 Subject: [PATCH 09/11] Make webrtc depend on MOZ_X11

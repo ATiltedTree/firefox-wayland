@@ -1,4 +1,4 @@
-From 7d66770e257572ac3e2c195cabad50e753e57499 Mon Sep 17 00:00:00 2001
+From 137f437665c51aee991c703367f3e1021d971711 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 15 Apr 2022 14:15:12 +0200
 Subject: [PATCH 07/11] Remove mozgtk

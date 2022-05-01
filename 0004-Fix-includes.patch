@@ -1,4 +1,4 @@
-From f7ea8c3a9f839ee846395e5357e0f558bf86e061 Mon Sep 17 00:00:00 2001
+From f6c3497bc791124981dbc1ce8f81d22c76978c42 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 15 Apr 2022 14:08:32 +0200
 Subject: [PATCH 04/11] Fix includes
@@ -14,7 +14,7 @@ Subject: [PATCH 04/11] Fix includes
  7 files changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
-index ed680e14e43d8..e8f5e2b56ef34 100644
+index 5195f256d3996..f497a1890f0e6 100644
 --- a/gfx/thebes/gfxPlatformGtk.cpp
 +++ b/gfx/thebes/gfxPlatformGtk.cpp
 @@ -41,7 +41,9 @@
@@ -28,7 +28,7 @@ index ed680e14e43d8..e8f5e2b56ef34 100644
  #ifdef MOZ_X11
  #  include "mozilla/gfx/XlibDisplay.h"
 diff --git a/widget/gtk/DMABufLibWrapper.cpp b/widget/gtk/DMABufLibWrapper.cpp
-index b31cefc075ec7..9a4920e310d83 100644
+index 285893c85c9c0..36dae5e712fab 100644
 --- a/widget/gtk/DMABufLibWrapper.cpp
 +++ b/widget/gtk/DMABufLibWrapper.cpp
 @@ -5,6 +5,7 @@
@@ -64,7 +64,7 @@ index 756201b64a723..aabc77feb0a69 100644
  #include "gfx2DGlue.h"
  #include "gfxPlatform.h"
 diff --git a/widget/gtk/nsDragService.cpp b/widget/gtk/nsDragService.cpp
-index 1477e457e8139..e388e617f4edb 100644
+index 7f64b1223cbe4..0769414c4824d 100644
 --- a/widget/gtk/nsDragService.cpp
 +++ b/widget/gtk/nsDragService.cpp
 @@ -23,7 +23,6 @@
@@ -89,10 +89,10 @@ index 7fd24d53f6f7c..2121012626526 100644
  #include "nsGtkUtils.h"
  #include "nsIBidiKeyboard.h"
 diff --git a/widget/gtk/nsLookAndFeel.cpp b/widget/gtk/nsLookAndFeel.cpp
-index f51ed1bb3d2ae..8804a101fe33c 100644
+index d591b1dfe3cb7..04de06e3156df 100644
 --- a/widget/gtk/nsLookAndFeel.cpp
 +++ b/widget/gtk/nsLookAndFeel.cpp
-@@ -43,9 +43,11 @@
+@@ -44,9 +44,11 @@
  #include "mozilla/gfx/2D.h"
  
  #include <cairo-gobject.h>

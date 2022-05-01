@@ -1,4 +1,4 @@
-From 04595e9e933e26123963c8280702e92621c628fd Mon Sep 17 00:00:00 2001
+From bdd9ee0f493d1ddc0afd1603bfeceb04a5df96d7 Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 15 Apr 2022 14:07:48 +0200
 Subject: [PATCH 02/11] Add wayland required code getting opt-out by disabling
@@ -16,7 +16,7 @@ Subject: [PATCH 02/11] Add wayland required code getting opt-out by disabling
  8 files changed, 56 insertions(+), 61 deletions(-)
 
 diff --git a/dom/base/nsDOMWindowUtils.cpp b/dom/base/nsDOMWindowUtils.cpp
-index a34984f2fdb1a..72fc16fc5ddc7 100644
+index c6dce5c9fdf7e..1ea3bd345caf5 100644
 --- a/dom/base/nsDOMWindowUtils.cpp
 +++ b/dom/base/nsDOMWindowUtils.cpp
 @@ -74,9 +74,11 @@
@@ -50,7 +50,7 @@ index cfed9d9a2f7b7..d57f954463d4e 100644
  #define CAIRO_HAS_XLIB_SURFACE 1
  #endif
 diff --git a/gfx/thebes/gfxPlatformGtk.cpp b/gfx/thebes/gfxPlatformGtk.cpp
-index 38239302bc990..ed680e14e43d8 100644
+index 415532297892d..5195f256d3996 100644
 --- a/gfx/thebes/gfxPlatformGtk.cpp
 +++ b/gfx/thebes/gfxPlatformGtk.cpp
 @@ -325,7 +325,6 @@ already_AddRefed<gfxASurface> gfxPlatformGtk::CreateOffscreenSurface(
@@ -69,9 +69,9 @@ index 38239302bc990..ed680e14e43d8 100644
  
    if (!newSurface) {
      // We couldn't create a native surface for whatever reason;
-@@ -976,8 +974,10 @@ class XrandrSoftwareVsyncSource final : public SoftwareVsyncSource {
-     }
-   };
+@@ -951,8 +949,10 @@ class XrandrSoftwareVsyncSource final : public SoftwareVsyncSource {
+     return rate;
+   }
  };
 +#endif
  
@@ -80,7 +80,7 @@ index 38239302bc990..ed680e14e43d8 100644
    if (IsHeadless() || IsWaylandDisplay()) {
      // On Wayland we can not create a global hardware based vsync source, thus
      // use a software based one here. We create window specific ones later.
-@@ -1014,8 +1014,10 @@ already_AddRefed<gfx::VsyncSource> gfxPlatformGtk::CreateHardwareVsyncSource() {
+@@ -988,8 +988,10 @@ already_AddRefed<gfx::VsyncSource> gfxPlatformGtk::CreateHardwareVsyncSource() {
  
    RefPtr<VsyncSource> softwareVsync = new XrandrSoftwareVsyncSource();
    return softwareVsync.forget();

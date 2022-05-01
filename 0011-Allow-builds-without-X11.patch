@@ -1,4 +1,4 @@
-From 10d8c6fb1e010bac43913b019a6b34fb306b7403 Mon Sep 17 00:00:00 2001
+From 3937f18307c267af972f74a37823ec84fafcf7dd Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 15 Apr 2022 14:19:54 +0200
 Subject: [PATCH 11/11] Allow builds without X11
@@ -8,10 +8,10 @@ Subject: [PATCH 11/11] Allow builds without X11
  1 file changed, 29 insertions(+), 19 deletions(-)
 
 diff --git a/toolkit/moz.configure b/toolkit/moz.configure
-index 38d8d8fa2587c..ddb5012e6c786 100644
+index 7a1bb95944d8b..17733bcc28477 100644
 --- a/toolkit/moz.configure
 +++ b/toolkit/moz.configure
-@@ -285,7 +285,7 @@ def toolkit_choices(target):
+@@ -407,7 +407,7 @@ def toolkit_choices(target):
      elif target.os == "Android":
          return ("cairo-android",)
      else:
@@ -20,7 +20,7 @@ index 38d8d8fa2587c..ddb5012e6c786 100644
  
  
  @depends(toolkit_choices)
-@@ -337,23 +337,24 @@ def toolkit_gtk(toolkit):
+@@ -459,23 +459,24 @@ def toolkit_gtk(toolkit):
  
  # Wayland support
  # ==============================================================
@@ -57,7 +57,7 @@ index 38d8d8fa2587c..ddb5012e6c786 100644
  
  # GL Provider
  # ==============================================================
-@@ -375,7 +376,7 @@ def gl_provider_define(provider):
+@@ -497,7 +498,7 @@ def gl_provider_define(provider):
  set_define("MOZ_GL_PROVIDER", gl_provider_define)
  
  
@@ -66,7 +66,7 @@ index 38d8d8fa2587c..ddb5012e6c786 100644
  def gl_default_provider(value, wayland, toolkit_gtk):
      if value:
          return value
-@@ -1227,11 +1228,20 @@ set_define("MOZ_RAW", depends_if("--enable-raw")(lambda _: True))
+@@ -1349,11 +1350,20 @@ set_define("MOZ_RAW", depends_if("--enable-raw")(lambda _: True))
  
  # X11
  # ==============================================================
@@ -90,7 +90,7 @@ index 38d8d8fa2587c..ddb5012e6c786 100644
  def x11_libs(webrtc):
      libs = [
          "x11",
-@@ -1255,8 +1265,8 @@ def x11_libs(webrtc):
+@@ -1377,8 +1387,8 @@ def x11_libs(webrtc):
      return libs
  
  

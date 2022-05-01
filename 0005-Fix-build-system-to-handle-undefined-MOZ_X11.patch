@@ -1,4 +1,4 @@
-From 65cb7b2b8e39e5a778efb3b5ae9ec27c5fbed866 Mon Sep 17 00:00:00 2001
+From e8f47deecaa4de0d96a0d28065a867a7bb9871ff Mon Sep 17 00:00:00 2001
 From: Tilmann Meyer <me@atiltedtree.dev>
 Date: Fri, 15 Apr 2022 14:10:07 +0200
 Subject: [PATCH 05/11] Fix build system to handle undefined MOZ_X11
@@ -137,10 +137,10 @@ index 4832cace0a3ff..7b1fff94235e4 100644
          "/widget/x11",
      ]
 diff --git a/widget/moz.build b/widget/moz.build
-index e4d025f462542..fee92099240cb 100644
+index 988f55de4605c..4bad4c00dfee8 100644
 --- a/widget/moz.build
 +++ b/widget/moz.build
-@@ -293,7 +293,7 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
+@@ -295,7 +295,7 @@ if CONFIG["MOZ_INSTRUMENT_EVENT_LOOP"]:
  
  EXPORTS.ipc = ["nsGUIEventIPC.h"]
  
@@ -149,7 +149,7 @@ index e4d025f462542..fee92099240cb 100644
      DIRS += ["x11"]
  
  if toolkit in ("cocoa", "windows"):
-@@ -340,7 +340,7 @@ if toolkit == "windows":
+@@ -342,7 +342,7 @@ if toolkit == "windows":
          "windows/PCompositorWidget.ipdl",
          "windows/PlatformWidgetTypes.ipdlh",
      ]
